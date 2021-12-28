@@ -83,11 +83,12 @@ struct item locMenu[] = {
 // This is the clock display option list
 
 // If Clock is zero; then draw hands
-const int NClks = 8;    // number of clock faces to choose from (splash doesn't count)
+const int NClks = 9;    // number of clock faces to choose from (splash doesn't count)
 
 // list of clock face draw lists
 item * ClkList[] = 
    {faceList,    // analog clock face, needs hands drawn
+    clock2List,
     pongList,    // play Pong, special code is run for this
     tetrisList,  // play Tetris
  //   timefList,   // 6 digit digital clock with full date, day
@@ -102,6 +103,7 @@ item * ClkList[] =
 
 // list of function pointers for each face that needs to initialize things when it is selected
 void (*customInitList[])(void) = {
+  0,
   0,
   reset_pong,
   reset_tetris,
@@ -119,6 +121,7 @@ void (*customInitList[])(void) = {
 // list of function pointers for each face that needs to draw its own stuff
 void (*customDrawList[])(void) = {
   DrawClk,
+  clock2Draw,
   doPong,
   drawTetris,
   0,
@@ -134,6 +137,7 @@ void (*customDrawList[])(void) = {
 
 // list of bools signifying whether a face makes direct use of the position pots or not.  (usually games)
 bool customKnobsList[] = {
+  0,
   0,
   1,
   1,

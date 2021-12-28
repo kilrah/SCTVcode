@@ -143,6 +143,98 @@ void DrawClk() {
   // doingHand = false;
 }
 
+// ------------------------ another analog clock -----------------------------
+
+struct item clock2List[] = {
+  {text,40,0,BlankLn, 0,0},
+  {text,10,0,HrsStr,  0,0},   // hours
+  {text,10,0,ColStr,  0,0},   // colon
+  {text,10,0,MinStr,  0,0},   // mins
+  {text,10,0,ColStr,  0,0},   // colon
+  {text,10,0,SecStr,  0,0},   // secs
+  {text,7,0,WDayStr, 0,0},   // day of week
+  {listend,0,0,BlankLn,0,0}
+};
+
+
+void clock2DrawRadialLine(int inside, int outside, int resolution, int angle) {
+  int handAngle = (angle*nsteps/resolution) % nsteps;  // get angle in range of new sin/cos tab
+  YSize = costab[handAngle]/500;      // swap X and Y, because 0 deg is at north CW like a clock, not east CCW like math
+  XSize = sintab[handAngle]/500;
+  XStart = (inside * XSize) >>8;
+  YStart = (inside * YSize) >>8;
+  XEnd   = (outside * XSize) >>8;
+  YEnd   = (outside * YSize) >>8;
+  Scale = 1;
+  ChrXPos = ChrYPos = 0;
+  Shape = lin;
+  DoSeg();
+}
+
+void clock2DrawRadialLine(int inside, int outside, int angle) {
+  clock2DrawRadialLine(inside, outside, 240, angle);
+}
+
+void clock2DrawRadialCircle(int inside, int resolution, int angle, int diameter) {
+  int handAngle = (angle*nsteps/resolution) % nsteps;  // get angle in range of new sin/cos tab
+  YSize = costab[handAngle]/500;      // swap X and Y, because 0 deg is at north CW like a clock, not east CCW like math
+  XSize = sintab[handAngle]/500;
+  XStart = (inside * XSize) >>8;
+  YStart = (inside * YSize) >>8;
+  Scale = 1;
+  ChrXPos = ChrYPos = 0;
+  Shape = lin;
+  drawACircle((inside * XSize) >>8, (inside * YSize) >>8, diameter);
+}
+
+void clock2DrawRadialCircle(int inside, int angle, int diameter) {
+  clock2DrawRadialCircle(inside, 240, angle, diameter);
+}
+
+void clock2Draw() {
+  int largeTickInside = 2500;
+  int largeTickOutside = 3000;
+  int smallTickInside = 2500;
+  int smallTickOutside = 2600;
+  int centerCircle = 60;
+
+  int framesPerSec=1000;
+  int framesPerMin=60000;
+  static int currentMinute = -1;
+  static int millisMinOld = 0;
+
+  if(currentMinute != Mins) {
+    millisMinOld = millis() - (Secs * framesPerSec);               // Fudge the second hand when we start up...
+    currentMinute = Mins;
+  }
+
+  for(int i = 0; i < 60; i +=15 )                                  // draw large tick marks at 12, 3, 6, and 9.  These are drawn beyond the edge of the screen.
+    clock2DrawRadialLine(largeTickInside, largeTickOutside, i << 2);
+
+  for(int i = 0; i <= Secs; i ++)
+    if(i%15 != 0)                                                  // Don't overlap with the larger tick marks.
+      clock2DrawRadialLine(smallTickInside, smallTickOutside, i << 2);
+
+  for(int i = 0; i<=3; i++)
+    if(Secs%15 != 0)                                               // highlight a little tickmark
+      clock2DrawRadialLine(smallTickInside, smallTickOutside, Secs << 2);
+    else                                                           // highlight a larger tickmark
+      clock2DrawRadialLine(largeTickInside, largeTickOutside, Secs << 2);
+
+  drawACircle(0, 0, centerCircle);
+
+  clock2DrawRadialLine(centerCircle+10, 1940, 1440, (float)1440/framesPerMin*(millis()-millisMinOld));  // smoooooooooooooth.
+  clock2DrawRadialCircle(2000, 1440, (float)1440/framesPerMin*(millis()-millisMinOld), 70);
+  clock2DrawRadialLine(2080, 2200, 1440, (float)1440/framesPerMin*(millis()-millisMinOld));
+
+  clock2DrawRadialLine(centerCircle+10, 2000, (Secs / 15) + (Mins << 2));
+  clock2DrawRadialLine(centerCircle+10, 2000, (Secs / 15) + (Mins << 2));
+
+  clock2DrawRadialLine(centerCircle+10, 1500, (Hrs % 12) * 20 + Mins / 3);
+  clock2DrawRadialLine(centerCircle+10, 1500, (Hrs % 12) * 20 + Mins / 3);
+}
+
+
 // ------------------------ digital clocks -----------------------------------
 
 // total time/date/day digital clock draw list
