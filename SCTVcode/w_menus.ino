@@ -99,55 +99,6 @@ item * ClkList[] =
  //   flwList,     // four letter words at random
     splashList,  // splash screen vanishes when knob touched
     0};
-
-// list of function pointers for each face that needs to initialize things when it is selected
-void (*customInitList[])(void) = {
-  0,
-  reset_pong,
-  reset_tetris,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0
-};
-
-// list of function pointers for each face that needs to draw its own stuff
-void (*customDrawList[])(void) = {
-  DrawClk,
-  doPong,
-  drawTetris,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0
-};
-
-// list of bools signifying whether a face makes direct use of the position pots or not.  (usually games)
-bool customKnobsList[] = {
-  0,
-  1,
-  1,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0
-};
-
-
 // -------------------------- Menu navigation -----------------------
 
 // Do the thing asked for in a menu item

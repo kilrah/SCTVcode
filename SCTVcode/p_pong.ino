@@ -34,13 +34,6 @@ struct item pongList[] = {
   {listend,0,0,BlankLn,0,0}
 };
 
-void reset_pong() {
-        lScore = 0;                 // reset the score when entering Pong
-        rScore = 0;
-        waitingForBall = true;                 // let the user have a chance to get ready
-        waitFrames = ballStartDelayFrames;
-        xBall = centerLine;                   // give them a chance
-}
 
 // This plays Pong. It uses the position controls as paddles. 
 void doPong() {

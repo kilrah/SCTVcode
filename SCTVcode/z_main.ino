@@ -123,7 +123,7 @@ void loop()
   while (userial.available())
     myGps.encode(userial.read());
 
-  if(customKnobsList[theClock] == false)          // Some faces uses the position controls as paddles.
+  if ((theClock != 1) && (theClock != 2))  // Pong and Tetris use position controls as paddles
   {
     xPos = yPos = 0;
     for (i=0;i<40;i++) {
@@ -151,23 +151,27 @@ void loop()
   {  // it's a clock, not a menu
     if (EncDir != 0) 
     {   // If knob turned, choose the next clock face
-      theClock += EncDir;                     // select the next clock face
-      if (theClock >= NClks) theClock = 0;    // Wrap around
-      if (theClock < 0) theClock = NClks - 1; // Wrap around
-
-      if(customInitList[theClock]) {       // Some faces can have custom initialization functions.
-        (*customInitList[theClock])();
+      theClock += EncDir;
+      if (theClock >= NClks) theClock = 0;   // select the next clock face
+      if (theClock < 0) theClock = NClks - 1;
+      if (theClock == 1) 
+      {
+        lScore = 0;                 // reset the score when entering Pong
+        rScore = 0;
+        waitingForBall = true;                 // let the user have a chance to get ready
+        waitFrames = ballStartDelayFrames;
+        xBall = centerLine;                   // give them a chance
       }
-      
+      if (theClock == 2)
+      {
+        reset_tetris();
+      }
       EncDir = 0;
     }
-    
     whichList = ClkList[theClock];       // point to the clock drawlist we are displaying now
-
-    if(customDrawList[theClock]) {       // Non-text faces can have custom drawing functions.
-      (*customDrawList[theClock])();
-    }
-
+    if (theClock == 0) DrawClk();        // clock 0 has hands to draw
+    if (theClock == 1) doPong();         // clock 1 is Pong
+    if (theClock == 2) drawTetris();     // clock 2 is Tetris
     if (pushed) 
     {
       whichList = mainMenu;
