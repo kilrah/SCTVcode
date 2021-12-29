@@ -96,9 +96,9 @@ item * ClkList[] = {
     time4dList,           // 6 - 4 digit digital clock with date
     time6dList,           // 7 - 6 digit digital clock with date
     haikuList,            // 8 - some poetry at random
-    cubeList,             // 9 
-    calibrateCircleList,  // 10 - 
-    calibrateSquareList,  // 11 - 
+    0,                    // 9 - 3d cube
+    0,                    // 10 - Calabration - circles
+    0,                    // 11 - Calibration - square
     calibrateFontList,    // 12 - 
     splashList,           // 13 - splash screen vanishes when knob touched
  //   flwList,     // four letter words at random

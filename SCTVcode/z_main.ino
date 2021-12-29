@@ -187,13 +187,17 @@ void loop()
   if (frame%haikuFrames == 0) doHaiku();                 // get a fresh one
 
 //  unsigned int beforeTime = micros();
-  copyList(whichList);            // make fresh copy of draw list for us to muck with
   makeTimeStrings();              // fill in the time variables into number strings
   updateScreenSaver();
 //  unsigned int stringsTime = micros();
-  Center(TheList);                // fill in the positions of each string in our copy
-//  unsigned int centerTime = micros();
-  DoAList(TheList);               // draw it on the screen
+
+  if(whichList) {                   // Is there any text to display?
+    copyList(whichList);            // make fresh copy of draw list for us to muck with
+    Center(TheList);                // fill in the positions of each string in our copy
+  //  unsigned int centerTime = micros();
+    DoAList(TheList);               // draw it on the screen
+  }
+
 //  unsigned int drawTime = micros();
   while (micros() - lastMicros < (1000000/Hertz)) {
     delayMicroseconds(10);
