@@ -786,4 +786,4 @@ const int * const incFont[] =
  incSmallP,incSmallQ,incSmallR,incSmallS, incSmallT, incSmallU, incSmallV,incSmallW,
  incSmallX,incSmallY,incSmallZ,incLfBrace,incVertBar,incRtBrace,incTilde, Rubout};
  
-const int * const * Fonts[] = {incFont, Font1, asteroidsFont, LEDFont, pico8Font};
+const int * const * Fonts[] = {Font1, asteroidsFont, LEDFont, incFont, pico8Font};

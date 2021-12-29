@@ -131,6 +131,7 @@ void drawALine(int xstart, int ystart, int xend, int yend) {
   Shape = lin;
   DoSeg();
 }
+
 void drawACircle(int xcenter, int ycenter, int diameter) {
   Scale = 1;
   ChrXPos = 0;

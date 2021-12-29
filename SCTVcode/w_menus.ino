@@ -83,11 +83,11 @@ struct item locMenu[] = {
 // This is the clock display option list
 
 // If Clock is zero; then draw hands
-const int NClks = 12;    // number of clock faces to choose from (splash doesn't count)
+const int NClks = 13;    // number of clock faces to choose from (splash doesn't count)
 
 // list of clock face draw lists
-item * ClkList[] = 
-   {faceList,             // 0 - analog clock face
+item * ClkList[] = {
+    faceList,             // 0 - analog clock face
     clock2List,           // 1 - another analog clock face
     pongList,             // 2 - play Pong, special code is run for this
     tetrisList,           // 3 - play Tetris
@@ -96,10 +96,11 @@ item * ClkList[] =
     time4dList,           // 6 - 4 digit digital clock with date
     time6dList,           // 7 - 6 digit digital clock with date
     haikuList,            // 8 - some poetry at random
-    calibrateCircleList,  // 9 - 
-    calibrateSquareList,  // 10 - 
-    calibrateFontList,    // 11 - 
-    splashList,           // 12 - splash screen vanishes when knob touched
+    cubeList,             // 9 
+    calibrateCircleList,  // 10 - 
+    calibrateSquareList,  // 11 - 
+    calibrateFontList,    // 12 - 
+    splashList,           // 13 - splash screen vanishes when knob touched
  //   flwList,     // four letter words at random
  //   timefList,   // 6 digit digital clock with full date, day
     0};
@@ -118,7 +119,8 @@ void (*customInitList[])(void) = {
   0,              // 9
   0,              // 10
   0,              // 11
-  0,
+  0,              // 12
+  0,              // 13
   0
 };
 
@@ -133,10 +135,11 @@ void (*customDrawList[])(void) = {
   0,                  // 6
   0,                  // 7
   0,                  // 8
-  doCalibrateCircle,  // 9
-  doCalibrateSquare,  // 10
-  0,                  // 11
-  0,
+  doCube,             // 9
+  doCalibrateCircle,  // 10
+  doCalibrateSquare,  // 11
+  0,                  // 12
+  0,                  // 13
   0
 };
 
@@ -154,7 +157,8 @@ bool customKnobsList[] = {
   0,  // 9
   0,  // 10
   0,  // 11
-  0,
+  0,  // 12
+  0,  // 13
   0
 };
 
