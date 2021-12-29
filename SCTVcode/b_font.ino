@@ -515,6 +515,116 @@ const int * const pico8Font[] =
  pico8SmallQ, pico8SmallR, pico8SmallS, pico8SmallT, pico8SmallU, pico8SmallV, pico8SmallW, pico8SmallX,
  pico8SmallY, pico8SmallZ, pico8LfBrace, pico8VertBar, pico8RtBrace, pico8Tilde, pico8Rubout};
 
+/*
+  AAA
+F     B
+F     B
+  GGG
+E     C
+E     C
+  DDD
+ */
 
+#define LEDSEGA lin,10,18, 2,18, 6,13,  lin,11,19,10,18, 6,13,  lin,10,20,11,19, 6,13,  lin, 2,20,10,20, 6,13,  lin, 1,19, 2,20, 6,13,  lin, 2,18, 1,19, 6,13,
+#define LEDSEGB lin,10,11,10,18, 6,13,  lin,11,10,10,11, 6,13,  lin,12,11,11,10, 6,13,  lin,12,18,12,11, 6,13,  lin,11,19,12,18, 6,13,  lin,10,18,11,19, 6,13,
+#define LEDSEGC lin,10, 2,10, 9, 6,13,  lin,11, 1,10, 2, 6,13,  lin,12, 2,11, 1, 6,13,  lin,12, 9,12, 2, 6,13,  lin,11,10,12, 9, 6,13,  lin,10, 9,11,10, 6,13,
+#define LEDSEGD lin,10, 0, 2, 0, 6,13,  lin,11, 1,10, 0, 6,13,  lin,10, 2,11, 1, 6,13,  lin, 2, 2,10, 2, 6,13,  lin, 1, 1, 2, 2, 6,13,  lin, 2, 0, 1, 1, 6,13,
+#define LEDSEGE lin, 0, 2, 0, 9, 6,13,  lin, 1, 1, 0, 2, 6,13,  lin, 2, 2, 1, 1, 6,13,  lin, 2, 9, 2, 2, 6,13,  lin, 1,10, 2, 9, 6,13,  lin, 0, 9, 1,10, 6,13,
+#define LEDSEGF lin, 0,11, 0,18, 6,13,  lin, 1,10, 0,11, 6,13,  lin, 2,11, 1,10, 6,13,  lin, 2,18, 2,11, 6,13,  lin, 1,19, 2,18, 6,13,  lin, 0,18, 1,19, 6,13,
+#define LEDSEGG lin,10, 9, 2, 9, 6,13,  lin,11,10,10, 9, 6,13,  lin,10,11,11,10, 6,13,  lin, 2,11,10,11, 6,13,  lin, 1,10, 2,11, 6,13,  lin, 2, 9, 1,10, 6,13,
 
-const int * const * Fonts[] = {Font1, asteroidsFont, pico8Font};
+const int LEDZero[] = {
+  LEDSEGA
+  LEDSEGB
+  LEDSEGC
+  LEDSEGD
+  LEDSEGE
+  LEDSEGF
+  0x8c};
+
+const int LEDOne[] = {
+  LEDSEGB
+  LEDSEGC
+  0x8c};
+
+const int LEDTwo[] = {
+  LEDSEGA
+  LEDSEGB
+  LEDSEGD
+  LEDSEGE
+  LEDSEGG
+  0x8c};
+
+const int LEDThree[] = {
+  LEDSEGA
+  LEDSEGB
+  LEDSEGC
+  LEDSEGD
+  LEDSEGG
+  0x8c};
+
+const int LEDFour[] = {
+  LEDSEGB
+  LEDSEGC
+  LEDSEGF
+  LEDSEGG
+  0x8c};
+
+const int LEDFive[] = {
+  LEDSEGA
+  LEDSEGC
+  LEDSEGD
+  LEDSEGF
+  LEDSEGG
+  0x8c};
+
+const int LEDSix[] = {
+  LEDSEGA
+  LEDSEGC
+  LEDSEGD
+  LEDSEGE
+  LEDSEGF
+  LEDSEGG
+  0x8c};
+
+const int LEDSeven[] = {
+  LEDSEGA
+  LEDSEGB
+  LEDSEGC
+  0x8c};
+
+const int LEDEight[] = {
+  LEDSEGA
+  LEDSEGB
+  LEDSEGC
+  LEDSEGD
+  LEDSEGE
+  LEDSEGF
+  LEDSEGG
+  0x8c};
+
+const int LEDNine[] = {
+  LEDSEGA
+  LEDSEGB
+  LEDSEGC
+  LEDSEGD
+  LEDSEGF
+  LEDSEGG
+  0x8c};
+
+// All the characters, arranged in ASCII order because ASCII rules
+const int * const LEDFont[] =
+{Space, Exclam,DQuot, Sharp,  Dollar, Percent,Amper, Apost,
+ LParen,RParen,Aster, Plus,   Comma,  Minus,  Period,Slash,
+ LEDZero, LEDOne, LEDTwo, LEDThree, LEDFour, LEDFive, LEDSix, LEDSeven,
+ LEDEight, LEDNine,  Colon, SemiCol,LThan,  Equal,  GThan, Quest,
+ AtSign,BigA,  BigB,  BigC,   BigD,   BigE,   BigF,  BigG,
+ BigH,  BigI,  BigJ,  BigK,   BigL,   BigM,   BigN,  BigO,
+ BigP,  BigQ,  BigR,  BigS,   BigT,   BigU,   BigV,  BigW,
+ BigX,  BigY,  BigZ,  LftSqBr,BackSl, RtSqBr, Carat, UnderSc,
+ BackQu,SmallA,SmallB,SmallC, SmallD, SmallE, SmallF,SmallG,
+ SmallH,SmallI,SmallJ,SmallK, SmallL, SmallM, SmallN,SmallO,
+ SmallP,SmallQ,SmallR,SmallS, SmallT, SmallU, SmallV,SmallW,
+ SmallX,SmallY,SmallZ,LfBrace,VertBar,RtBrace,Tilde, Rubout};
+
+const int * const * Fonts[] = {Font1, asteroidsFont, LEDFont, pico8Font};

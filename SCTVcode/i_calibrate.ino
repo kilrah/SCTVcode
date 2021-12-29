@@ -38,7 +38,7 @@ struct item calibrateFontList[] = {
   {text,10,0,1,letters,  0,0},
   {text,10,0,2,numbers,  0,0},
   {text,10,0,2,letters,  0,0},
-//  {text,10,0,3,numbers,  0,0},
-//  {text,10,0,3,letters,  0,0},
+  {text,10,0,3,numbers,  0,0},
+  {text,10,0,3,letters,  0,0},
   {listend,0,0,0,BlankLn,0,0}
 };
