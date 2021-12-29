@@ -558,8 +558,10 @@ const int LEDSix[] = {LEDSEGA LEDSEGC LEDSEGD LEDSEGE LEDSEGF LEDSEGG 0x8c};
 const int LEDSeven[] = {LEDSEGA LEDSEGB LEDSEGC 0x8c};
 const int LEDEight[] = {LEDSEGA LEDSEGB LEDSEGC LEDSEGD LEDSEGE LEDSEGF LEDSEGG 0x8c};
 const int LEDNine[] = {LEDSEGA LEDSEGB LEDSEGC LEDSEGD LEDSEGF LEDSEGG 0x8c};
-const int LEDColon[]   = { cir, 2, 6, 4, 4, 6,13, 
-                        cir, 2,14, 4, 4, 6,13, 0x84};
+const int LEDColon[]   = { cir, 2, 6, 2, 2, 6,13, 
+                           cir, 2, 6, 1, 1, 6,13, 
+                           cir, 2,14, 2, 2, 6,13, 
+                           cir, 2,14, 1, 1, 6,13, 0x84};
 const int LEDSemiCol[] = { cir, 3,14, 2, 2, 6,13, 
                         cir, 3, 6, 2, 2, 6,13, 
                         cir, 0, 6, 8,12, 6, 7, 0x84};
@@ -650,13 +652,21 @@ const int * const LEDFont[] =
  LEDSmallX,LEDSmallY,LEDSmallZ,LEDLfBrace,LEDVertBar,LEDRtBrace,LEDTilde, Rubout};
 
 // STYLE 2 (lines)
-#define incSEGA lin,2,20,12,20,0,0,
-#define incSEGB lin,12,20,11,10,0,0,
-#define incSEGC lin,11,10,10,0,0,0,
-#define incSEGD lin,10,0,0,0,0,0,
-#define incSEGE lin,0,0,1,10,0,0,
-#define incSEGF lin,1,10,2,20,0,0,
-#define incSEGG lin,1,10,11,10,0,0,
+#define inc1SEGA lin,2,20,12,20,0,0,
+#define inc1SEGB lin,12,20,11,10,0,0,
+#define inc1SEGC lin,11,10,10,0,0,0,
+#define inc1SEGD lin,10,0,0,0,0,0,
+#define inc1SEGE lin,0,0,1,10,0,0,
+#define inc1SEGF lin,1,10,2,20,0,0,
+#define inc1SEGG lin,1,10,11,10,0,0,
+
+#define incSEGA lin,3,20,11,20,0,0,
+#define incSEGB lin,12,20,11,11,0,0,
+#define incSEGC lin,11,9,10,0,0,0,
+#define incSEGD lin,9,0,1,0,0,0,
+#define incSEGE lin,0,0,1,9,0,0,
+#define incSEGF lin,1,11,2,20,0,0,
+#define incSEGG lin,2,10,10,10,0,0,
 
 const int incExclam[] = {incSEGB incSEGC 0x8c};
 const int incDQuot[] = {incSEGB incSEGF 0x8c};
@@ -683,8 +693,10 @@ const int incSix[] = {incSEGA incSEGC incSEGD incSEGE incSEGF incSEGG 0x8c};
 const int incSeven[] = {incSEGA incSEGB incSEGC 0x8c};
 const int incEight[] = {incSEGA incSEGB incSEGC incSEGD incSEGE incSEGF incSEGG 0x8c};
 const int incNine[] = {incSEGA incSEGB incSEGC incSEGD incSEGF incSEGG 0x8c};
-const int incColon[]   = { cir, 2, 6, 4, 4, 6,13, 
-                        cir, 2,14, 4, 4, 6,13, 0x84};
+const int incColon[]   = { cir, 2, 5, 2, 2, 6,13, 
+                           cir, 2, 5, 1, 1, 6,13, 
+                           cir, 3,15, 2, 2, 6,13, 
+                           cir, 3,15, 1, 1, 6,13, 0x84};
 const int incSemiCol[] = { cir, 3,14, 2, 2, 6,13, 
                         cir, 3, 6, 2, 2, 6,13, 
                         cir, 0, 6, 8,12, 6, 7, 0x84};
@@ -774,4 +786,4 @@ const int * const incFont[] =
  incSmallP,incSmallQ,incSmallR,incSmallS, incSmallT, incSmallU, incSmallV,incSmallW,
  incSmallX,incSmallY,incSmallZ,incLfBrace,incVertBar,incRtBrace,incTilde, Rubout};
  
-const int * const * Fonts[] = {Font1, asteroidsFont, LEDFont, incFont, pico8Font};
+const int * const * Fonts[] = {incFont, Font1, asteroidsFont, LEDFont, pico8Font};
