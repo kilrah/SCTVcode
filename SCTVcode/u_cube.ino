@@ -24,40 +24,23 @@ float cube3d[8][3] = {
   {xOff - cSize, yOff - cSize, zOff + cSize},
   {xOff + cSize, yOff - cSize, zOff + cSize}
 };
+
 int cube2d[8][2];
-static int r=-1;
+
 static int a=0;
 static int b=0;
 static int c=0;
 
 void doCube() {
-  if(r == -1 || frame%500==0) {
-    r=random(5);
-    a=random(3)+1;
-    b=random(3)+1;
-    c=random(3)+1;
+  if((a==0 && b==0 && c==0) || frame%500==0) {
+    a=random(6)-3;
+    b=random(6)-3;
+    c=random(6)-3;
   }
-  switch(r) {
-    case 0:
-      xrotate(0.01F*a);
-      yrotate(0.01F*b);
-      zrotate(0.01F*c);
-      break;
-    case 1:
-      yrotate(0.01F*a);
-      break;
-    case 2:
-      zrotate(0.01F*a);
-      break;
-    case 3:
-      xrotate(0.01F*b);
-      zrotate(0.02F*c);
-      break;
-    case 4:
-      xrotate(0.01F*a);
-      yrotate(0.02F*b);
-    break;
-  }
+
+  xrotate(0.01F*a);
+  yrotate(0.01F*b);
+  zrotate(0.01F*c);
 
   //calculate 2d points
   for(byte i = 0; i < 8; i++) {
