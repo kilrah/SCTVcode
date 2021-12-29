@@ -83,7 +83,7 @@ struct item locMenu[] = {
 // This is the clock display option list
 
 // If Clock is zero; then draw hands
-const int NClks = 11;    // number of clock faces to choose from (splash doesn't count)
+const int NClks = 12;    // number of clock faces to choose from (splash doesn't count)
 
 // list of clock face draw lists
 item * ClkList[] = 
@@ -98,7 +98,8 @@ item * ClkList[] =
     haikuList,            // 8 - some poetry at random
     calibrateCircleList,  // 9 - 
     calibrateSquareList,  // 10 - 
-    splashList,           // 11 - splash screen vanishes when knob touched
+    calibrateFontList,    // 11 - 
+    splashList,           // 12 - splash screen vanishes when knob touched
  //   flwList,     // four letter words at random
  //   timefList,   // 6 digit digital clock with full date, day
     0};
@@ -117,6 +118,7 @@ void (*customInitList[])(void) = {
   0,              // 9
   0,              // 10
   0,              // 11
+  0,
   0
 };
 
@@ -134,6 +136,7 @@ void (*customDrawList[])(void) = {
   doCalibrateCircle,  // 9
   doCalibrateSquare,  // 10
   0,                  // 11
+  0,
   0
 };
 
@@ -151,6 +154,7 @@ bool customKnobsList[] = {
   0,  // 9
   0,  // 10
   0,  // 11
+  0,
   0
 };
 

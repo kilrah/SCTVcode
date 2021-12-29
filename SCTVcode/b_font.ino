@@ -278,7 +278,7 @@ const int Rubout[]  = { lin, 0,10, 6,20, 6,13,
                         lin, 6, 0,12,10, 6,13, 0x8c};
 
 // All the characters, arranged in ASCII order because ASCII rules
-const int * const Font[] = 
+const int * const Font1[] =
 {Space, Exclam,DQuot, Sharp,  Dollar, Percent,Amper, Apost,
  LParen,RParen,Aster, Plus,   Comma,  Minus,  Period,Slash,
  Zero,  One,   Two,   Three,  Four,   Five,   Six,   Seven,
@@ -291,3 +291,117 @@ const int * const Font[] =
  SmallH,SmallI,SmallJ,SmallK, SmallL, SmallM, SmallN,SmallO,
  SmallP,SmallQ,SmallR,SmallS, SmallT, SmallU, SmallV,SmallW,
  SmallX,SmallY,SmallZ,LfBrace,VertBar,RtBrace,Tilde, Rubout};
+
+// font from asteroids
+const int asteroidsSpace[]   = {0x86};      // space does nothing but move over
+const int asteroidsRubout[]  = { lin, 0,10, 6,20, 6,13, lin, 0, 0,12,20, 6,13, lin, 6, 0,12,10, 6,13, 0x8c};
+const int asteroidsAmper[] = {lin,13,0,7,20,0,0,lin,7,20,13,13,0,0,lin,13,13,0,7,0,0,lin,0,7,7,0,0,0,lin,7,0,13,7,0,0,0x8f};
+const int asteroidsApost[] = {lin,3,10,10,17,0,0,0x8f};
+const int asteroidsAster[] = {lin,0,0,7,20,0,0,lin,7,20,13,0,0,0,lin,13,0,0,13,0,0,lin,0,13,13,13,0,0,lin,13,13,0,0,0,0,0x8f};
+const int asteroidsAtSign[] = {lin,13,7,7,0,0,0,lin,7,0,0,7,0,0,lin,0,7,0,13,0,0,lin,0,13,7,20,0,0,lin,7,20,13,13,0,0,lin,13,13,7,7,0,0,lin,7,7,5,10,0,0,0x8f};
+const int asteroidsBackQu[] = {lin,3,17,10,10,0,0,0x8f};
+const int asteroidsBackSl[] = {lin,0,20,13,0,0,0,0x8f};
+const int asteroidsBigA[] = {lin,0,0,0,13,0,0,lin,0,13,7,20,0,0,lin,7,20,13,13,0,0,lin,13,13,13,0,0,0,lin,0,7,13,7,0,0,0x8f};
+const int asteroidsBigB[] = {lin,0,0,0,20,0,0,lin,0,20,7,20,0,0,lin,7,20,13,17,0,0,lin,13,17,7,10,0,0,lin,7,10,13,3,0,0,lin,13,3,7,0,0,0,lin,7,0,0,0,0,0,0x8f};
+const int asteroidsBigC[] = {lin,13,0,0,0,0,0,lin,0,0,0,20,0,0,lin,0,20,13,20,0,0,0x8f};
+const int asteroidsBigD[] = {lin,0,0,0,20,0,0,lin,0,20,7,20,0,0,lin,7,20,13,13,0,0,lin,13,13,13,7,0,0,lin,13,7,7,0,0,0,lin,7,0,0,0,0,0,0x8f};
+const int asteroidsBigE[] = {lin,13,0,0,0,0,0,lin,0,0,0,20,0,0,lin,0,20,13,20,0,0,lin,0,10,10,10,0,0,0x8f};
+const int asteroidsBigF[] = {lin,0,0,0,20,0,0,lin,0,20,13,20,0,0,lin,0,10,10,10,0,0,0x8f};
+const int asteroidsBigG[] = {lin,10,10,13,7,0,0,lin,13,7,13,0,0,0,lin,13,0,0,0,0,0,lin,0,0,0,20,0,0,lin,0,20,13,20,0,0,0x8f};
+const int asteroidsBigH[] = {lin,0,0,0,20,0,0,lin,0,10,13,10,0,0,lin,13,20,13,0,0,0,0x8f};
+const int asteroidsBigI[] = {lin,0,0,13,0,0,0,lin,7,0,7,20,0,0,lin,0,20,13,20,0,0,0x8f};
+const int asteroidsBigJ[] = {lin,0,7,7,0,0,0,lin,7,0,13,0,0,0,lin,13,0,13,20,0,0,0x8f};
+const int asteroidsBigK[] = {lin,0,0,0,20,0,0,lin,13,20,0,10,0,0,lin,0,10,10,0,0,0,0x8f};
+const int asteroidsBigL[] = {lin,13,0,0,0,0,0,lin,0,0,0,20,0,0,0x8f};
+const int asteroidsBigM[] = {lin,0,0,0,20,0,0,lin,0,20,7,13,0,0,lin,7,13,13,20,0,0,lin,13,20,13,0,0,0,0x8f};
+const int asteroidsBigN[] = {lin,0,0,0,20,0,0,lin,0,20,13,0,0,0,lin,13,0,13,20,0,0,0x8f};
+const int asteroidsBigO[] = {lin,0,0,0,20,0,0,lin,0,20,13,20,0,0,lin,13,20,13,0,0,0,lin,13,0,0,0,0,0,0x8f};
+const int asteroidsBigP[] = {lin,0,0,0,20,0,0,lin,0,20,13,20,0,0,lin,13,20,13,10,0,0,lin,13,10,0,8,0,0,0x8f};
+const int asteroidsBigQ[] = {lin,0,0,0,20,0,0,lin,0,20,13,20,0,0,lin,13,20,13,7,0,0,lin,13,7,0,0,0,0,lin,7,7,13,0,0,0,0x8f};
+const int asteroidsBigR[] = {lin,0,0,0,20,0,0,lin,0,20,13,20,0,0,lin,13,20,13,10,0,0,lin,13,10,0,8,0,0,lin,7,8,13,0,0,0,0x8f};
+const int asteroidsBigS[] = {lin,0,3,3,0,0,0,lin,3,0,13,0,0,0,lin,13,0,13,8,0,0,lin,13,8,0,12,0,0,lin,0,12,0,20,0,0,lin,0,20,10,20,0,0,lin,10,20,13,17,0,0,0x8f};
+const int asteroidsBigT[] = {lin,0,20,13,20,0,0,lin,7,20,7,0,0,0,0x8f};
+const int asteroidsBigU[] = {lin,0,20,0,3,0,0,lin,0,3,7,0,0,0,lin,7,0,13,3,0,0,lin,13,3,13,20,0,0,0x8f};
+const int asteroidsBigV[] = {lin,0,20,7,0,0,0,lin,7,0,13,20,0,0,0x8f};
+const int asteroidsBigW[] = {lin,0,20,3,0,0,0,lin,3,0,7,7,0,0,lin,7,7,10,0,0,0,lin,10,0,13,20,0,0,0x8f};
+const int asteroidsBigX[] = {lin,0,0,13,20,0,0,lin,0,20,13,0,0,0,0x8f};
+const int asteroidsBigY[] = {lin,0,20,7,10,0,0,lin,7,10,13,20,0,0,lin,7,10,7,0,0,0,0x8f};
+const int asteroidsBigZ[] = {lin,0,20,13,20,0,0,lin,13,20,0,0,0,0,lin,0,0,13,0,0,0,lin,3,10,10,10,0,0,0x8f};
+const int asteroidsCarat[] = {lin,3,10,7,20,0,0,lin,7,20,10,10,0,0,0x8f};
+const int asteroidsColon[] = {lin,7,15,7,12,0,0,lin,7,8,7,5,0,0,0x8f};
+const int asteroidsComma[] = {lin,3,0,7,3,0,0,0x8f};
+const int asteroidsDQuot[] = {lin,3,17,3,10,0,0,lin,10,17,10,10,0,0,0x8f};
+const int asteroidsDollar[] = {lin,10,3,3,10,0,0,lin,3,10,10,17,0,0,lin,7,20,7,0,0,0,0x8f};
+const int asteroidsEight[] = {lin,0,0,13,0,0,0,lin,13,0,13,20,0,0,lin,13,20,0,20,0,0,lin,0,20,0,0,0,0,lin,0,10,13,10,0,0,0x8f};
+const int asteroidsEqual[] = {lin,2,7,12,7,0,0,lin,2,13,12,13,0,0,0x8f};
+const int asteroidsExclam[] = {lin,7,0,5,3,0,0,lin,5,3,8,3,0,0,lin,8,3,7,0,0,0,lin,7,7,7,20,0,0,0x8f};
+const int asteroidsFive[] = {lin,0,0,13,0,0,0,lin,13,0,13,10,0,0,lin,13,10,0,12,0,0,lin,0,12,0,20,0,0,lin,0,20,13,20,0,0,0x8f};
+const int asteroidsFour[] = {lin,0,20,0,10,0,0,lin,0,10,13,10,0,0,lin,13,20,13,0,0,0,0x8f};
+const int asteroidsGThan[] = {lin,3,0,10,10,0,0,lin,10,10,3,20,0,0,0x8f};
+const int asteroidsLParen[] = {lin,10,0,3,7,0,0,lin,3,7,3,13,0,0,lin,3,13,10,20,0,0,0x8f};
+const int asteroidsLThan[] = {lin,10,0,3,10,0,0,lin,3,10,10,20,0,0,0x8f};
+const int asteroidsLfBrace[] = {lin,10,0,7,3,0,0,lin,7,3,7,17,0,0,lin,7,17,10,20,0,0,lin,3,10,7,10,0,0,0x8f};
+const int asteroidsLftSqBr[] = {lin,10,0,3,0,0,0,lin,3,0,3,20,0,0,lin,3,20,10,20,0,0,0x8f};
+const int asteroidsMinus[] = {lin,3,10,10,10,0,0,0x8f};
+const int asteroidsNine[] = {lin,13,0,13,20,0,0,lin,13,20,0,20,0,0,lin,0,20,0,12,0,0,lin,0,12,13,8,0,0,0x8f};
+const int asteroidsOne[] = {lin,7,0,7,20,0,0,lin,7,20,5,17,0,0,0x8f};
+const int asteroidsPercent[] = {lin,0,0,13,20,0,0,lin,3,17,3,13,0,0,lin,10,7,10,3,0,0,0x8f};
+const int asteroidsPeriod[] = {lin,5,0,7,0,0,0,0x8f};
+const int asteroidsPlus[] = {lin,2,10,12,10,0,0,lin,7,15,7,5,0,0,0x8f};
+const int asteroidsQuest[] = {lin,0,13,7,20,0,0,lin,7,20,13,13,0,0,lin,13,13,7,7,0,0,lin,7,2,7,0,0,0,0x8f};
+const int asteroidsRParen[] = {lin,3,0,10,7,0,0,lin,10,7,10,13,0,0,lin,10,13,3,20,0,0,0x8f};
+const int asteroidsRtBrace[] = {lin,7,0,10,3,0,0,lin,10,3,10,17,0,0,lin,10,17,7,20,0,0,lin,10,10,13,10,0,0,0x8f};
+const int asteroidsRtSqBr[] = {lin,3,0,10,0,0,0,lin,10,0,10,20,0,0,lin,10,20,3,20,0,0,0x8f};
+const int asteroidsSemiCol[] = {lin,7,15,7,12,0,0,lin,7,8,2,3,0,0,0x8f};
+const int asteroidsSeven[] = {lin,0,20,13,20,0,0,lin,13,20,13,10,0,0,lin,13,10,7,0,0,0,0x8f};
+const int asteroidsSharp[] = {lin,0,7,13,7,0,0,lin,13,7,10,3,0,0,lin,10,3,10,17,0,0,lin,10,17,13,13,0,0,lin,13,13,0,13,0,0,lin,0,13,3,17,0,0,lin,3,17,3,3,0,0,0x8f};
+const int asteroidsSix[] = {lin,0,20,0,0,0,0,lin,0,0,13,0,0,0,lin,13,0,13,8,0,0,lin,13,8,0,12,0,0,0x8f};
+const int asteroidsSlash[] = {lin,0,0,13,20,0,0,0x8f};
+const int asteroidsSmallA[] = {lin,0,0,0,13,0,0,lin,0,13,7,20,0,0,lin,7,20,13,13,0,0,lin,13,13,13,0,0,0,lin,0,7,13,7,0,0,0x8f};
+const int asteroidsSmallB[] = {lin,0,0,0,20,0,0,lin,0,20,7,20,0,0,lin,7,20,13,17,0,0,lin,13,17,7,10,0,0,lin,7,10,13,3,0,0,lin,13,3,7,0,0,0,lin,7,0,0,0,0,0,0x8f};
+const int asteroidsSmallC[] = {lin,13,0,0,0,0,0,lin,0,0,0,20,0,0,lin,0,20,13,20,0,0,0x8f};
+const int asteroidsSmallD[] = {lin,0,0,0,20,0,0,lin,0,20,7,20,0,0,lin,7,20,13,13,0,0,lin,13,13,13,7,0,0,lin,13,7,7,0,0,0,lin,7,0,0,0,0,0,0x8f};
+const int asteroidsSmallE[] = {lin,13,0,0,0,0,0,lin,0,0,0,20,0,0,lin,0,20,13,20,0,0,lin,0,10,10,10,0,0,0x8f};
+const int asteroidsSmallF[] = {lin,0,0,0,20,0,0,lin,0,20,13,20,0,0,lin,0,10,10,10,0,0,0x8f};
+const int asteroidsSmallG[] = {lin,10,10,13,7,0,0,lin,13,7,13,0,0,0,lin,13,0,0,0,0,0,lin,0,0,0,20,0,0,lin,0,20,13,20,0,0,0x8f};
+const int asteroidsSmallH[] = {lin,0,0,0,20,0,0,lin,0,10,13,10,0,0,lin,13,20,13,0,0,0,0x8f};
+const int asteroidsSmallI[] = {lin,0,0,13,0,0,0,lin,7,0,7,20,0,0,lin,0,20,13,20,0,0,0x8f};
+const int asteroidsSmallJ[] = {lin,0,7,7,0,0,0,lin,7,0,13,0,0,0,lin,13,0,13,20,0,0,0x8f};
+const int asteroidsSmallK[] = {lin,0,0,0,20,0,0,lin,13,20,0,10,0,0,lin,0,10,10,0,0,0,0x8f};
+const int asteroidsSmallL[] = {lin,13,0,0,0,0,0,lin,0,0,0,20,0,0,0x8f};
+const int asteroidsSmallM[] = {lin,0,0,0,20,0,0,lin,0,20,7,13,0,0,lin,7,13,13,20,0,0,lin,13,20,13,0,0,0,0x8f};
+const int asteroidsSmallN[] = {lin,0,0,0,20,0,0,lin,0,20,13,0,0,0,lin,13,0,13,20,0,0,0x8f};
+const int asteroidsSmallO[] = {lin,0,0,0,20,0,0,lin,0,20,13,20,0,0,lin,13,20,13,0,0,0,lin,13,0,0,0,0,0,0x8f};
+const int asteroidsSmallP[] = {lin,0,0,0,20,0,0,lin,0,20,13,20,0,0,lin,13,20,13,10,0,0,lin,13,10,0,8,0,0,0x8f};
+const int asteroidsSmallQ[] = {lin,0,0,0,20,0,0,lin,0,20,13,20,0,0,lin,13,20,13,7,0,0,lin,13,7,0,0,0,0,lin,7,7,13,0,0,0,0x8f};
+const int asteroidsSmallR[] = {lin,0,0,0,20,0,0,lin,0,20,13,20,0,0,lin,13,20,13,10,0,0,lin,13,10,0,8,0,0,lin,7,8,13,0,0,0,0x8f};
+const int asteroidsSmallS[] = {lin,0,3,3,0,0,0,lin,3,0,13,0,0,0,lin,13,0,13,8,0,0,lin,13,8,0,12,0,0,lin,0,12,0,20,0,0,lin,0,20,10,20,0,0,lin,10,20,13,17,0,0,0x8f};
+const int asteroidsSmallT[] = {lin,0,20,13,20,0,0,lin,7,20,7,0,0,0,0x8f};
+const int asteroidsSmallU[] = {lin,0,20,0,3,0,0,lin,0,3,7,0,0,0,lin,7,0,13,3,0,0,lin,13,3,13,20,0,0,0x8f};
+const int asteroidsSmallV[] = {lin,0,20,7,0,0,0,lin,7,0,13,20,0,0,0x8f};
+const int asteroidsSmallW[] = {lin,0,20,3,0,0,0,lin,3,0,7,7,0,0,lin,7,7,10,0,0,0,lin,10,0,13,20,0,0,0x8f};
+const int asteroidsSmallX[] = {lin,0,0,13,20,0,0,lin,0,20,13,0,0,0,0x8f};
+const int asteroidsSmallY[] = {lin,0,20,7,10,0,0,lin,7,10,13,20,0,0,lin,7,10,7,0,0,0,0x8f};
+const int asteroidsSmallZ[] = {lin,0,20,13,20,0,0,lin,13,20,0,0,0,0,lin,0,0,13,0,0,0,lin,3,10,10,10,0,0,0x8f};
+const int asteroidsThree[] = {lin,0,20,13,20,0,0,lin,13,20,13,0,0,0,lin,13,0,0,0,0,0,lin,0,10,13,10,0,0,0x8f};
+const int asteroidsTilde[] = {lin,0,7,3,13,0,0,lin,3,13,10,7,0,0,lin,10,7,13,13,0,0,0x8f};
+const int asteroidsTwo[] = {lin,0,20,13,20,0,0,lin,13,20,13,12,0,0,lin,13,12,0,8,0,0,lin,0,8,0,0,0,0,lin,0,0,13,0,0,0,0x8f};
+const int asteroidsUnderSc[] = {lin,0,0,13,0,0,0,0x8f};
+const int asteroidsVertBar[] = {lin,7,0,7,8,0,0,lin,7,10,7,20,0,0,0x8f};
+const int asteroidsZero[] = {lin,0,0,13,0,0,0,lin,13,0,13,20,0,0,lin,13,20,0,20,0,0,lin,0,20,0,0,0,0,lin,0,0,13,20,0,0,0x8f};
+
+const int * const asteroidsFont[] =
+{Space, asteroidsExclam, asteroidsDQuot, asteroidsSharp, asteroidsDollar, asteroidsPercent, asteroidsAmper, asteroidsApost, asteroidsLParen,
+ asteroidsRParen, asteroidsAster, asteroidsPlus, asteroidsComma, asteroidsMinus, asteroidsPeriod, asteroidsSlash, asteroidsZero,
+ asteroidsOne, asteroidsTwo, asteroidsThree, asteroidsFour, asteroidsFive, asteroidsSix, asteroidsSeven, asteroidsEight,
+ asteroidsNine, asteroidsColon, asteroidsSemiCol, asteroidsLThan, asteroidsEqual, asteroidsGThan, asteroidsQuest, asteroidsAtSign,
+ asteroidsBigA, asteroidsBigB, asteroidsBigC, asteroidsBigD, asteroidsBigE, asteroidsBigF, asteroidsBigG, asteroidsBigH, 
+ asteroidsBigI, asteroidsBigJ, asteroidsBigK, asteroidsBigL, asteroidsBigM, asteroidsBigN, asteroidsBigO, asteroidsBigP,
+ asteroidsBigQ, asteroidsBigR, asteroidsBigS, asteroidsBigT, asteroidsBigU, asteroidsBigV, asteroidsBigW, asteroidsBigX,
+ asteroidsBigY, asteroidsBigZ, asteroidsLftSqBr, asteroidsBackSl, asteroidsRtSqBr, asteroidsCarat, asteroidsUnderSc, asteroidsBackQu,
+ asteroidsSmallA, asteroidsSmallB, asteroidsSmallC, asteroidsSmallD, asteroidsSmallE, asteroidsSmallF, asteroidsSmallG, asteroidsSmallH,
+ asteroidsSmallI, asteroidsSmallJ, asteroidsSmallK, asteroidsSmallL, asteroidsSmallM, asteroidsSmallN, asteroidsSmallO, asteroidsSmallP,
+ asteroidsSmallQ, asteroidsSmallR, asteroidsSmallS, asteroidsSmallT, asteroidsSmallU, asteroidsSmallV, asteroidsSmallW, asteroidsSmallX,
+ asteroidsSmallY, asteroidsSmallZ, asteroidsLfBrace, asteroidsVertBar, asteroidsRtBrace, asteroidsTilde, asteroidsRubout};
+
+const int * const * Fonts[] = {Font1, asteroidsFont};

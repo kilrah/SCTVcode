@@ -26,3 +26,13 @@ void doCalibrateSquare() {
   drawALine(-1250, -1250, 1250, 1250);
   drawALine(1250, -1250, -1250, 1250);
 }
+
+char numbers[] = "0123456789\n";
+
+struct item calibrateFontList[] = {
+  {text,16,0,numbers,  0,0},
+  {text,16,0,numbers,  0,0},
+  {text,16,0,numbers,  0,0},
+  {text,16,0,numbers,  0,0},
+  {listend,0,0,BlankLn,0,0}
+};

@@ -197,7 +197,7 @@ void GetWid()
   // look up width of each printable char, sum into StrWid, leave StrPtr at \n or null
   while ((TheChr = *StrPtr++) >= 0x20)
   {
-    TheSeg = Font[(TheChr % 0x7f)- 32]; // read font table - tricky
+    TheSeg = Fonts[0][(TheChr % 0x7f)- 32]; // read font table - tricky
     while (*TheSeg < 0x80) // skip over all real segments, stopping at end flag
       TheSeg += 7;
     StrWid += *TheSeg % 128;   // mask off end flag to reveal width
@@ -356,7 +356,7 @@ void DispStr()
   while ((TheChr >= 32)) // printable
   {
     // look up character in ROM font table. This is tricky. 
-    TheSeg = Font[(TheChr & 0x7f) - 32];
+    TheSeg = Fonts[0][(TheChr & 0x7f) - 32];
     notLast = GetSeg();
     while (notLast) 
     {
