@@ -3,7 +3,7 @@ struct item calibrateCircleList[] = {
 };
 
 void doCalibrateCircle() {
-  for (int i = 100; i < 2700; i += 100) {
+  for (int i = 100; i < 3000; i += 200) {
     drawACircle(0, 0, i);
     DoEnc();          // polled mode I/O, so we need to do it many times
   }
