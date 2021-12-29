@@ -83,71 +83,74 @@ struct item locMenu[] = {
 // This is the clock display option list
 
 // If Clock is zero; then draw hands
-const int NClks = 9;    // number of clock faces to choose from (splash doesn't count)
+const int NClks = 11;    // number of clock faces to choose from (splash doesn't count)
 
 // list of clock face draw lists
 item * ClkList[] = 
-   {faceList,    // analog clock face, needs hands drawn
-    clock2List,
-    pongList,    // play Pong, special code is run for this
-    tetrisList,  // play Tetris
- //   timefList,   // 6 digit digital clock with full date, day
-    time4nList,  // 4 digit digital clock
-    time6nList,  // 6 digit digital clock
-    time4dList,  // 4 digit digital clock with date
-    time6dList,  // 6 digit digital clock with date
-    haikuList,   // some poetry at random
+   {faceList,             // 0 - analog clock face
+    clock2List,           // 1 - another analog clock face
+    pongList,             // 2 - play Pong, special code is run for this
+    tetrisList,           // 3 - play Tetris
+    time4nList,           // 4 - 4 digit digital clock
+    time6nList,           // 5 - 6 digit digital clock
+    time4dList,           // 6 - 4 digit digital clock with date
+    time6dList,           // 7 - 6 digit digital clock with date
+    haikuList,            // 8 - some poetry at random
+    calibrateCircleList,  // 9 - 
+    calibrateSquareList,  // 10 - 
+    splashList,           // 11 - splash screen vanishes when knob touched
  //   flwList,     // four letter words at random
-    splashList,  // splash screen vanishes when knob touched
+ //   timefList,   // 6 digit digital clock with full date, day
     0};
 
 // list of function pointers for each face that needs to initialize things when it is selected
 void (*customInitList[])(void) = {
-  0,
-  0,
-  reset_pong,
-  reset_tetris,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
+  0,              // 0
+  0,              // 1
+  reset_pong,     // 2
+  reset_tetris,   // 3
+  0,              // 4
+  0,              // 5
+  0,              // 6
+  0,              // 7
+  0,              // 8
+  0,              // 9
+  0,              // 10
+  0,              // 11
   0
 };
 
 // list of function pointers for each face that needs to draw its own stuff
 void (*customDrawList[])(void) = {
-  DrawClk,
-  clock2Draw,
-  doPong,
-  drawTetris,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
+  DrawClk,            // 0
+  clock2Draw,         // 1
+  doPong,             // 2
+  drawTetris,         // 3
+  0,                  // 4
+  0,                  // 5
+  0,                  // 6
+  0,                  // 7
+  0,                  // 8
+  doCalibrateCircle,  // 9
+  doCalibrateSquare,  // 10
+  0,                  // 11
   0
 };
 
 // list of bools signifying whether a face makes direct use of the position pots or not.  (usually games)
 bool customKnobsList[] = {
-  0,
-  0,
-  1,
-  1,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
+  0,  // 0
+  0,  // 1
+  1,  // 2
+  1,  // 3
+  0,  // 4
+  0,  // 5
+  0,  // 6
+  0,  // 7
+  0,  // 8
+  0,  // 9
+  0,  // 10
+  0,  // 11
   0
 };
 
