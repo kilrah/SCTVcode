@@ -1,4 +1,5 @@
 // Cube from https://github.com/OpenHDZ/Arduino-experimentation/blob/master/cube_gfx.ino
+// Hacked up by Audin Malmin.
 
 char cubeStr[] = "A Cube\n";
 
@@ -24,15 +25,35 @@ float cube3d[8][3] = {
   {xOff + cSize, yOff - cSize, zOff + cSize}
 };
 int cube2d[8][2];
+static int r=0;
 
 void doCube() {
-//  Serial.printf("doCube: %d %d\n", frame, millis());
+  if(frame%500==0)
+    r=random(5);
 
-  xrotate(0.01F);
-  yrotate(0.01F*2);
-  zrotate(0.01F/2);
+  switch(r) {
+    case 0:
+      xrotate(0.01F);
+      yrotate(0.01F*2);
+      zrotate(0.01F);
+      break;
+    case 1:
+      yrotate(0.01F);
+      break;
+    case 2:
+      zrotate(0.01F);
+      break;
+    case 3:
+      xrotate(0.01F*2);
+      zrotate(0.02F);
+      break;
+    case 4:
+      xrotate(0.01F);
+      yrotate(0.02F);
+    break;
+  }
 
-    //calculate 2d points
+  //calculate 2d points
   for(byte i = 0; i < 8; i++) {
     cube2d[i][0] = cube3d[i][0] * view_plane / cube3d[i][2];
     cube2d[i][1] = cube3d[i][1] * view_plane / cube3d[i][2];

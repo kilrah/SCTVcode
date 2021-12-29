@@ -29,6 +29,7 @@
 // LastO    ignored
 // The character ends with a 0x80 which tells DoChar to stop, plus the char width.
 
+// TODO These need to turn into an array...
 const int OurBigKern = 2;  // this font's kern size for 40-up scales
 const int OurLilKern = 3;  // this font's kern size for 30-down scales
 const int OurBigGap = 4;   // this font's inter-row gap for 40-up scales
