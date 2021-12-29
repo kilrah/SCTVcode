@@ -649,6 +649,129 @@ const int * const LEDFont[] =
  LEDSmallP,LEDSmallQ,LEDSmallR,LEDSmallS, LEDSmallT, LEDSmallU, LEDSmallV,LEDSmallW,
  LEDSmallX,LEDSmallY,LEDSmallZ,LEDLfBrace,LEDVertBar,LEDRtBrace,LEDTilde, Rubout};
 
+// STYLE 2 (lines)
+#define incSEGA lin,2,20,12,20,0,0,
+#define incSEGB lin,12,20,11,10,0,0,
+#define incSEGC lin,11,10,10,0,0,0,
+#define incSEGD lin,10,0,0,0,0,0,
+#define incSEGE lin,0,0,1,10,0,0,
+#define incSEGF lin,1,10,2,20,0,0,
+#define incSEGG lin,1,10,11,10,0,0,
 
+const int incExclam[] = {incSEGB incSEGC 0x8c};
+const int incDQuot[] = {incSEGB incSEGF 0x8c};
+const int incSharp[] = {incSEGB incSEGC incSEGE incSEGF 0x8c};
+const int incDollar[] = {incSEGA incSEGC incSEGD incSEGF incSEGG 0x8c};
+const int incPercent[] = {incSEGB incSEGE incSEGG 0x8c};
+const int incAmper[] = {incSEGA incSEGB incSEGC incSEGD incSEGE incSEGF incSEGG 0x8c};
+const int incApost[] = {incSEGB 0x8c};
+const int incLParen[] = {incSEGA incSEGD incSEGE incSEGF 0x8c};
+const int incRParen[] = {incSEGA incSEGB incSEGC incSEGD 0x8c};
+const int incAster[] = {incSEGB incSEGC incSEGE incSEGF incSEGG 0x8c};
+const int incPlus[] = {incSEGB incSEGC incSEGG 0x8c};
+const int incComma[] = {incSEGC 0x8c};
+const int incMinus[] = {incSEGG 0x8c};
+const int incPeriod[] = {incSEGD 0x8c};
+const int incSlash[] = {incSEGB incSEGE incSEGG 0x8c};
+const int incZero[] = {incSEGA incSEGB incSEGC incSEGD incSEGE incSEGF 0x8c};
+const int incOne[] = {incSEGB incSEGC 0x8c};
+const int incTwo[] = {incSEGA incSEGB incSEGD incSEGE incSEGG 0x8c};
+const int incThree[] = {incSEGA incSEGB incSEGC incSEGD incSEGG 0x8c};
+const int incFour[] = {incSEGB incSEGC incSEGF incSEGG 0x8c};
+const int incFive[] = {incSEGA incSEGC incSEGD incSEGF incSEGG 0x8c};
+const int incSix[] = {incSEGA incSEGC incSEGD incSEGE incSEGF incSEGG 0x8c};
+const int incSeven[] = {incSEGA incSEGB incSEGC 0x8c};
+const int incEight[] = {incSEGA incSEGB incSEGC incSEGD incSEGE incSEGF incSEGG 0x8c};
+const int incNine[] = {incSEGA incSEGB incSEGC incSEGD incSEGF incSEGG 0x8c};
+const int incColon[]   = { cir, 2, 6, 4, 4, 6,13, 
+                        cir, 2,14, 4, 4, 6,13, 0x84};
+const int incSemiCol[] = { cir, 3,14, 2, 2, 6,13, 
+                        cir, 3, 6, 2, 2, 6,13, 
+                        cir, 0, 6, 8,12, 6, 7, 0x84};
+const int incLThan[]   = { lin, 0,10,12,18, 6,13, 
+                        lin, 0,10,12, 2, 6,13, 0x8c};
+const int incEqual[]   = { lin, 0,13,12,13, 6,13, 
+                        lin, 0, 7,12, 7, 6,13, 0x8c};
+const int incGThan[]   = { lin, 0,18,12,10, 6,13, 
+                        lin, 0, 2,12,10, 6,13, 0x8c};
+const int incQuest[] = {incSEGA incSEGB incSEGE incSEGG 0x8c};
+const int incAtSign[] = {incSEGA incSEGB incSEGC incSEGD incSEGE incSEGF 0x8c};
+const int incBigA[] = {incSEGA incSEGB incSEGC incSEGE incSEGF incSEGG 0x8c};
+const int incBigB[] = {incSEGC incSEGD incSEGE incSEGF incSEGG 0x8c};
+const int incBigC[] = {incSEGA incSEGD incSEGE incSEGF 0x8c};
+const int incBigD[] = {incSEGB incSEGC incSEGD incSEGE incSEGG 0x8c};
+const int incBigE[] = {incSEGA incSEGD incSEGE incSEGF incSEGG 0x8c};
+const int incBigF[] = {incSEGA incSEGE incSEGF incSEGG 0x8c};
+const int incBigG[] = {incSEGA incSEGC incSEGD incSEGE incSEGF 0x8c};
+const int incBigH[] = {incSEGC incSEGE incSEGF incSEGG 0x8c};
+const int incBigI[] = {incSEGB incSEGC 0x8c};
+const int incBigJ[] = {incSEGB incSEGC incSEGD incSEGE 0x8c};
+const int incBigK[] = {incSEGB incSEGC incSEGE incSEGF incSEGG 0x8c};
+const int incBigL[] = {incSEGD incSEGE incSEGF 0x8c};
+const int incBigM[] = {incSEGA incSEGC incSEGE incSEGG 0x8c};
+const int incBigN[] = {incSEGA incSEGB incSEGC incSEGE incSEGF 0x8c};
+const int incBigO[] = {incSEGA incSEGB incSEGC incSEGD incSEGE incSEGF 0x8c};
+const int incBigP[] = {incSEGA incSEGB incSEGE incSEGF incSEGG 0x8c};
+const int incBigQ[] = {incSEGA incSEGB incSEGC incSEGF incSEGG 0x8c};
+const int incBigR[] = {incSEGA incSEGE incSEGF 0x8c};
+const int incBigS[] = {incSEGA incSEGC incSEGD incSEGF incSEGG 0x8c};
+const int incBigT[] = {incSEGD incSEGE incSEGF incSEGG 0x8c};
+const int incBigU[] = {incSEGB incSEGC incSEGD incSEGE incSEGF 0x8c};
+const int incBigV[] = {incSEGB incSEGD incSEGF 0x8c};
+const int incBigW[] = {incSEGB incSEGD incSEGF incSEGG 0x8c};
+const int incBigX[] = {incSEGA incSEGD incSEGG 0x8c};
+const int incBigY[] = {incSEGB incSEGC incSEGD incSEGF incSEGG 0x8c};
+const int incBigZ[] = {incSEGA incSEGB incSEGD incSEGE incSEGG 0x8c};
+const int incLftSqBr[] = {incSEGA incSEGD incSEGE incSEGF 0x8c};
+const int incBackSl[] = {incSEGC incSEGF incSEGG 0x8c};
+const int incRtSqBr[] = {incSEGA incSEGB incSEGC incSEGD 0x8c};
+const int incCarat[] = {incSEGA incSEGB incSEGF 0x8c};
+const int incUnderSc[] = {incSEGD 0x8c};
+const int incBackQu[] = {incSEGB 0x8c};
+const int incSmallA[] = {incSEGA incSEGB incSEGC incSEGE incSEGF incSEGG 0x8c};
+const int incSmallB[] = {incSEGC incSEGD incSEGE incSEGF incSEGG 0x8c};
+const int incSmallC[] = {incSEGA incSEGD incSEGE incSEGF 0x8c};
+const int incSmallD[] = {incSEGB incSEGC incSEGD incSEGE incSEGG 0x8c};
+const int incSmallE[] = {incSEGA incSEGD incSEGE incSEGF incSEGG 0x8c};
+const int incSmallF[] = {incSEGA incSEGE incSEGF incSEGG 0x8c};
+const int incSmallG[] = {incSEGA incSEGC incSEGD incSEGE incSEGF 0x8c};
+const int incSmallH[] = {incSEGC incSEGE incSEGF incSEGG 0x8c};
+const int incSmallI[] = {incSEGB incSEGC 0x8c};
+const int incSmallJ[] = {incSEGB incSEGC incSEGD incSEGE 0x8c};
+const int incSmallK[] = {incSEGB incSEGC incSEGE incSEGF incSEGG 0x8c};
+const int incSmallL[] = {incSEGD incSEGE incSEGF 0x8c};
+const int incSmallM[] = {incSEGA incSEGC incSEGE incSEGG 0x8c};
+const int incSmallN[] = {incSEGA incSEGB incSEGC incSEGE incSEGF 0x8c};
+const int incSmallO[] = {incSEGA incSEGB incSEGC incSEGD incSEGE incSEGF 0x8c};
+const int incSmallP[] = {incSEGA incSEGB incSEGE incSEGF incSEGG 0x8c};
+const int incSmallQ[] = {incSEGA incSEGB incSEGC incSEGF incSEGG 0x8c};
+const int incSmallR[] = {incSEGA incSEGE incSEGF 0x8c};
+const int incSmallS[] = {incSEGA incSEGC incSEGD incSEGF incSEGG 0x8c};
+const int incSmallT[] = {incSEGD incSEGE incSEGF incSEGG 0x8c};
+const int incSmallU[] = {incSEGB incSEGC incSEGD incSEGE incSEGF 0x8c};
+const int incSmallV[] = {incSEGB incSEGD incSEGF 0x8c};
+const int incSmallW[] = {incSEGB incSEGD incSEGF incSEGG 0x8c};
+const int incSmallX[] = {incSEGA incSEGD incSEGG 0x8c};
+const int incSmallY[] = {incSEGB incSEGC incSEGD incSEGF incSEGG 0x8c};
+const int incSmallZ[] = {incSEGA incSEGB incSEGD incSEGE incSEGG 0x8c};
+const int incLfBrace[] = {incSEGA incSEGD incSEGE incSEGF 0x8c};
+const int incVertBar[] = {incSEGB incSEGC 0x8c};
+const int incRtBrace[] = {incSEGA incSEGB incSEGC incSEGD 0x8c};
+const int incTilde[] = {incSEGG 0x8c};
 
-const int * const * Fonts[] = {Font1, asteroidsFont, LEDFont, pico8Font};
+// All the characters, arranged in ASCII order because ASCII rules
+const int * const incFont[] =
+{Space, incExclam,incDQuot, incSharp,  incDollar, incPercent,incAmper, incApost,
+ incLParen,incRParen,incAster, incPlus,   incComma,  incMinus,  incPeriod,incSlash,
+ incZero, incOne, incTwo, incThree, incFour, incFive, incSix, incSeven,
+ incEight, incNine,  incColon, incSemiCol,incLThan,  incEqual,  incGThan, incQuest,
+ incAtSign,incBigA,  incBigB,  incBigC,   incBigD,   incBigE,   incBigF,  incBigG,
+ incBigH,  incBigI,  incBigJ,  incBigK,   incBigL,   incBigM,   incBigN,  incBigO,
+ incBigP,  incBigQ,  incBigR,  incBigS,   incBigT,   incBigU,   incBigV,  incBigW,
+ incBigX,  incBigY,  incBigZ,  incLftSqBr,incBackSl, incRtSqBr, incCarat, incUnderSc,
+ incBackQu,incSmallA,incSmallB,incSmallC, incSmallD, incSmallE, incSmallF,incSmallG,
+ incSmallH,incSmallI,incSmallJ,incSmallK, incSmallL, incSmallM, incSmallN,incSmallO,
+ incSmallP,incSmallQ,incSmallR,incSmallS, incSmallT, incSmallU, incSmallV,incSmallW,
+ incSmallX,incSmallY,incSmallZ,incLfBrace,incVertBar,incRtBrace,incTilde, Rubout};
+ 
+const int * const * Fonts[] = {Font1, asteroidsFont, LEDFont, incFont, pico8Font};

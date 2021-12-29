@@ -53,10 +53,10 @@ struct item calibrateFontList[] = {
   {text,10,0,3,numbers,  0,0},
   {text,10,0,3,letters,  0,0},
   */  
-  {text,10,0,2,chars1,  0,0},
-  {text,10,0,2,chars2,  0,0},
-  {text,10,0,2,chars3,  0,0},
-  {text,10,0,2,chars4,  0,0},
-  {text,10,0,2,chars5,  0,0},
+  {text,10,0,3,chars1,  0,0},
+  {text,10,0,3,chars2,  0,0},
+  {text,10,0,3,chars3,  0,0},
+  {text,10,0,3,chars4,  0,0},
+  {text,10,0,3,chars5,  0,0},
   {listend,0,0,0,BlankLn,0,0}
 };
