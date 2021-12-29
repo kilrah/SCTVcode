@@ -116,11 +116,11 @@ void DrawClk() {
   drawACircle(0, 0, 180);   // 
 //  DoHand(250, (Ticks / HalfSec) << 1 + (Secs << 2));  // no Ticks right now, so no smooth sweep.
   // doingHand = true;
-  drawRadialLine(181, 2500, 240, Secs<<2);
-  drawRadialLine(181, 2000, 240, (Secs / 15) + (Mins << 2));
-  drawRadialLine(181, 1500, 240, (Hrs % 12) * 20 + Mins / 3);
-  drawRadialLine(181, 2000, 240, (Secs / 15) + (Mins << 2));   // make the hour and minute hands bright by doubling up
-  drawRadialLine(181, 1500, 240, (Hrs % 12) * 20 + Mins / 3);
+  drawRadialLine(200, 2500, 240, Secs<<2);
+  drawRadialLine(200, 2000, 240, (Secs / 15) + (Mins << 2));
+  drawRadialLine(200, 1500, 240, (Hrs % 12) * 20 + Mins / 3);
+  drawRadialLine(200, 2000, 240, (Secs / 15) + (Mins << 2));   // make the hour and minute hands bright by doubling up
+  drawRadialLine(200, 1500, 240, (Hrs % 12) * 20 + Mins / 3);
   // doingHand = false;
 }
 
@@ -140,6 +140,8 @@ struct item clock2List[] = {
 void clock2Draw() {
   int largeTickInside = 2500;
   int largeTickOutside = 3000;
+  int midTickInside = 2500;
+  int midTickOutside = 2700;
   int smallTickInside = 2500;
   int smallTickOutside = 2600;
   int centerCircle = 60;
@@ -156,32 +158,35 @@ void clock2Draw() {
     currentMinute = Mins;
   }
 
-  for(int i = 0; i < 60; i +=15 )                                  // draw large tick marks at 12, 3, 6, and 9.  These are drawn beyond the edge of the screen.
-    drawRadialLine(largeTickInside, largeTickOutside, 240, i << 2);
+  for(int i = 0; i < 60; i++) {                                    // Draw the tick marks.
+    if(i%15 == 0)
+      drawRadialLine(largeTickInside, largeTickOutside, 60, i);
+    else if(i%5 == 0)
+      drawRadialLine(midTickInside, midTickOutside, 60, i);
+    else if(i <= Secs)
+      drawRadialLine(smallTickInside, smallTickOutside, 240, i << 2);     
+  }
 
-  for(int i = 0; i <= Secs; i ++)
-    if(i%15 != 0)                                                  // Don't overlap with the larger tick marks.
-      drawRadialLine(smallTickInside, smallTickOutside, 240, i << 2);
-
-  for(int i = 0; i<=3; i++)
-    if(Secs%15 != 0)                                               // highlight a little tickmark
-      drawRadialLine(smallTickInside, smallTickOutside, 240, Secs << 2);
-    else                                                           // highlight a larger tickmark
+  for(int i = 0; i<=3; i++)  // highlight the current second.
+    if(Secs%15 == 0)
       drawRadialLine(largeTickInside, largeTickOutside, 240, Secs << 2);
+    else if(Secs%5 == 0)
+      drawRadialLine(midTickInside, midTickOutside, 240, Secs << 2);
+    else
+      drawRadialLine(smallTickInside, smallTickOutside, 240, Secs << 2);
 
   drawACircle(0, 0, centerCircle);
 
-  drawRadialLine(centerCircle+10, 1940, 1440, (float)1440/framesPerMin*(millis()-millisMinOld));  // smoooooooooooooth.
+  drawRadialLine(centerCircle+15, 1940, 1440, (float)1440/framesPerMin*(millis()-millisMinOld));  // smoooooooooooooth.
   drawRadialCircle(2000, 1440, (float)1440/framesPerMin*(millis()-millisMinOld), 70);
   drawRadialLine(2080, 2200, 1440, (float)1440/framesPerMin*(millis()-millisMinOld));
 
-  drawRadialLine(centerCircle+10, 2000, 240, (Secs / 15) + (Mins << 2));
-  drawRadialLine(centerCircle+10, 2000, 240, (Secs / 15) + (Mins << 2));
+  drawRadialLine(centerCircle+15, 2000, 240, (Secs / 15) + (Mins << 2));
+  drawRadialLine(centerCircle+15, 2000, 240, (Secs / 15) + (Mins << 2));
 
-  drawRadialLine(centerCircle+10, 1500, 240, (Hrs % 12) * 20 + Mins / 3);
-  drawRadialLine(centerCircle+10, 1500, 240, (Hrs % 12) * 20 + Mins / 3);
+  drawRadialLine(centerCircle+15, 1500, 240, (Hrs % 12) * 20 + Mins / 3);
+  drawRadialLine(centerCircle+15, 1500, 240, (Hrs % 12) * 20 + Mins / 3);
 }
-
 
 // ------------------------ digital clocks -----------------------------------
 
