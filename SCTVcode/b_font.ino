@@ -533,98 +533,122 @@ E     C
 #define LEDSEGF lin, 0,11, 0,18, 6,13,  lin, 1,10, 0,11, 6,13,  lin, 2,11, 1,10, 6,13,  lin, 2,18, 2,11, 6,13,  lin, 1,19, 2,18, 6,13,  lin, 0,18, 1,19, 6,13,
 #define LEDSEGG lin,10, 9, 2, 9, 6,13,  lin,11,10,10, 9, 6,13,  lin,10,11,11,10, 6,13,  lin, 2,11,10,11, 6,13,  lin, 1,10, 2,11, 6,13,  lin, 2, 9, 1,10, 6,13,
 
-const int LEDZero[] = {
-  LEDSEGA
-  LEDSEGB
-  LEDSEGC
-  LEDSEGD
-  LEDSEGE
-  LEDSEGF
-  0x8c};
-
-const int LEDOne[] = {
-  LEDSEGB
-  LEDSEGC
-  0x8c};
-
-const int LEDTwo[] = {
-  LEDSEGA
-  LEDSEGB
-  LEDSEGD
-  LEDSEGE
-  LEDSEGG
-  0x8c};
-
-const int LEDThree[] = {
-  LEDSEGA
-  LEDSEGB
-  LEDSEGC
-  LEDSEGD
-  LEDSEGG
-  0x8c};
-
-const int LEDFour[] = {
-  LEDSEGB
-  LEDSEGC
-  LEDSEGF
-  LEDSEGG
-  0x8c};
-
-const int LEDFive[] = {
-  LEDSEGA
-  LEDSEGC
-  LEDSEGD
-  LEDSEGF
-  LEDSEGG
-  0x8c};
-
-const int LEDSix[] = {
-  LEDSEGA
-  LEDSEGC
-  LEDSEGD
-  LEDSEGE
-  LEDSEGF
-  LEDSEGG
-  0x8c};
-
-const int LEDSeven[] = {
-  LEDSEGA
-  LEDSEGB
-  LEDSEGC
-  0x8c};
-
-const int LEDEight[] = {
-  LEDSEGA
-  LEDSEGB
-  LEDSEGC
-  LEDSEGD
-  LEDSEGE
-  LEDSEGF
-  LEDSEGG
-  0x8c};
-
-const int LEDNine[] = {
-  LEDSEGA
-  LEDSEGB
-  LEDSEGC
-  LEDSEGD
-  LEDSEGF
-  LEDSEGG
-  0x8c};
+const int LEDExclam[] = {LEDSEGB LEDSEGC 0x8c};
+const int LEDDQuot[] = {LEDSEGB LEDSEGF 0x8c};
+const int LEDSharp[] = {LEDSEGB LEDSEGC LEDSEGE LEDSEGF 0x8c};
+const int LEDDollar[] = {LEDSEGA LEDSEGC LEDSEGD LEDSEGF LEDSEGG 0x8c};
+const int LEDPercent[] = {LEDSEGB LEDSEGE LEDSEGG 0x8c};
+const int LEDAmper[] = {LEDSEGA LEDSEGB LEDSEGC LEDSEGD LEDSEGE LEDSEGF LEDSEGG 0x8c};
+const int LEDApost[] = {LEDSEGB 0x8c};
+const int LEDLParen[] = {LEDSEGA LEDSEGD LEDSEGE LEDSEGF 0x8c};
+const int LEDRParen[] = {LEDSEGA LEDSEGB LEDSEGC LEDSEGD 0x8c};
+const int LEDAster[] = {LEDSEGB LEDSEGC LEDSEGE LEDSEGF LEDSEGG 0x8c};
+const int LEDPlus[] = {LEDSEGB LEDSEGC LEDSEGG 0x8c};
+const int LEDComma[] = {LEDSEGC 0x8c};
+const int LEDMinus[] = {LEDSEGG 0x8c};
+const int LEDPeriod[] = {LEDSEGD 0x8c};
+const int LEDSlash[] = {LEDSEGB LEDSEGE LEDSEGG 0x8c};
+const int LEDZero[] = {LEDSEGA LEDSEGB LEDSEGC LEDSEGD LEDSEGE LEDSEGF 0x8c};
+const int LEDOne[] = {LEDSEGB LEDSEGC 0x8c};
+const int LEDTwo[] = {LEDSEGA LEDSEGB LEDSEGD LEDSEGE LEDSEGG 0x8c};
+const int LEDThree[] = {LEDSEGA LEDSEGB LEDSEGC LEDSEGD LEDSEGG 0x8c};
+const int LEDFour[] = {LEDSEGB LEDSEGC LEDSEGF LEDSEGG 0x8c};
+const int LEDFive[] = {LEDSEGA LEDSEGC LEDSEGD LEDSEGF LEDSEGG 0x8c};
+const int LEDSix[] = {LEDSEGA LEDSEGC LEDSEGD LEDSEGE LEDSEGF LEDSEGG 0x8c};
+const int LEDSeven[] = {LEDSEGA LEDSEGB LEDSEGC 0x8c};
+const int LEDEight[] = {LEDSEGA LEDSEGB LEDSEGC LEDSEGD LEDSEGE LEDSEGF LEDSEGG 0x8c};
+const int LEDNine[] = {LEDSEGA LEDSEGB LEDSEGC LEDSEGD LEDSEGF LEDSEGG 0x8c};
+const int LEDColon[]   = { cir, 2, 6, 4, 4, 6,13, 
+                        cir, 2,14, 4, 4, 6,13, 0x84};
+const int LEDSemiCol[] = { cir, 3,14, 2, 2, 6,13, 
+                        cir, 3, 6, 2, 2, 6,13, 
+                        cir, 0, 6, 8,12, 6, 7, 0x84};
+const int LEDLThan[]   = { lin, 0,10,12,18, 6,13, 
+                        lin, 0,10,12, 2, 6,13, 0x8c};
+const int LEDEqual[]   = { lin, 0,13,12,13, 6,13, 
+                        lin, 0, 7,12, 7, 6,13, 0x8c};
+const int LEDGThan[]   = { lin, 0,18,12,10, 6,13, 
+                        lin, 0, 2,12,10, 6,13, 0x8c};
+const int LEDQuest[] = {LEDSEGA LEDSEGB LEDSEGE LEDSEGG 0x8c};
+const int LEDAtSign[] = {LEDSEGA LEDSEGB LEDSEGC LEDSEGD LEDSEGE LEDSEGF 0x8c};
+const int LEDBigA[] = {LEDSEGA LEDSEGB LEDSEGC LEDSEGE LEDSEGF LEDSEGG 0x8c};
+const int LEDBigB[] = {LEDSEGC LEDSEGD LEDSEGE LEDSEGF LEDSEGG 0x8c};
+const int LEDBigC[] = {LEDSEGA LEDSEGD LEDSEGE LEDSEGF 0x8c};
+const int LEDBigD[] = {LEDSEGB LEDSEGC LEDSEGD LEDSEGE LEDSEGG 0x8c};
+const int LEDBigE[] = {LEDSEGA LEDSEGD LEDSEGE LEDSEGF LEDSEGG 0x8c};
+const int LEDBigF[] = {LEDSEGA LEDSEGE LEDSEGF LEDSEGG 0x8c};
+const int LEDBigG[] = {LEDSEGA LEDSEGC LEDSEGD LEDSEGE LEDSEGF 0x8c};
+const int LEDBigH[] = {LEDSEGC LEDSEGE LEDSEGF LEDSEGG 0x8c};
+const int LEDBigI[] = {LEDSEGB LEDSEGC 0x8c};
+const int LEDBigJ[] = {LEDSEGB LEDSEGC LEDSEGD LEDSEGE 0x8c};
+const int LEDBigK[] = {LEDSEGB LEDSEGC LEDSEGE LEDSEGF LEDSEGG 0x8c};
+const int LEDBigL[] = {LEDSEGD LEDSEGE LEDSEGF 0x8c};
+const int LEDBigM[] = {LEDSEGA LEDSEGC LEDSEGE LEDSEGG 0x8c};
+const int LEDBigN[] = {LEDSEGA LEDSEGB LEDSEGC LEDSEGE LEDSEGF 0x8c};
+const int LEDBigO[] = {LEDSEGA LEDSEGB LEDSEGC LEDSEGD LEDSEGE LEDSEGF 0x8c};
+const int LEDBigP[] = {LEDSEGA LEDSEGB LEDSEGE LEDSEGF LEDSEGG 0x8c};
+const int LEDBigQ[] = {LEDSEGA LEDSEGB LEDSEGC LEDSEGF LEDSEGG 0x8c};
+const int LEDBigR[] = {LEDSEGA LEDSEGE LEDSEGF 0x8c};
+const int LEDBigS[] = {LEDSEGA LEDSEGC LEDSEGD LEDSEGF LEDSEGG 0x8c};
+const int LEDBigT[] = {LEDSEGD LEDSEGE LEDSEGF LEDSEGG 0x8c};
+const int LEDBigU[] = {LEDSEGB LEDSEGC LEDSEGD LEDSEGE LEDSEGF 0x8c};
+const int LEDBigV[] = {LEDSEGB LEDSEGD LEDSEGF 0x8c};
+const int LEDBigW[] = {LEDSEGB LEDSEGD LEDSEGF LEDSEGG 0x8c};
+const int LEDBigX[] = {LEDSEGA LEDSEGD LEDSEGG 0x8c};
+const int LEDBigY[] = {LEDSEGB LEDSEGC LEDSEGD LEDSEGF LEDSEGG 0x8c};
+const int LEDBigZ[] = {LEDSEGA LEDSEGB LEDSEGD LEDSEGE LEDSEGG 0x8c};
+const int LEDLftSqBr[] = {LEDSEGA LEDSEGD LEDSEGE LEDSEGF 0x8c};
+const int LEDBackSl[] = {LEDSEGC LEDSEGF LEDSEGG 0x8c};
+const int LEDRtSqBr[] = {LEDSEGA LEDSEGB LEDSEGC LEDSEGD 0x8c};
+const int LEDCarat[] = {LEDSEGA LEDSEGB LEDSEGF 0x8c};
+const int LEDUnderSc[] = {LEDSEGD 0x8c};
+const int LEDBackQu[] = {LEDSEGB 0x8c};
+const int LEDSmallA[] = {LEDSEGA LEDSEGB LEDSEGC LEDSEGE LEDSEGF LEDSEGG 0x8c};
+const int LEDSmallB[] = {LEDSEGC LEDSEGD LEDSEGE LEDSEGF LEDSEGG 0x8c};
+const int LEDSmallC[] = {LEDSEGA LEDSEGD LEDSEGE LEDSEGF 0x8c};
+const int LEDSmallD[] = {LEDSEGB LEDSEGC LEDSEGD LEDSEGE LEDSEGG 0x8c};
+const int LEDSmallE[] = {LEDSEGA LEDSEGD LEDSEGE LEDSEGF LEDSEGG 0x8c};
+const int LEDSmallF[] = {LEDSEGA LEDSEGE LEDSEGF LEDSEGG 0x8c};
+const int LEDSmallG[] = {LEDSEGA LEDSEGC LEDSEGD LEDSEGE LEDSEGF 0x8c};
+const int LEDSmallH[] = {LEDSEGC LEDSEGE LEDSEGF LEDSEGG 0x8c};
+const int LEDSmallI[] = {LEDSEGB LEDSEGC 0x8c};
+const int LEDSmallJ[] = {LEDSEGB LEDSEGC LEDSEGD LEDSEGE 0x8c};
+const int LEDSmallK[] = {LEDSEGB LEDSEGC LEDSEGE LEDSEGF LEDSEGG 0x8c};
+const int LEDSmallL[] = {LEDSEGD LEDSEGE LEDSEGF 0x8c};
+const int LEDSmallM[] = {LEDSEGA LEDSEGC LEDSEGE LEDSEGG 0x8c};
+const int LEDSmallN[] = {LEDSEGA LEDSEGB LEDSEGC LEDSEGE LEDSEGF 0x8c};
+const int LEDSmallO[] = {LEDSEGA LEDSEGB LEDSEGC LEDSEGD LEDSEGE LEDSEGF 0x8c};
+const int LEDSmallP[] = {LEDSEGA LEDSEGB LEDSEGE LEDSEGF LEDSEGG 0x8c};
+const int LEDSmallQ[] = {LEDSEGA LEDSEGB LEDSEGC LEDSEGF LEDSEGG 0x8c};
+const int LEDSmallR[] = {LEDSEGA LEDSEGE LEDSEGF 0x8c};
+const int LEDSmallS[] = {LEDSEGA LEDSEGC LEDSEGD LEDSEGF LEDSEGG 0x8c};
+const int LEDSmallT[] = {LEDSEGD LEDSEGE LEDSEGF LEDSEGG 0x8c};
+const int LEDSmallU[] = {LEDSEGB LEDSEGC LEDSEGD LEDSEGE LEDSEGF 0x8c};
+const int LEDSmallV[] = {LEDSEGB LEDSEGD LEDSEGF 0x8c};
+const int LEDSmallW[] = {LEDSEGB LEDSEGD LEDSEGF LEDSEGG 0x8c};
+const int LEDSmallX[] = {LEDSEGA LEDSEGD LEDSEGG 0x8c};
+const int LEDSmallY[] = {LEDSEGB LEDSEGC LEDSEGD LEDSEGF LEDSEGG 0x8c};
+const int LEDSmallZ[] = {LEDSEGA LEDSEGB LEDSEGD LEDSEGE LEDSEGG 0x8c};
+const int LEDLfBrace[] = {LEDSEGA LEDSEGD LEDSEGE LEDSEGF 0x8c};
+const int LEDVertBar[] = {LEDSEGB LEDSEGC 0x8c};
+const int LEDRtBrace[] = {LEDSEGA LEDSEGB LEDSEGC LEDSEGD 0x8c};
+const int LEDTilde[] = {LEDSEGG 0x8c};
 
 // All the characters, arranged in ASCII order because ASCII rules
 const int * const LEDFont[] =
-{Space, Exclam,DQuot, Sharp,  Dollar, Percent,Amper, Apost,
- LParen,RParen,Aster, Plus,   Comma,  Minus,  Period,Slash,
+{Space, LEDExclam,LEDDQuot, LEDSharp,  LEDDollar, LEDPercent,LEDAmper, LEDApost,
+ LEDLParen,LEDRParen,LEDAster, LEDPlus,   LEDComma,  LEDMinus,  LEDPeriod,LEDSlash,
  LEDZero, LEDOne, LEDTwo, LEDThree, LEDFour, LEDFive, LEDSix, LEDSeven,
- LEDEight, LEDNine,  Colon, SemiCol,LThan,  Equal,  GThan, Quest,
- AtSign,BigA,  BigB,  BigC,   BigD,   BigE,   BigF,  BigG,
- BigH,  BigI,  BigJ,  BigK,   BigL,   BigM,   BigN,  BigO,
- BigP,  BigQ,  BigR,  BigS,   BigT,   BigU,   BigV,  BigW,
- BigX,  BigY,  BigZ,  LftSqBr,BackSl, RtSqBr, Carat, UnderSc,
- BackQu,SmallA,SmallB,SmallC, SmallD, SmallE, SmallF,SmallG,
- SmallH,SmallI,SmallJ,SmallK, SmallL, SmallM, SmallN,SmallO,
- SmallP,SmallQ,SmallR,SmallS, SmallT, SmallU, SmallV,SmallW,
- SmallX,SmallY,SmallZ,LfBrace,VertBar,RtBrace,Tilde, Rubout};
+ LEDEight, LEDNine,  LEDColon, LEDSemiCol,LEDLThan,  LEDEqual,  LEDGThan, LEDQuest,
+ LEDAtSign,LEDBigA,  LEDBigB,  LEDBigC,   LEDBigD,   LEDBigE,   LEDBigF,  LEDBigG,
+ LEDBigH,  LEDBigI,  LEDBigJ,  LEDBigK,   LEDBigL,   LEDBigM,   LEDBigN,  LEDBigO,
+ LEDBigP,  LEDBigQ,  LEDBigR,  LEDBigS,   LEDBigT,   LEDBigU,   LEDBigV,  LEDBigW,
+ LEDBigX,  LEDBigY,  LEDBigZ,  LEDLftSqBr,LEDBackSl, LEDRtSqBr, LEDCarat, LEDUnderSc,
+ LEDBackQu,LEDSmallA,LEDSmallB,LEDSmallC, LEDSmallD, LEDSmallE, LEDSmallF,LEDSmallG,
+ LEDSmallH,LEDSmallI,LEDSmallJ,LEDSmallK, LEDSmallL, LEDSmallM, LEDSmallN,LEDSmallO,
+ LEDSmallP,LEDSmallQ,LEDSmallR,LEDSmallS, LEDSmallT, LEDSmallU, LEDSmallV,LEDSmallW,
+ LEDSmallX,LEDSmallY,LEDSmallZ,LEDLfBrace,LEDVertBar,LEDRtBrace,LEDTilde, Rubout};
+
+
 
 const int * const * Fonts[] = {Font1, asteroidsFont, LEDFont, pico8Font};
