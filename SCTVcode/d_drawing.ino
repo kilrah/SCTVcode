@@ -172,14 +172,9 @@ void drawRadialLine(int inside, int outside, int resolution, int angle) {
 // diameter - how big of a circle?
 void drawRadialCircle(int inside, int resolution, int angle, int diameter) {
   int handAngle = (angle*nsteps/resolution) % nsteps;  // get angle in range of new sin/cos tab
-  YSize = costab[handAngle]/500;      // swap X and Y, because 0 deg is at north CW like a clock, not east CCW like math
-  XSize = sintab[handAngle]/500;
-  XStart = (inside * XSize) >>8;
-  YStart = (inside * YSize) >>8;
-  Scale = 1;
-  ChrXPos = ChrYPos = 0;
-  Shape = lin;
-  drawACircle((inside * XSize) >>8, (inside * YSize) >>8, diameter);
+  int ys = costab[handAngle]/500;      // swap X and Y, because 0 deg is at north CW like a clock, not east CCW like math
+  int xs = sintab[handAngle]/500;
+  drawACircle((inside * xs) >>8, (inside * ys) >>8, diameter);
 }
 
 // -------------------- Draw list centering code ---------------------
