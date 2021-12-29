@@ -29,9 +29,9 @@ int rScore = 0;
 char lScoreStr[] = "00";
 char rScoreStr[] = "00";
 struct item pongList[] = {
-  {text,10,0,lScoreStr, leftWall/2-100, topWall+scoreHeight},
-  {text,10,0,rScoreStr,rightWall/2-100, topWall+scoreHeight},
-  {listend,0,0,BlankLn,0,0}
+  {text,10,0,0,lScoreStr, leftWall/2-100, topWall+scoreHeight},
+  {text,10,0,0,rScoreStr,rightWall/2-100, topWall+scoreHeight},
+  {listend,0,0,0,BlankLn,0,0}
 };
 
 void reset_pong() {

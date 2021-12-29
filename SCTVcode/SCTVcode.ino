@@ -200,6 +200,7 @@ int ChrYPos;         // Y position
 bool NewL;           // newline seen by GetWid for Center
 
 // String formatting variables
+int Font;           // which font
 int Scale;          // Font scale factor * 20 pixels high
 int ChrHt;          // scaled character height in pixels (uppercase)
 int ChrWid;         // scaled character width in pixels (variable)
@@ -241,6 +242,7 @@ struct item {
   int type;        // see list above
   int scale;       // scale factor
   int func;        // function to execute (mod or menu numeration) if used, 0 if not
+  int font;        // font number to use
   char *string;     // the string to display
   int xpos;        // where it goes, or used when calculating where it goes
   int ypos;

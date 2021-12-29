@@ -1,5 +1,5 @@
 struct item calibrateCircleList[] = {
-  {listend, 0, 0, BlankLn, 0, 0}
+  {listend, 0, 0, 0, BlankLn, 0, 0}
 };
 
 void doCalibrateCircle() {
@@ -10,7 +10,7 @@ void doCalibrateCircle() {
 }
 
 struct item calibrateSquareList[] = {
-  {listend, 0, 0, BlankLn, 0, 0}
+  {listend, 0, 0, 0, BlankLn, 0, 0}
 };
 
 void doCalibrateSquare() {
@@ -28,11 +28,17 @@ void doCalibrateSquare() {
 }
 
 char numbers[] = "0123456789\n";
+char letters[] = "aAbBcCdDeEfFgGhHiI\n";
+char LETTERS[] = "ABCDEFGHIJFG\n";
 
 struct item calibrateFontList[] = {
-  {text,16,0,numbers,  0,0},
-  {text,16,0,numbers,  0,0},
-  {text,16,0,numbers,  0,0},
-  {text,16,0,numbers,  0,0},
-  {listend,0,0,BlankLn,0,0}
+  {text,10,0,0,numbers,  0,0},
+  {text,10,0,0,letters,  0,0},
+  {text,10,0,1,numbers,  0,0},
+  {text,10,0,1,letters,  0,0},
+//  {text,10,0,2,numbers,  0,0},
+//  {text,10,0,2,letters,  0,0},
+//  {text,10,0,3,numbers,  0,0},
+//  {text,10,0,3,letters,  0,0},
+  {listend,0,0,0,BlankLn,0,0}
 };

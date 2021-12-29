@@ -197,7 +197,7 @@ void GetWid()
   // look up width of each printable char, sum into StrWid, leave StrPtr at \n or null
   while ((TheChr = *StrPtr++) >= 0x20)
   {
-    TheSeg = Fonts[0][(TheChr % 0x7f)- 32]; // read font table - tricky
+    TheSeg = Fonts[Font][(TheChr % 0x7f)- 32]; // read font table - tricky
     while (*TheSeg < 0x80) // skip over all real segments, stopping at end flag
       TheSeg += 7;
     StrWid += *TheSeg % 128;   // mask off end flag to reveal width
@@ -317,6 +317,7 @@ void copyList(struct item *list)
     q->type   = p->type;
     q->scale  = p->scale;
     q->func   = p->func;
+    q->font   = p->font;
     q->string = p->string; 
     q->xpos   = p->xpos;  
     q->ypos   = p->ypos; 
@@ -356,7 +357,7 @@ void DispStr()
   while ((TheChr >= 32)) // printable
   {
     // look up character in ROM font table. This is tricky. 
-    TheSeg = Fonts[0][(TheChr & 0x7f) - 32];
+    TheSeg = Fonts[Font][(TheChr & 0x7f) - 32];
     notLast = GetSeg();
     while (notLast) 
     {
@@ -382,6 +383,7 @@ void DoAList(struct item *list)
   while (p->type != listend) 
   {
     Scale = p->scale;
+    Font = p->font;
     StrPtr = p->string;   // read string pointer
     ChrXPos = p->xpos;  // read position of string (not used by most!)
     ChrYPos = p->ypos;

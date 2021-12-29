@@ -331,13 +331,13 @@ char poetStr[50];
 char spacesStr[] = "    - ";
 
 struct item haikuList[] = {
-  {text,10,0,haiku1Str,  0,0},   // haiku display is centered, as is everything
-  {text,10,0,haiku2Str,  0,0}, 
-  {text,10,0,haiku3Str,  0,0}, 
-  {text,6,0,BlankLn,    0,0}, 
-  {text,6,0,spacesStr,  0,0},    // poet's name is offset to the right
-  {text,6,0,poetStr,    0,0}, 
-  {listend,0,0,BlankLn,0,0}
+  {text,10,0,0,haiku1Str,  0,0},   // haiku display is centered, as is everything
+  {text,10,0,0,haiku2Str,  0,0}, 
+  {text,10,0,0,haiku3Str,  0,0}, 
+  {text,6,0,0,BlankLn,    0,0}, 
+  {text,6,0,0,spacesStr,  0,0},    // poet's name is offset to the right
+  {text,6,0,0,poetStr,    0,0}, 
+  {listend,0,0,0,BlankLn,0,0}
 };
 
 void doHaiku(void)
