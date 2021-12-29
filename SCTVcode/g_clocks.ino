@@ -108,25 +108,6 @@ struct item faceList[] = {
   {listend,0,0,BlankLn,0,0}
 };
 
-// Draw clock hand on screen
-
-// angle is the angle (0=N, 60=E, 120=S, 180=W)
-// len is length of hand
-void DoHand(int len, int angle) {
-  int handAngle = (angle*nsteps/240) % nsteps;  // get angle in range of new sin/cos tab
-  YSize = costab[handAngle]/500;      // swap X and Y, because 0 deg is at north CW like a clock, not east CCW like math
-  XSize = sintab[handAngle]/500;
-  XStart = XSize * 10 / 13; // start at center circle radius
-  YStart = YSize * 10 / 13;
-  XEnd = (len * XSize) >>8;   // scale to hand length
-  YEnd = (len * YSize) >>8;
- // Serial.printf("size %5d %5d  start %5d %5d  end %5d %5d\n", XSize, YSize, XStart, YStart, XEnd, YEnd);
-  Scale = 1;
-  ChrXPos = ChrYPos = 0;
-  Shape = lin;
-  DoSeg();
-}
-
 // DrawClk draws the three clock hands. They are drawn in fine
 // increments of 1.5 degrees per step. The steps are calculated
 // incorporating the smaller time units for smoother movement.
@@ -135,11 +116,11 @@ void DrawClk() {
   drawACircle(0, 0, 180);   // 
 //  DoHand(250, (Ticks / HalfSec) << 1 + (Secs << 2));  // no Ticks right now, so no smooth sweep.
   // doingHand = true;
-  DoHand(2500, Secs << 2);
-  DoHand(2000, (Secs / 15) + (Mins << 2));
-  DoHand(1500, (Hrs % 12) * 20 + Mins / 3);
-  DoHand(2000, (Secs / 15) + (Mins << 2));   // make the hour and minute hands bright by doubling up
-  DoHand(1500, (Hrs % 12) * 20 + Mins / 3);
+  drawRadialLine(181, 2500, 240, Secs<<2);
+  drawRadialLine(181, 2000, 240, (Secs / 15) + (Mins << 2));
+  drawRadialLine(181, 1500, 240, (Hrs % 12) * 20 + Mins / 3);
+  drawRadialLine(181, 2000, 240, (Secs / 15) + (Mins << 2));   // make the hour and minute hands bright by doubling up
+  drawRadialLine(181, 1500, 240, (Hrs % 12) * 20 + Mins / 3);
   // doingHand = false;
 }
 
@@ -156,41 +137,6 @@ struct item clock2List[] = {
   {listend,0,0,BlankLn,0,0}
 };
 
-
-void clock2DrawRadialLine(int inside, int outside, int resolution, int angle) {
-  int handAngle = (angle*nsteps/resolution) % nsteps;  // get angle in range of new sin/cos tab
-  YSize = costab[handAngle]/500;      // swap X and Y, because 0 deg is at north CW like a clock, not east CCW like math
-  XSize = sintab[handAngle]/500;
-  XStart = (inside * XSize) >>8;
-  YStart = (inside * YSize) >>8;
-  XEnd   = (outside * XSize) >>8;
-  YEnd   = (outside * YSize) >>8;
-  Scale = 1;
-  ChrXPos = ChrYPos = 0;
-  Shape = lin;
-  DoSeg();
-}
-
-void clock2DrawRadialLine(int inside, int outside, int angle) {
-  clock2DrawRadialLine(inside, outside, 240, angle);
-}
-
-void clock2DrawRadialCircle(int inside, int resolution, int angle, int diameter) {
-  int handAngle = (angle*nsteps/resolution) % nsteps;  // get angle in range of new sin/cos tab
-  YSize = costab[handAngle]/500;      // swap X and Y, because 0 deg is at north CW like a clock, not east CCW like math
-  XSize = sintab[handAngle]/500;
-  XStart = (inside * XSize) >>8;
-  YStart = (inside * YSize) >>8;
-  Scale = 1;
-  ChrXPos = ChrYPos = 0;
-  Shape = lin;
-  drawACircle((inside * XSize) >>8, (inside * YSize) >>8, diameter);
-}
-
-void clock2DrawRadialCircle(int inside, int angle, int diameter) {
-  clock2DrawRadialCircle(inside, 240, angle, diameter);
-}
-
 void clock2Draw() {
   int largeTickInside = 2500;
   int largeTickOutside = 3000;
@@ -198,6 +144,8 @@ void clock2Draw() {
   int smallTickOutside = 2600;
   int centerCircle = 60;
 
+  // The RTC only gives us second-resolution time.  This goofyness sort of syncronizes the millis() counter with the RTC to allow smooth second-hand motion.
+  // The sycnronization isn't great until we get to the top of the minute...
   int framesPerSec=1000;
   int framesPerMin=60000;
   static int currentMinute = -1;
@@ -209,29 +157,29 @@ void clock2Draw() {
   }
 
   for(int i = 0; i < 60; i +=15 )                                  // draw large tick marks at 12, 3, 6, and 9.  These are drawn beyond the edge of the screen.
-    clock2DrawRadialLine(largeTickInside, largeTickOutside, i << 2);
+    drawRadialLine(largeTickInside, largeTickOutside, 240, i << 2);
 
   for(int i = 0; i <= Secs; i ++)
     if(i%15 != 0)                                                  // Don't overlap with the larger tick marks.
-      clock2DrawRadialLine(smallTickInside, smallTickOutside, i << 2);
+      drawRadialLine(smallTickInside, smallTickOutside, 240, i << 2);
 
   for(int i = 0; i<=3; i++)
     if(Secs%15 != 0)                                               // highlight a little tickmark
-      clock2DrawRadialLine(smallTickInside, smallTickOutside, Secs << 2);
+      drawRadialLine(smallTickInside, smallTickOutside, 240, Secs << 2);
     else                                                           // highlight a larger tickmark
-      clock2DrawRadialLine(largeTickInside, largeTickOutside, Secs << 2);
+      drawRadialLine(largeTickInside, largeTickOutside, 240, Secs << 2);
 
   drawACircle(0, 0, centerCircle);
 
-  clock2DrawRadialLine(centerCircle+10, 1940, 1440, (float)1440/framesPerMin*(millis()-millisMinOld));  // smoooooooooooooth.
-  clock2DrawRadialCircle(2000, 1440, (float)1440/framesPerMin*(millis()-millisMinOld), 70);
-  clock2DrawRadialLine(2080, 2200, 1440, (float)1440/framesPerMin*(millis()-millisMinOld));
+  drawRadialLine(centerCircle+10, 1940, 1440, (float)1440/framesPerMin*(millis()-millisMinOld));  // smoooooooooooooth.
+  drawRadialCircle(2000, 1440, (float)1440/framesPerMin*(millis()-millisMinOld), 70);
+  drawRadialLine(2080, 2200, 1440, (float)1440/framesPerMin*(millis()-millisMinOld));
 
-  clock2DrawRadialLine(centerCircle+10, 2000, (Secs / 15) + (Mins << 2));
-  clock2DrawRadialLine(centerCircle+10, 2000, (Secs / 15) + (Mins << 2));
+  drawRadialLine(centerCircle+10, 2000, 240, (Secs / 15) + (Mins << 2));
+  drawRadialLine(centerCircle+10, 2000, 240, (Secs / 15) + (Mins << 2));
 
-  clock2DrawRadialLine(centerCircle+10, 1500, (Hrs % 12) * 20 + Mins / 3);
-  clock2DrawRadialLine(centerCircle+10, 1500, (Hrs % 12) * 20 + Mins / 3);
+  drawRadialLine(centerCircle+10, 1500, 240, (Hrs % 12) * 20 + Mins / 3);
+  drawRadialLine(centerCircle+10, 1500, 240, (Hrs % 12) * 20 + Mins / 3);
 }
 
 

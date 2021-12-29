@@ -145,6 +145,42 @@ void drawACircle(int xcenter, int ycenter, int diameter) {
   DoSeg();
 }
 
+// Draw a line from the center of the screen outwards.
+// inside - how far out front the center to start the line
+// outside - how far out from the center to end the line
+// resolution - how many degrees should the screen have?  240 makes sense for clocks, 360 is common, and 1440 is nice and smooth...
+// angle - what angle should the line be drawn at?  0 = up.
+void drawRadialLine(int inside, int outside, int resolution, int angle) {
+  int handAngle = (angle*nsteps/resolution) % nsteps;  // get angle in range of new sin/cos tab
+  YSize = costab[handAngle]/500;      // swap X and Y, because 0 deg is at north CW like a clock, not east CCW like math
+  XSize = sintab[handAngle]/500;
+  XStart = (inside * XSize) >>8;
+  YStart = (inside * YSize) >>8;
+  XEnd   = (outside * XSize) >>8;
+  YEnd   = (outside * YSize) >>8;
+  Scale = 1;
+  ChrXPos = ChrYPos = 0;
+  Shape = lin;
+  DoSeg();
+}
+
+// Draw a circle somewhere on the screen along an imaginary line from the center of the screen (does that make sense?)
+// inside - how far out front the center of the screen to draw the center of the circle
+// resolution - how many degrees should the screen have?  240 makes sense for clocks, 360 is common, and 1440 is nice and smooth...
+// angle - what angle should the circle be drawn at? 0 = up.
+// diameter - how big of a circle?
+void drawRadialCircle(int inside, int resolution, int angle, int diameter) {
+  int handAngle = (angle*nsteps/resolution) % nsteps;  // get angle in range of new sin/cos tab
+  YSize = costab[handAngle]/500;      // swap X and Y, because 0 deg is at north CW like a clock, not east CCW like math
+  XSize = sintab[handAngle]/500;
+  XStart = (inside * XSize) >>8;
+  YStart = (inside * YSize) >>8;
+  Scale = 1;
+  ChrXPos = ChrYPos = 0;
+  Shape = lin;
+  drawACircle((inside * XSize) >>8, (inside * YSize) >>8, diameter);
+}
+
 // -------------------- Draw list centering code ---------------------
 
 // GetWid calculates the pixel width of the text string pointed to by StrPtr
