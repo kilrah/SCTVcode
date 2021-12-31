@@ -1,17 +1,9 @@
-struct item calibrateCircleList[] = {
-  {listend, 0, 0, 0, BlankLn, 0, 0}
-};
-
 void doCalibrateCircle() {
   for (int i = 100; i < 3000; i += 200) {
     drawACircle(0, 0, i);
     DoEnc();          // polled mode I/O, so we need to do it many times
   }
 }
-
-struct item calibrateSquareList[] = {
-  {listend, 0, 0, 0, BlankLn, 0, 0}
-};
 
 void doCalibrateSquare() {
 // xs ys xe ye 
