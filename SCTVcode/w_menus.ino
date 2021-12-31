@@ -83,24 +83,25 @@ struct item locMenu[] = {
 // This is the clock display option list
 
 // If Clock is zero; then draw hands
-const int NClks = 13;    // number of clock faces to choose from (splash doesn't count)
+const int NClks = 14;    // number of clock faces to choose from (splash doesn't count)
 
 // list of clock face draw lists
 item * ClkList[] = {
     faceList,             // 0 - analog clock face
     clock2List,           // 1 - another analog clock face
-    pongList,             // 2 - play Pong, special code is run for this
-    tetrisList,           // 3 - play Tetris
-    time4nList,           // 4 - 4 digit digital clock
-    time6nList,           // 5 - 6 digit digital clock
-    time4dList,           // 6 - 4 digit digital clock with date
-    time6dList,           // 7 - 6 digit digital clock with date
-    haikuList,            // 8 - some poetry at random
-    0,                    // 9 - 3d cube
-    0,                    // 10 - Calabration - circles
-    0,                    // 11 - Calibration - square
-    calibrateFontList,    // 12 - 
-    splashList,           // 13 - splash screen vanishes when knob touched
+    clock3List,           // 2 - an analog clock face with a 3d cube in it for some reason
+    pongList,             // 3 - play Pong, special code is run for this
+    tetrisList,           // 4 - play Tetris
+    time4nList,           // 5 - 4 digit digital clock
+    time6nList,           // 6 - 6 digit digital clock
+    time4dList,           // 7 - 4 digit digital clock with date
+    time6dList,           // 8 - 6 digit digital clock with date
+    haikuList,            // 9 - some poetry at random
+    0,                    // 10- 3d cube
+    0,                    // 11 - Calabration - circles
+    0,                    // 12 - Calibration - square
+    calibrateFontList,    // 13 - 
+    splashList,           // 14 - splash screen vanishes when knob touched
  //   flwList,     // four letter words at random
  //   timefList,   // 6 digit digital clock with full date, day
     0};
@@ -109,18 +110,19 @@ item * ClkList[] = {
 void (*customInitList[])(void) = {
   0,              // 0
   0,              // 1
-  reset_pong,     // 2
-  reset_tetris,   // 3
-  0,              // 4
+  0,              // 2
+  reset_pong,     // 3
+  reset_tetris,   // 4
   0,              // 5
   0,              // 6
   0,              // 7
   0,              // 8
   0,              // 9
-  0,              // 10
+  reset_cube,     // 10
   0,              // 11
   0,              // 12
   0,              // 13
+  0,              // 14
   0
 };
 
@@ -128,18 +130,19 @@ void (*customInitList[])(void) = {
 void (*customDrawList[])(void) = {
   DrawClk,            // 0
   clock2Draw,         // 1
-  doPong,             // 2
-  drawTetris,         // 3
-  0,                  // 4
+  clock3Draw,         // 2
+  doPong,             // 3
+  drawTetris,         // 4
   0,                  // 5
   0,                  // 6
   0,                  // 7
   0,                  // 8
-  doCube,             // 9
-  doCalibrateCircle,  // 10
-  doCalibrateSquare,  // 11
-  0,                  // 12
+  0,                  // 9
+  doCube,             // 10
+  doCalibrateCircle,  // 11
+  doCalibrateSquare,  // 12
   0,                  // 13
+  0,                  // 14
   0
 };
 
@@ -147,9 +150,9 @@ void (*customDrawList[])(void) = {
 bool customKnobsList[] = {
   0,  // 0
   0,  // 1
-  1,  // 2
+  0,  // 2
   1,  // 3
-  0,  // 4
+  1,  // 4
   0,  // 5
   0,  // 6
   0,  // 7
@@ -159,6 +162,7 @@ bool customKnobsList[] = {
   0,  // 11
   0,  // 12
   0,  // 13
+  0,  // 14
   0
 };
 
