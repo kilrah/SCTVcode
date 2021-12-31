@@ -1,3 +1,6 @@
+// starfield from https://github.com/jordanmack/arduino-starfield
+// Hacked up by Audin Malmin.
+
 const int starCount = 512; // number of stars in the star field
 const int maxDepth = 32;   // maximum distance away for a star
 
