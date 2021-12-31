@@ -77,21 +77,14 @@ void DoSeg()
     ystart = YStart * Scale + ChrYPos + YSaver + yPos + midDAC;  // Y start position
     int xlen = ((XEnd - XStart) * Scale);         // X size
     int ylen = ((YEnd - YStart) * Scale);         // Y size
-    if (xlen == 0) 
-    {
+
+    if (xlen == 0)
       len = abs(ylen);   //save ourselves a square root and two muls when not needed
-    }
-    else 
-    {
-      if (ylen == 0)
-      {
-        len = abs(xlen);
-      }
-      else
-      {
-        len = (int)sqrt(xlen * xlen + ylen * ylen);
-      }
-    }
+    else if (ylen == 0)
+      len = abs(xlen);
+    else
+      len = (int)sqrt(xlen * xlen + ylen * ylen);
+
     if (len <= 0) len = lineStride; 
     int xinc = ((xlen<<8)/len);
     int yinc = ((ylen<<8)/len);
@@ -132,7 +125,16 @@ void drawALine(int xstart, int ystart, int xend, int yend) {
   DoSeg();
 }
 
+// FirstO   Start angle 0..7 is 0 deg .. 315 deg 0 = E, 90 = N, 180 = W, 270 = S
+// LastO    End angle 1..14 is 45 deg .. 630 deg
+
 void drawACircle(int xcenter, int ycenter, int diameter) {
+  drawACircle(xcenter, ycenter, diameter, 6, 13);
+}
+
+// FirstO   Start angle 0..7 is 0 deg .. 315 deg 0 = E, 90 = N, 180 = W, 270 = S
+// LastO    End angle 1..14 is 45 deg .. 630 deg
+void drawACircle(int xcenter, int ycenter, int diameter, int fo, int lo) {
   Scale = 1;
   ChrXPos = 0;
   ChrYPos = 0;
@@ -141,8 +143,8 @@ void drawACircle(int xcenter, int ycenter, int diameter) {
   XSize = diameter;
   YSize = diameter;
   Shape = cir;
-  FirstO = 6;
-  LastO = 13;
+  FirstO = fo;
+  LastO = lo;
   DoSeg();
 }
 
@@ -300,7 +302,6 @@ void Center(struct item *list)
     p++;    // look at next list element
   }
 }
-
 
 // copy a draw list to TheList, since TheList is modified by Center(). 
 void copyList(struct item *list) 
