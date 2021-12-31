@@ -188,7 +188,6 @@ void clock2Draw() {
   drawRadialLine(centerCircle+15, 1500, 240, (Hrs % 12) * 20 + Mins / 3);
 }
 
-
 // ------------------------ another analog clock -----------------------------
 
 struct item clock3List[] = {

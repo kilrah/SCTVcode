@@ -60,3 +60,11 @@ struct item calibrateFontList[] = {
   {text,10,0,3,chars5,  0,0},
   {listend,0,0,0,BlankLn,0,0}
 };
+/*
+void doCalibrateFont() {
+ if(frame%4 == 0)
+    lineStride = 1;
+  else
+    lineStride = 4;
+}
+*/
