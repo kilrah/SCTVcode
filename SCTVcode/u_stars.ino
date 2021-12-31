@@ -1,13 +1,17 @@
 // original starfield code from https://github.com/jordanmack/arduino-starfield
 // Hacked up by Audin Malmin.
 
+//const int starCount = 256; // number of stars in the star field
+//const int maxDepth = 128;   // maximum distance away for a star
+
 const int starCount = 512; // number of stars in the star field
-const int maxDepth = 32;   // maximum distance away for a star
+const int maxDepth = 48;   // maximum distance away for a star
 
 // the star field - starCount stars represented as x, y and z co-ordinates
 double stars[starCount][4];
 
 void reset_stars() {
+  randomSeed(millis());
   for (int i = 0; i < starCount; i++) {
     stars[i][0] = random(-25, 25);
     stars[i][1] = random(-25, 25);
@@ -23,7 +27,7 @@ void doStars() {
 
   // Iterate through the stars reducing the z co-ordinate in order to move the star closer.
   for (int i = 0; i < starCount; ++i) {
-    stars[i][2] -= 0.29;
+    stars[i][2] -= 0.39;
 
     // if the star has moved past the screen (z < 0) reposition it far away
     // with random x and y positions.
@@ -46,7 +50,7 @@ void doStars() {
 
 //      if (i == 1)
 //        Serial.printf("%4d %4d %4d\n", x, y, size);
-        
+
       for(int j = stars[i][3]; j>0; j--) {
         drawACircle(x - origin_x, y - origin_y, (size+1)*3);    
       }
