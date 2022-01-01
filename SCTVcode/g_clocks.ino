@@ -176,9 +176,14 @@ void clock2Draw() {
       drawRadialLine(smallTickInside, smallTickOutside, 240, Secs << 2);
 
   drawACircle(0, 0, centerCircle);
+  drawACircle(0, 0, 40);
+  drawACircle(0, 0, 20);
 
   drawRadialLine(centerCircle+15, 1940, 1440, (float)1440/framesPerMin*(millis()-millisMinOld));  // smoooooooooooooth.
   drawRadialCircle(2000, 1440, (float)1440/framesPerMin*(millis()-millisMinOld), 70);
+  drawRadialCircle(2000, 1440, (float)1440/framesPerMin*(millis()-millisMinOld), 50);
+  drawRadialCircle(2000, 1440, (float)1440/framesPerMin*(millis()-millisMinOld), 30);
+  drawRadialCircle(2000, 1440, (float)1440/framesPerMin*(millis()-millisMinOld), 10);
   drawRadialLine(2080, 2200, 1440, (float)1440/framesPerMin*(millis()-millisMinOld));
 
   drawRadialLine(centerCircle+15, 2000, 240, (Secs / 15) + (Mins << 2));
@@ -228,7 +233,7 @@ void clock3Draw() {
     else if(i%5 == 0)
       drawRadialLine(midTickInside, midTickOutside, 60, i);
     else if(i <= Secs)
-      drawRadialLine(smallTickInside, smallTickOutside, 240, i << 2);     
+      drawRadialLine(smallTickInside, smallTickOutside, 240, i << 2);
   }
 
   for(int i = 0; i<=3; i++)  // highlight the current second.
@@ -240,9 +245,14 @@ void clock3Draw() {
       drawRadialLine(smallTickInside, smallTickOutside, 240, Secs << 2);
 
   drawACircle(0, 0, centerCircle);
+  drawACircle(0, 0, 40);
+  drawACircle(0, 0, 20);
 
   drawRadialLine(centerCircle+15, 1940, 1440, (float)1440/framesPerMin*(millis()-millisMinOld));  // smoooooooooooooth.
   drawRadialCircle(2000, 1440, (float)1440/framesPerMin*(millis()-millisMinOld), 70);
+  drawRadialCircle(2000, 1440, (float)1440/framesPerMin*(millis()-millisMinOld), 50);
+  drawRadialCircle(2000, 1440, (float)1440/framesPerMin*(millis()-millisMinOld), 30);
+  drawRadialCircle(2000, 1440, (float)1440/framesPerMin*(millis()-millisMinOld), 10);
   drawRadialLine(2080, 2200, 1440, (float)1440/framesPerMin*(millis()-millisMinOld));
 
   drawRadialLine(centerCircle+15, 2000, 240, (Secs / 15) + (Mins << 2));
@@ -253,6 +263,72 @@ void clock3Draw() {
   setCubeSize(0, 0, 75, 25, 32, 20, 0, 600);
 
   doCube();
+}
+
+// ------------------------ another analog clock -----------------------------
+
+void reset_spaceclock() {
+  reset_stars();
+  set_star_count(256);
+}
+
+void spaceclockDraw() {
+  int largeTickInside = 2500;
+  int largeTickOutside = 3000;
+  int midTickInside = 2500;
+  int midTickOutside = 2700;
+  int smallTickInside = 2500;
+  int smallTickOutside = 2600;
+  int centerCircle = 60;
+
+  // The RTC only gives us second-resolution time.  This goofyness sort of syncronizes the millis() counter with the RTC to allow smooth second-hand motion.
+  // The sycnronization isn't great until we get to the top of the minute...
+  int framesPerSec=1000;
+  int framesPerMin=60000;
+  static int currentMinute = -1;
+  static int millisMinOld = 0;
+
+  if(currentMinute != Mins) {
+    millisMinOld = millis() - (Secs * framesPerSec);               // Fudge the second hand when we start up...
+    currentMinute = Mins;
+  }
+
+  for(int i = 60; i > 0; i--) {                                    // Draw the tick marks.
+    if(i%15 == 0)
+      drawRadialLine(largeTickInside, largeTickOutside, 60, i);
+    else if(i%5 == 0)
+      drawRadialLine(midTickInside, midTickOutside, 60, i);
+    else if(i <= Secs)
+      drawRadialLine(smallTickInside, smallTickOutside, 240, i << 2);
+  }
+
+  for(int i = 0; i<=3; i++)  // highlight the current second.
+    if(Secs%15 == 0)
+      drawRadialLine(largeTickInside, largeTickOutside, 240, Secs << 2);
+    else if(Secs%5 == 0)
+      drawRadialLine(midTickInside, midTickOutside, 240, Secs << 2);
+    else
+      drawRadialLine(smallTickInside, smallTickOutside, 240, Secs << 2);
+
+  drawACircle(0, 0, centerCircle);
+  drawACircle(0, 0, 40);
+  drawACircle(0, 0, 20);
+
+  drawRadialLine(centerCircle+15, 1940, 1440, (float)1440/framesPerMin*(millis()-millisMinOld));  // smoooooooooooooth.
+  drawRadialCircle(2000, 1440, (float)1440/framesPerMin*(millis()-millisMinOld), 70);
+  drawRadialCircle(2000, 1440, (float)1440/framesPerMin*(millis()-millisMinOld), 50);
+  drawRadialCircle(2000, 1440, (float)1440/framesPerMin*(millis()-millisMinOld), 30);
+  drawRadialCircle(2000, 1440, (float)1440/framesPerMin*(millis()-millisMinOld), 10);
+  drawRadialLine(2080, 2200, 1440, (float)1440/framesPerMin*(millis()-millisMinOld));
+
+  drawRadialLine(centerCircle+15, 2000, 240, (Secs / 15) + (Mins << 2));
+  drawRadialLine(centerCircle+15, 2000, 240, (Secs / 15) + (Mins << 2));
+  drawRadialLine(centerCircle+15, 1500, 240, (Hrs % 12) * 20 + Mins / 3);
+  drawRadialLine(centerCircle+15, 1500, 240, (Hrs % 12) * 20 + Mins / 3);
+
+  setCubeSize(0, 0, 75, 25, 32, 20, 0, 600);
+
+  doStars();
 }
 
 // ------------------------ digital clocks -----------------------------------

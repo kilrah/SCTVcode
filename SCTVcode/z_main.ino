@@ -85,6 +85,7 @@ void loop() {
 // real code. This is not a test
 void loop() 
 {
+//  int oldtime = micros();
   // process USB connection and disconnection events
   myusb.Task();
   // Print out information about different devices.
@@ -206,6 +207,10 @@ void loop()
 
  // if (frame%20 == 0) Serial.printf("strings %4d   center %4d   draw %6d us\n", 
  //                  stringsTime-beforeTime, centerTime-stringsTime, drawTime-centerTime);
+
+//  if(frame%20 ==0) {
+//    Serial.printf("%6d %d\n", frame, micros()-oldtime);
+//  }
   frame++;   // turn off diagnostic printing
 }
 

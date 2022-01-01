@@ -83,48 +83,50 @@ struct item locMenu[] = {
 // This is the clock display option list
 
 // If Clock is zero; then draw hands
-const int NClks = 15;    // number of clock faces to choose from (splash doesn't count)
+const int NClks = 16;    // number of clock faces to choose from (splash doesn't count)
 
 // list of clock face draw lists
 item * ClkList[] = {
     faceList,             // 0 - analog clock face
     clock2List,           // 1 - another analog clock face
     clock3List,           // 2 - an analog clock face with a 3d cube in it for some reason
-    pongList,             // 3 - play Pong, special code is run for this
-    tetrisList,           // 4 - play Tetris
-    time4nList,           // 5 - 4 digit digital clock
-    time6nList,           // 6 - 6 digit digital clock
-    time4dList,           // 7 - 4 digit digital clock with date
-    time6dList,           // 8 - 6 digit digital clock with date
-    haikuList,            // 9 - some poetry at random
-    0,                    // 10- 3d cube
-    0,                    // 11 - stars
-    0,                    // 11 - Calabration - circles
-    0,                    // 12 - Calibration - square
-    calibrateFontList,    // 13 - 
-    splashList,           // 14 - splash screen vanishes when knob touched
+    0,                    // 3 - spaceclock
+    pongList,             // 4 - play Pong, special code is run for this
+    tetrisList,           // 5 - play Tetris
+    time4nList,           // 6 - 4 digit digital clock
+    time6nList,           // 7 - 6 digit digital clock
+    time4dList,           // 8 - 4 digit digital clock with date
+    time6dList,           // 9 - 6 digit digital clock with date
+    haikuList,            // 10- some poetry at random
+    0,                    // 11- 3d cube
+    0,                    // 12 - stars
+    0,                    // 13 - Calabration - circles
+    0,                    // 14 - Calibration - square
+    calibrateFontList,    // 15 - 
+    splashList,           // 16 - splash screen vanishes when knob touched
  //   flwList,     // four letter words at random
  //   timefList,   // 6 digit digital clock with full date, day
     0};
 
 // list of function pointers for each face that needs to initialize things when it is selected
 void (*customInitList[])(void) = {
-  0,              // 0
-  0,              // 1
-  0,              // 2
-  reset_pong,     // 3
-  reset_tetris,   // 4
-  0,              // 5
-  0,              // 6
-  0,              // 7
-  0,              // 8
-  0,              // 9
-  reset_cube,     // 10
-  reset_stars,    // 11
-  0,              // 11
-  0,              // 12
-  0,              // 13
-  0,              // 14
+  0,                // 0
+  0,                // 1
+  0,                // 2
+  reset_spaceclock, // 3
+  reset_pong,       // 4
+  reset_tetris,     // 5
+  0,                // 6
+  0,                // 7
+  0,                // 8
+  0,                // 9
+  0,                // 10
+  reset_cube,       // 11
+  reset_stars,      // 12
+  0,                // 13
+  0,                // 14
+  0,                // 15
+  0,                // 16
   0
 };
 
@@ -133,19 +135,20 @@ void (*customDrawList[])(void) = {
   DrawClk,            // 0
   clock2Draw,         // 1
   clock3Draw,         // 2
-  doPong,             // 3
-  drawTetris,         // 4
-  0,                  // 5
+  spaceclockDraw,     // 3
+  doPong,             // 4
+  drawTetris,         // 5
   0,                  // 6
   0,                  // 7
   0,                  // 8
   0,                  // 9
-  doCube,             // 10
-  doStars,            // 11
-  doCalibrateCircle,  // 11
-  doCalibrateSquare,  // 12
-  0,                  // 13
-  0,                  // 14
+  0,                  // 10
+  doCube,             // 11
+  doStars,            // 12
+  doCalibrateCircle,  // 13
+  doCalibrateSquare,  // 14
+  0,                  // 15
+  0,                  // 16
   0
 };
 
@@ -154,19 +157,20 @@ bool customKnobsList[] = {
   0,  // 0
   0,  // 1
   0,  // 2
-  1,  // 3
+  0,  // 3
   1,  // 4
-  0,  // 5
+  1,  // 5
   0,  // 6
   0,  // 7
   0,  // 8
   0,  // 9
   0,  // 10
   0,  // 11
-  0,  // 11
   0,  // 12
   0,  // 13
   0,  // 14
+  0,  // 15
+  0,  // 16
   0
 };
 

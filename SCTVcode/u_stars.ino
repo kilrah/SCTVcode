@@ -7,10 +7,18 @@
 const int starCount = 512; // number of stars in the star field
 const int maxDepth = 48;   // maximum distance away for a star
 
+int usedStarCount = 512;
+
 // the star field - starCount stars represented as x, y and z co-ordinates
 double stars[starCount][4];
 
+void set_star_count(int c) {  // Reduce to increase performance.
+  usedStarCount = c;
+}
+
 void reset_stars() {
+  usedStarCount = starCount;
+
   randomSeed(millis());
   for (int i = 0; i < starCount; i++) {
     stars[i][0] = random(-25, 25);
@@ -26,7 +34,7 @@ void doStars() {
   int screen_size = 1500*2;
 
   // Iterate through the stars reducing the z co-ordinate in order to move the star closer.
-  for (int i = 0; i < starCount; ++i) {
+  for (int i = 0; i < usedStarCount; i++) {
     stars[i][2] -= 0.39;
 
     // if the star has moved past the screen (z < 0) reposition it far away
