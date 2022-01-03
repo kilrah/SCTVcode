@@ -1,3 +1,4 @@
+
 // ------------------- Draw list display code ------------------------------
 
 // SetScale sets the character size parameters from Scale

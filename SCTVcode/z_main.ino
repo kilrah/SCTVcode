@@ -211,6 +211,7 @@ void loop()
 //  if(frame%20 ==0) {
 //    Serial.printf("%6d %d\n", frame, micros()-oldtime);
 //  }
+
   frame++;   // turn off diagnostic printing
 }
 
