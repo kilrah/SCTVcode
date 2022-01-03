@@ -39,8 +39,8 @@ void setCubeSize(float xo, float yo, float zo, float cs, float vp, float s, int 
 
 void doCube() {
   static int a=0;
-  static int b=0;
-  static int c=0;
+  static int b=1;
+  static int c=2;
 
   int cube2d[8][2];
 
