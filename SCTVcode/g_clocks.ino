@@ -175,9 +175,10 @@ void clock2Draw() {
     else
       drawRadialLine(smallTickInside, smallTickOutside, 240, Secs << 2);
 
-  drawACircle(0, 0, centerCircle);
   drawACircle(0, 0, 40);
   drawACircle(0, 0, 20);
+  drawACircle(0, 0, centerCircle);
+  drawACircle(0, 0, centerCircle);
 
   drawRadialLine(centerCircle+15, 1940, 1440, (float)1440/framesPerMin*(millis()-millisMinOld));  // smoooooooooooooth.
   drawRadialCircle(2000, 1440, (float)1440/framesPerMin*(millis()-millisMinOld), 70);
@@ -244,9 +245,10 @@ void clock3Draw() {
     else
       drawRadialLine(smallTickInside, smallTickOutside, 240, Secs << 2);
 
-  drawACircle(0, 0, centerCircle);
   drawACircle(0, 0, 40);
   drawACircle(0, 0, 20);
+  drawACircle(0, 0, centerCircle);
+  drawACircle(0, 0, centerCircle);
 
   drawRadialLine(centerCircle+15, 1940, 1440, (float)1440/framesPerMin*(millis()-millisMinOld));  // smoooooooooooooth.
   drawRadialCircle(2000, 1440, (float)1440/framesPerMin*(millis()-millisMinOld), 70);
@@ -310,9 +312,10 @@ void spaceclockDraw() {
     else
       drawRadialLine(smallTickInside, smallTickOutside, 240, Secs << 2);
 
-  drawACircle(0, 0, centerCircle);
   drawACircle(0, 0, 40);
   drawACircle(0, 0, 20);
+  drawACircle(0, 0, centerCircle);
+  drawACircle(0, 0, centerCircle);
 
   drawRadialLine(centerCircle+15, 1940, 1440, (float)1440/framesPerMin*(millis()-millisMinOld));  // smoooooooooooooth.
   drawRadialCircle(2000, 1440, (float)1440/framesPerMin*(millis()-millisMinOld), 70);
