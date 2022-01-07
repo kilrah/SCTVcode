@@ -365,7 +365,7 @@ void DispStr()
     ChrXPos = ChrXPos + ChrWid + Kern;   // move over by width of char
     TheChr = (*StrPtr++);
   }
-    DoEnc();          // polled mode I/O, so we need to do it many times
+//    DoEnc();          // polled mode I/O, so we need to do it many times
 }
 
 

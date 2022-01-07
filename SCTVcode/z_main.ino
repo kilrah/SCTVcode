@@ -40,6 +40,7 @@ void setup()
   readRTClocale();   // get the locale data if it was stored
   
   attachInterrupt(encAPin, DoEnc, CHANGE);  // Fix lack of encoder responsiveness under high load
+  attachInterrupt(encBPin, DoEnc, CHANGE);  // Fix lack of encoder responsiveness under high load
 }
 
 
@@ -142,7 +143,7 @@ void loop()
   blinkCount++;
   Blink = (blinkCount >> BlnkBit) & 1;  // a one bit, 5 times a second thingie
   
-  DoEnc();
+//  DoEnc();
   DoButt();
   if (InMenu) 
   {
