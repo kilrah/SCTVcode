@@ -38,6 +38,8 @@ void setup()
 
   myusb.begin();     // start the USB device service
   readRTClocale();   // get the locale data if it was stored
+  
+  attachInterrupt(encAPin, DoEnc, CHANGE);  // Fix lack of encoder responsiveness under high load
 }
 
 
