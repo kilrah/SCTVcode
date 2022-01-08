@@ -33,29 +33,27 @@ char chars4[] =
 char chars5[] =
 "[\\]^_`{|}~\n";
 
+
 struct item calibrateFontList[] = {
-/*
-  {text,10,0,0,numbers,  0,0},
-  {text,10,0,0,letters,  0,0},
-  {text,10,0,1,numbers,  0,0},
-  {text,10,0,1,letters,  0,0},
-  {text,10,0,2,numbers,  0,0},
-  {text,10,0,2,letters,  0,0},
-  {text,10,0,3,numbers,  0,0},
-  {text,10,0,3,letters,  0,0},
-  */  
-  {text,10,0,3,chars1,  0,0},
-  {text,10,0,3,chars2,  0,0},
-  {text,10,0,3,chars3,  0,0},
-  {text,10,0,3,chars4,  0,0},
-  {text,10,0,3,chars5,  0,0},
+  {text,10,0,0,chars1,  0,0},
+  {text,10,0,0,chars2,  0,0},
+  {text,10,0,0,chars3,  0,0},
+  {text,10,0,0,chars4,  0,0},
+  {text,10,0,0,chars5,  0,0},
   {listend,0,0,0,BlankLn,0,0}
 };
-/*
+
 void doCalibrateFont() {
- if(frame%4 == 0)
-    lineStride = 1;
-  else
-    lineStride = 4;
+  static int f = 0;
+  static int count = 1;
+
+  if(count++%100 == 0) {
+    f = (f+1) % 5;
+
+    calibrateFontList[0].font = f;
+    calibrateFontList[1].font = f;
+    calibrateFontList[2].font = f;
+    calibrateFontList[3].font = f;
+    calibrateFontList[4].font = f;
+  }
 }
-*/

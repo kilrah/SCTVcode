@@ -101,7 +101,8 @@ item * ClkList[] = {
     0,                    // 14 - Calabration - circles
     0,                    // 15 - Calibration - square
     calibrateFontList,    // 16 - 
-    splashList,           // 17 - splash screen vanishes when knob touched
+    0,                    // 17 - tempest clock - TBD
+    splashList,           // 18 - splash screen vanishes when knob touched
  //   flwList,     // four letter words at random
  //   timefList,   // 6 digit digital clock with full date, day
     0};
@@ -126,6 +127,7 @@ void (*customInitList[])(void) = {
   0,                // 15
   0,                // 16
   0,                // 17
+  0,                // 18
   0
 };
 
@@ -147,8 +149,9 @@ void (*customDrawList[])(void) = {
   doSpiral,           // 13
   doCalibrateCircle,  // 14
   doCalibrateSquare,  // 15
-  0,                  // 16
-  0,                  // 17
+  doCalibrateFont,    // 16
+  doTempest,          // 17
+  0,                  // 18
   0
 };
 
@@ -172,6 +175,7 @@ bool customKnobsList[] = {
   0,  // 15
   0,  // 16
   0,  // 17
+  0,  // 18
   0
 };
 
