@@ -56,12 +56,10 @@ void doStars() {
     if ((0 <= x && x < screen_size) && (0 <= y && y < screen_size)) {
       int size = (1 - stars[i][2] / maxDepth) * 8;
 
-//      if (i == 1)
-//        Serial.printf("%4d %4d %4d\n", x, y, size);
-
-      for(int j = stars[i][3]; j>0; j--) {
-        drawACircle(x - origin_x, y - origin_y, (size+1)*3);    
-      }
+      Brightness = HighestBrightness/5 * stars[i][3];
+      drawACircle(x - origin_x, y - origin_y, (size+1*3));
     }
   }
+
+  Brightness = DefaultBrightness;
 }
