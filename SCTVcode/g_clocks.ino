@@ -180,11 +180,12 @@ void baseClock() {
   drawRadialLine(centerCircle+15, 1940, 1440, (float)1440/framesPerMin*(millis()-millisMinOld));  // Seconds - smoooooooooooooth.
 
   drawRadialCircle(2000, 1440, (float)1440/framesPerMin*(millis()-millisMinOld), 70); // second hand circle
+
+  Brightness=DefaultBrightness;
+
   drawRadialCircle(2000, 1440, (float)1440/framesPerMin*(millis()-millisMinOld), 50); // second hand circle
   drawRadialCircle(2000, 1440, (float)1440/framesPerMin*(millis()-millisMinOld), 30); // second hand circle
   drawRadialCircle(2000, 1440, (float)1440/framesPerMin*(millis()-millisMinOld), 10); // second hand circle
-
-  Brightness=DefaultBrightness;
 
   drawRadialLine(2080, 2200, 1440, (float)1440/framesPerMin*(millis()-millisMinOld));  // End of second hand - dimmer to appear thinner.
 }
