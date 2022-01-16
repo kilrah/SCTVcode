@@ -26,7 +26,7 @@ void doSpiral() {
 
   // wait for the beam to reach the start point
   delayMicroseconds(10);
-  digitalWrite(BlankPin, HIGH);        // start making photons
+  analogWrite(BlankPin, HighestBrightness);  // Bright dot
   delayMicroseconds(glowDelay);        // wait for glow to start
 
     for (int t = 0; t < 40000; t+=8) {
@@ -57,5 +57,6 @@ void doSpiral() {
   }
 
   delayMicroseconds(glowDelay);        // wait for glow to start
-  digitalWrite(BlankPin, LOW);         // done, hide dot now
+  analogWrite(BlankPin, 0);            // Hide dot.
+
 }
