@@ -1,4 +1,4 @@
-int wow_x[16][16] = {
+int level_x[16][16] = {
   { -112, -103, -79, -42, 0, 42, 79, 103, 112, 103, 79, 42, 0, -42, -79, -103},
   { -112, -112, -112, -56, 0, 56, 112, 112, 112, 112, 112, 56, 0, -56, -112, -112},
   { -112, -112, -56, -56, 0, 56, 56, 112, 112, 112, 56, 56, 0, -56, -56, -112},
@@ -17,7 +17,7 @@ int wow_x[16][16] = {
   {112, 98, 95, 88, 68, 43, 26, 13, -13, -26, -43, -68, -88, -95, -98, -112}
 };
 
-int wow_y[16][16] = {
+int level_y[16][16] = {
   {0, -42, -79, -103, -112, -103, -79, -42, 0, 42, 79, 103, 112, 103, 79, 42},
   {0, -56, -112, -112, -112, -112, -112, -56, 0, 56, 112, 112, 112, 112, 112, 56},
   {0, -56, -56, -112, -112, -112, -56, -56, 0, 56, 56, 112, 112, 112, 56, 56},
@@ -36,7 +36,7 @@ int wow_y[16][16] = {
   { -41, -21, 4, 27, 41, 41, 29, 7, 7, 29, 41, 41, 27, 4, -21, -41}
 };
 
-int wow_angle[16][16] = {
+int level_angle[16][16] = {
     {0x05, 0x06, 0x07, 0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f, 0x00, 0x01, 0x02, 0x03, 0x04},
     {0x04, 0x04, 0x08, 0x08, 0x08, 0x08, 0x0c, 0x0c, 0x0c, 0x0c, 0x00, 0x00, 0x00, 0x00, 0x04, 0x04},
     {0x04, 0x08, 0x04, 0x08, 0x08, 0x0c, 0x08, 0x0c, 0x0c, 0x00, 0x0c, 0x00, 0x00, 0x04, 0x00, 0x04},
@@ -90,11 +90,11 @@ void doTempest() {
 //  Serial.println("");
 
   for (int i = 1; i < 16; i++) {
-    int x1 = wow_x[tempest_level][i - 1];
-    int y1 = -wow_y[tempest_level][i - 1];
+    int x1 = level_x[tempest_level][i - 1];
+    int y1 = -level_y[tempest_level][i - 1];
 
-    int x2 = wow_x[tempest_level][i];
-    int y2 = -wow_y[tempest_level][i];
+    int x2 = level_x[tempest_level][i];
+    int y2 = -level_y[tempest_level][i];
 
     /*
         Serial.printf("scale: %-3d level: %-2d x1a: %-5d y1a: %-5d x1: %-5d y1: %-5d\n",
@@ -112,17 +112,16 @@ void doTempest() {
     drawALine(x1, y1 + y2d * y_offset_scale, x1 * scale, y1 * scale);
 
 //void drawRadialLine(int inside, int outside, int resolution, int angle) {
-//    drawRadialLine(0, 1000, 16, wow_angle[tempest_level][i-1]);
-//    Serial.printf("%3d ", wow_angle[tempest_level][i-1]);
-    
+//    drawRadialLine(0, 1000, 16, level_angle[tempest_level][i-1]);
+//    Serial.printf("%3d ", level_angle[tempest_level][i-1]);
   }
 
   if (!lev_open[tempest_level]) {
-    drawALine(wow_x[tempest_level][0], -wow_y[tempest_level][0] + y2d * y_offset_scale, wow_x[tempest_level][15], -wow_y[tempest_level][15] + y2d * y_offset_scale);
-    drawALine(wow_x[tempest_level][0] * scale, -wow_y[tempest_level][0] * scale, wow_x[tempest_level][15] * scale, -wow_y[tempest_level][15] * scale);
+    drawALine(level_x[tempest_level][0], -level_y[tempest_level][0] + y2d * y_offset_scale, level_x[tempest_level][15], -level_y[tempest_level][15] + y2d * y_offset_scale);
+    drawALine(level_x[tempest_level][0] * scale, -level_y[tempest_level][0] * scale, level_x[tempest_level][15] * scale, -level_y[tempest_level][15] * scale);
   }
 
-  drawALine(wow_x[tempest_level][15], -wow_y[tempest_level][15] + y2d * y_offset_scale, wow_x[tempest_level][15] * scale, -wow_y[tempest_level][15] * scale);
+  drawALine(level_x[tempest_level][15], -level_y[tempest_level][15] + y2d * y_offset_scale, level_x[tempest_level][15] * scale, -level_y[tempest_level][15] * scale);
 
   if(count++%100 == 0) {
     tempest_level = (tempest_level+1) % 16;
