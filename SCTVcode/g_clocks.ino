@@ -117,27 +117,17 @@ void DrawClk() {
 //  DoHand(250, (Ticks / HalfSec) << 1 + (Secs << 2));  // no Ticks right now, so no smooth sweep.
   // doingHand = true;
   drawRadialLine(200, 2500, 240, Secs<<2);
+
+  Brightness = HighBrightness;
   drawRadialLine(200, 2000, 240, (Secs / 15) + (Mins << 2));
   drawRadialLine(200, 1500, 240, (Hrs % 12) * 20 + Mins / 3);
-  drawRadialLine(200, 2000, 240, (Secs / 15) + (Mins << 2));   // make the hour and minute hands bright by doubling up
-  drawRadialLine(200, 1500, 240, (Hrs % 12) * 20 + Mins / 3);
+  Brightness = DefaultBrightness;
+
   // doingHand = false;
 }
 
-// ------------------------ another analog clock -----------------------------
-
-struct item clock2List[] = {
-  {text,40,0,0,BlankLn, 0,0},
-  {text,10,0,0,HrsStr,  0,0},   // hours
-  {text,10,0,0,ColStr,  0,0},   // colon
-  {text,10,0,0,MinStr,  0,0},   // mins
-  {text,10,0,0,ColStr,  0,0},   // colon
-  {text,10,0,0,SecStr,  0,0},   // secs
-  {text,7,0,0,WDayStr, 0,0},   // day of week
-  {listend,0,0,0,BlankLn,0,0}
-};
-
-void clock2Draw() {
+// -- a basic clock with lots of tic marks
+void baseClock() {
   int largeTickInside = 2500;
   int largeTickOutside = 3000;
   int midTickInside = 2500;
@@ -163,11 +153,14 @@ void clock2Draw() {
       drawRadialLine(largeTickInside, largeTickOutside, 60, i);
     else if(i%5 == 0)
       drawRadialLine(midTickInside, midTickOutside, 60, i);
-    else if(i <= Secs)
-      drawRadialLine(smallTickInside, smallTickOutside, 240, i << 2);     
+    else if(i <= Secs) {
+      Brightness=LowBrightness;
+      drawRadialLine(smallTickInside, smallTickOutside, 240, i << 2);
+      Brightness=DefaultBrightness;
+    }
   }
 
-  for(int i = 0; i<=3; i++)  // highlight the current second.
+  for(int i = 0; i<=3; i++)  // highlight the current second.         // FIXME - should use Brightness.
     if(Secs%15 == 0)
       drawRadialLine(largeTickInside, largeTickOutside, 240, Secs << 2);
     else if(Secs%5 == 0)
@@ -175,23 +168,43 @@ void clock2Draw() {
     else
       drawRadialLine(smallTickInside, smallTickOutside, 240, Secs << 2);
 
-  drawACircle(0, 0, 40);
-  drawACircle(0, 0, 20);
-  drawACircle(0, 0, centerCircle);
-  drawACircle(0, 0, centerCircle);
+  drawACircle(0, 0, 40);  // Center circle fill
+  drawACircle(0, 0, 20);  // Center circle fill
 
-  drawRadialLine(centerCircle+15, 1940, 1440, (float)1440/framesPerMin*(millis()-millisMinOld));  // smoooooooooooooth.
-  drawRadialCircle(2000, 1440, (float)1440/framesPerMin*(millis()-millisMinOld), 70);
-  drawRadialCircle(2000, 1440, (float)1440/framesPerMin*(millis()-millisMinOld), 50);
-  drawRadialCircle(2000, 1440, (float)1440/framesPerMin*(millis()-millisMinOld), 30);
-  drawRadialCircle(2000, 1440, (float)1440/framesPerMin*(millis()-millisMinOld), 10);
-  drawRadialLine(2080, 2200, 1440, (float)1440/framesPerMin*(millis()-millisMinOld));
+  Brightness=HighBrightness;
 
-  drawRadialLine(centerCircle+15, 2000, 240, (Secs / 15) + (Mins << 2));
-  drawRadialLine(centerCircle+15, 2000, 240, (Secs / 15) + (Mins << 2));
+  drawACircle(0, 0, centerCircle);  // Center circle outline
 
-  drawRadialLine(centerCircle+15, 1500, 240, (Hrs % 12) * 20 + Mins / 3);
-  drawRadialLine(centerCircle+15, 1500, 240, (Hrs % 12) * 20 + Mins / 3);
+  drawRadialLine(centerCircle+15, 2000, 240, (Secs / 15) + (Mins << 2));                          // Hours
+  drawRadialLine(centerCircle+15, 1500, 240, (Hrs % 12) * 20 + Mins / 3);                         // Minutes
+  drawRadialLine(centerCircle+15, 1940, 1440, (float)1440/framesPerMin*(millis()-millisMinOld));  // Seconds - smoooooooooooooth.
+
+  drawRadialCircle(2000, 1440, (float)1440/framesPerMin*(millis()-millisMinOld), 70); // second hand circle
+  drawRadialCircle(2000, 1440, (float)1440/framesPerMin*(millis()-millisMinOld), 50); // second hand circle
+  drawRadialCircle(2000, 1440, (float)1440/framesPerMin*(millis()-millisMinOld), 30); // second hand circle
+  drawRadialCircle(2000, 1440, (float)1440/framesPerMin*(millis()-millisMinOld), 10); // second hand circle
+
+  Brightness=DefaultBrightness;
+
+  drawRadialLine(2080, 2200, 1440, (float)1440/framesPerMin*(millis()-millisMinOld));  // End of second hand - dimmer to appear thinner.
+}
+
+
+// ------------------------ another analog clock -----------------------------
+
+struct item clock2List[] = {
+  {text,40,0,0,BlankLn, 0,0},
+  {text,10,0,0,HrsStr,  0,0},   // hours
+  {text,10,0,0,ColStr,  0,0},   // colon
+  {text,10,0,0,MinStr,  0,0},   // mins
+  {text,10,0,0,ColStr,  0,0},   // colon
+  {text,10,0,0,SecStr,  0,0},   // secs
+  {text,7,0,0,WDayStr, 0,0},   // day of week
+  {listend,0,0,0,BlankLn,0,0}
+};
+
+void clock2Draw() {
+  baseClock();
 }
 
 // ------------------------ another analog clock -----------------------------
@@ -208,60 +221,8 @@ struct item clock3List[] = {
 };
 
 void clock3Draw() {
-  int largeTickInside = 2500;
-  int largeTickOutside = 3000;
-  int midTickInside = 2500;
-  int midTickOutside = 2700;
-  int smallTickInside = 2500;
-  int smallTickOutside = 2600;
-  int centerCircle = 60;
-
-  // The RTC only gives us second-resolution time.  This goofyness sort of syncronizes the millis() counter with the RTC to allow smooth second-hand motion.
-  // The sycnronization isn't great until we get to the top of the minute...
-  int framesPerSec=1000;
-  int framesPerMin=60000;
-  static int currentMinute = -1;
-  static int millisMinOld = 0;
-
-  if(currentMinute != Mins) {
-    millisMinOld = millis() - (Secs * framesPerSec);               // Fudge the second hand when we start up...
-    currentMinute = Mins;
-  }
-
-  for(int i = 60; i > 0; i--) {                                    // Draw the tick marks.
-    if(i%15 == 0)
-      drawRadialLine(largeTickInside, largeTickOutside, 60, i);
-    else if(i%5 == 0)
-      drawRadialLine(midTickInside, midTickOutside, 60, i);
-    else if(i <= Secs)
-      drawRadialLine(smallTickInside, smallTickOutside, 240, i << 2);
-  }
-
-  for(int i = 0; i<=3; i++)  // highlight the current second.
-    if(Secs%15 == 0)
-      drawRadialLine(largeTickInside, largeTickOutside, 240, Secs << 2);
-    else if(Secs%5 == 0)
-      drawRadialLine(midTickInside, midTickOutside, 240, Secs << 2);
-    else
-      drawRadialLine(smallTickInside, smallTickOutside, 240, Secs << 2);
-
-  drawACircle(0, 0, 40);
-  drawACircle(0, 0, 20);
-  drawACircle(0, 0, centerCircle);
-  drawACircle(0, 0, centerCircle);
-
-  drawRadialLine(centerCircle+15, 1940, 1440, (float)1440/framesPerMin*(millis()-millisMinOld));  // smoooooooooooooth.
-  drawRadialCircle(2000, 1440, (float)1440/framesPerMin*(millis()-millisMinOld), 70);
-  drawRadialCircle(2000, 1440, (float)1440/framesPerMin*(millis()-millisMinOld), 50);
-  drawRadialCircle(2000, 1440, (float)1440/framesPerMin*(millis()-millisMinOld), 30);
-  drawRadialCircle(2000, 1440, (float)1440/framesPerMin*(millis()-millisMinOld), 10);
-  drawRadialLine(2080, 2200, 1440, (float)1440/framesPerMin*(millis()-millisMinOld));
-
-  drawRadialLine(centerCircle+15, 2000, 240, (Secs / 15) + (Mins << 2));
-  drawRadialLine(centerCircle+15, 2000, 240, (Secs / 15) + (Mins << 2));
-  drawRadialLine(centerCircle+15, 1500, 240, (Hrs % 12) * 20 + Mins / 3);
-  drawRadialLine(centerCircle+15, 1500, 240, (Hrs % 12) * 20 + Mins / 3);
-
+  baseClock();
+  
   setCubeSize(0, 0, 75, 25, 32, 20, 0, 600);
 
   doCube();
@@ -275,61 +236,7 @@ void reset_spaceclock() {
 }
 
 void spaceclockDraw() {
-  int largeTickInside = 2500;
-  int largeTickOutside = 3000;
-  int midTickInside = 2500;
-  int midTickOutside = 2700;
-  int smallTickInside = 2500;
-  int smallTickOutside = 2600;
-  int centerCircle = 60;
-
-  // The RTC only gives us second-resolution time.  This goofyness sort of syncronizes the millis() counter with the RTC to allow smooth second-hand motion.
-  // The sycnronization isn't great until we get to the top of the minute...
-  int framesPerSec=1000;
-  int framesPerMin=60000;
-  static int currentMinute = -1;
-  static int millisMinOld = 0;
-
-  if(currentMinute != Mins) {
-    millisMinOld = millis() - (Secs * framesPerSec);               // Fudge the second hand when we start up...
-    currentMinute = Mins;
-  }
-
-  for(int i = 60; i > 0; i--) {                                    // Draw the tick marks.
-    if(i%15 == 0)
-      drawRadialLine(largeTickInside, largeTickOutside, 60, i);
-    else if(i%5 == 0)
-      drawRadialLine(midTickInside, midTickOutside, 60, i);
-    else if(i <= Secs)
-      drawRadialLine(smallTickInside, smallTickOutside, 240, i << 2);
-  }
-
-  for(int i = 0; i<=3; i++)  // highlight the current second.
-    if(Secs%15 == 0)
-      drawRadialLine(largeTickInside, largeTickOutside, 240, Secs << 2);
-    else if(Secs%5 == 0)
-      drawRadialLine(midTickInside, midTickOutside, 240, Secs << 2);
-    else
-      drawRadialLine(smallTickInside, smallTickOutside, 240, Secs << 2);
-
-  drawACircle(0, 0, 40);
-  drawACircle(0, 0, 20);
-  drawACircle(0, 0, centerCircle);
-  drawACircle(0, 0, centerCircle);
-
-  drawRadialLine(centerCircle+15, 1940, 1440, (float)1440/framesPerMin*(millis()-millisMinOld));  // smoooooooooooooth.
-  drawRadialCircle(2000, 1440, (float)1440/framesPerMin*(millis()-millisMinOld), 70);
-  drawRadialCircle(2000, 1440, (float)1440/framesPerMin*(millis()-millisMinOld), 50);
-  drawRadialCircle(2000, 1440, (float)1440/framesPerMin*(millis()-millisMinOld), 30);
-  drawRadialCircle(2000, 1440, (float)1440/framesPerMin*(millis()-millisMinOld), 10);
-  drawRadialLine(2080, 2200, 1440, (float)1440/framesPerMin*(millis()-millisMinOld));
-
-  drawRadialLine(centerCircle+15, 2000, 240, (Secs / 15) + (Mins << 2));
-  drawRadialLine(centerCircle+15, 2000, 240, (Secs / 15) + (Mins << 2));
-  drawRadialLine(centerCircle+15, 1500, 240, (Hrs % 12) * 20 + Mins / 3);
-  drawRadialLine(centerCircle+15, 1500, 240, (Hrs % 12) * 20 + Mins / 3);
-
-  setCubeSize(0, 0, 75, 25, 32, 20, 0, 600);
+  baseClock();
 
   doStars();
 }
