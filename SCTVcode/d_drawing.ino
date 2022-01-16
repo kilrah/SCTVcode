@@ -59,7 +59,8 @@ void DoSeg()
 
     // wait for the beam to reach the start point
     delayMicroseconds(motion/motionDelay + settlingDelay);
-    digitalWrite(BlankPin, HIGH);        // start making photons
+//    digitalWrite(BlankPin, HIGH);        // start making photons
+    analogWrite(BlankPin, Brightness);
     delayMicroseconds(glowDelay);        // wait for glow to start
 
     // draw the circle with the beam on
@@ -70,7 +71,8 @@ void DoSeg()
       analogWrite(YDACPin, thisY);
     }
     delayMicroseconds(glowDelay);        // wait for glow to start
-    digitalWrite(BlankPin, LOW);        // done, hide dot now
+//    digitalWrite(BlankPin, LOW);        // done, hide dot now
+    analogWrite(BlankPin, 0);
   }
   if (Shape == lin) {
     // draw a line 
@@ -97,7 +99,8 @@ void DoSeg()
     analogWrite(YDACPin, ystart);
     
     delayMicroseconds(motion/motionDelay + settlingDelay);
-    digitalWrite(BlankPin, HIGH);        // start making photons
+//    digitalWrite(BlankPin, HIGH);        // start making photons
+    analogWrite(BlankPin, Brightness);
     delayMicroseconds(glowDelay);        // wait for glow to start
     
  //   if (doingHand) Serial.printf("len %4d   stride %4d\n", len, lineStride);
@@ -108,7 +111,8 @@ void DoSeg()
       analogWrite(YDACPin, thisY);
     }
     delayMicroseconds(glowDelay);        // wait for glow to start
-    digitalWrite(BlankPin, LOW);        // done, hide dot now
+//    digitalWrite(BlankPin, LOW);        // done, hide dot now
+    analogWrite(BlankPin, 0);
   }
 }
 

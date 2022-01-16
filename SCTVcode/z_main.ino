@@ -3,6 +3,7 @@
 void setup() 
 {
   analogWriteResolution(12);    // Use the real DACs for X and Y position
+  analogWriteFrequency(BlankPin, 375000);
   
   // Circle lookup tables
   for (i=0;i<nsteps;i++) {
@@ -85,10 +86,12 @@ void loop() {
 
  // don't do the real thing while testing 
 
+long speed = 0;
+
 // real code. This is not a test
 void loop() 
 {
-//  int oldtime = micros();
+  int oldtime = micros();
   // process USB connection and disconnection events
   myusb.Task();
   // Print out information about different devices.
@@ -211,9 +214,23 @@ void loop()
  // if (frame%20 == 0) Serial.printf("strings %4d   center %4d   draw %6d us\n", 
  //                  stringsTime-beforeTime, centerTime-stringsTime, drawTime-centerTime);
 
-//  if(frame%20 ==0) {
-//    Serial.printf("%6d %d\n", frame, micros()-oldtime);
-//  }
+  speed += micros()-oldtime;
+ 
+  if(frame%20 ==0) {
+    Serial.printf("%6d %d %d\n", frame, micros()-oldtime, speed / 20);
+    speed = 0;
+  }
+
+// faster       - 180 =    540 28471 28470
+// faster + LTO - 180 =    540 25973 25972
+// faster + LTO - 192 =    260 42000 41997 // broken
+// faster       - 192 =    740 26986 26985
+// faster       - 218 =    680 25615 25615
+// LTO          - 216 =    220 39999 39997 // broken
+// LTO          - 240 =    100 38002 37998 // broken
+// fastest      - 180 =    460 25862 25862
+// fastest with all - 180 =    220 25010 25011
+
 
   frame++;   // turn off diagnostic printing
 }

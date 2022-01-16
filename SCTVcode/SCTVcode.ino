@@ -223,6 +223,11 @@ int YEnd;           // Y end of a line
 int Shape;          // shape code: lin/cir
 int FirstO;         // first octant to display
 int LastO;          // last octant to display
+const int DefaultBrightness = 2046;
+const int LowBrightness = 1500;
+const int HighBrightness = 3500;
+const int HighestBrightness = 4096;
+int Brightness = DefaultBrightness;     // How bright?  0-4096
 
 // The text, menu and field items are similar in format.
 // xpos and ypos may be zero for the centering code to figure out.
