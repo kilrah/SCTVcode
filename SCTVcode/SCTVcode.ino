@@ -190,6 +190,8 @@ int LastEnc;        // encoder previous state
 int HotItem;         // menu item currently highlighted
 int MenuCod;         // the address to execute when menu selected
 int theClock;        // which clock face to show
+int theClockTitleFade = 0;  // brightness of the clock title text, fades out over time.
+
 int NItems;          // how many items in menu to make hot, found by DoAList???
 
 // Text string variables
@@ -224,6 +226,7 @@ int Shape;          // shape code: lin/cir
 int FirstO;         // first octant to display
 int LastO;          // last octant to display
 const int DefaultBrightness = 2000;
+const int LowestBrightness = 1300;  // On my unit this is the lowest value that is visible.
 const int LowBrightness = 1500;
 const int HighBrightness = 3500;
 const int HighestBrightness = 4096;

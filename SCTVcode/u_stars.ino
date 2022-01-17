@@ -63,7 +63,7 @@ void doStars() {
 
       Brightness = (HighestBrightness-LowBrightness)/magnitudeRange * stars[i][3] + LowBrightness;
 //      Serial.printf("%f %f = %d\n", (HighestBrightness-LowBrightness)/magnitudeRange, stars[i][3], Brightness);
-      drawACircle(x - origin_x, y - origin_y, (size+1)*3);
+      drawACircle(x - origin_x, y - origin_y, (size+1)*3);  // TODO - add 6, 13 to see if avoiding the second call helps speed?
     }
   }
 

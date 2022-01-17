@@ -87,6 +87,7 @@ void loop() {
 
 long speed = 0;
 
+
 // real code. This is not a test
 void loop() 
 {
@@ -129,7 +130,7 @@ void loop()
   while (userial.available())
     myGps.encode(userial.read());
 
-  if(customKnobsList[theClock] == false)          // Some faces uses the position controls as paddles.
+  if(customKnobsList[theClock] == false)  // If the current face uses the position controls as paddles then skip the positioning stuff.
   {
     xPos = yPos = 0;
     for (i=0;i<40;i++) {
@@ -147,6 +148,7 @@ void loop()
   
   DoEnc();
   DoButt();
+  
   if (InMenu) 
   {
     DoMenus();      // if menu, process it
@@ -161,16 +163,30 @@ void loop()
       if (theClock >= NClks) theClock = 0;   // select the next clock face
       if (theClock < 0) theClock = NClks - 1;
 
-      if(customInitList[theClock]) {       // some faces can have custom initialization functions
+      theClockTitleFade = HighBrightness;  // Clock Title set to high brightness.
+
+      if(customInitList[theClock]) {       // Run the initialization function if the new clock face has one
         (*customInitList[theClock])();
       }
 
       EncDir = 0;
     }
 
+    if(theClockTitleFade > 1000) {  // If the Clock Title brightness is visible - show it
+      Brightness = theClockTitleFade;
+
+      copyList(clockTitles[theClock]);
+      Center(TheList);                // fill in the positions of each string in our copy
+      DoAList(TheList);               // draw it on the screen
+
+      theClockTitleFade -= 30;  // Dim the title down to fade it out over time.
+    }
+
+    Brightness = DefaultBrightness;
+
     whichList = ClkList[theClock];       // point to the clock drawlist we are displaying now
 
-    if(customDrawList[theClock]) {       // some faces can have custom drawing functions
+    if(customDrawList[theClock]) {       // Run the custom drawing function if the current clock face has one
       (*customDrawList[theClock])();
     }
 
@@ -216,7 +232,7 @@ void loop()
   speed += micros()-oldtime;
  
   if(frame%20 ==0) {
-    Serial.printf("%6d %d %d\n", frame, micros()-oldtime, speed / 20);
+    Serial.printf("%6d %d %d %d\n", frame, micros()-oldtime, speed / 20, theClockTitleFade);
     speed = 0;
   }
 
