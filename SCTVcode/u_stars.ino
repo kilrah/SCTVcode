@@ -4,10 +4,14 @@
 //const int starCount = 256; // number of stars in the star field
 //const int maxDepth = 128;   // maximum distance away for a star
 
+//const int starCount = 512; // number of stars in the star field
+//const int maxDepth = 48;   // maximum distance away for a star
 const int starCount = 512; // number of stars in the star field
-const int maxDepth = 48;   // maximum distance away for a star
+const int maxDepth = 72;   // maximum distance away for a star
 
 int usedStarCount = 512;
+
+const float magnitudeRange = 20;
 
 // the star field - starCount stars represented as x, y and z co-ordinates
 double stars[starCount][4];
@@ -24,7 +28,8 @@ void reset_stars() {
     stars[i][0] = random(-25, 25);
     stars[i][1] = random(-25, 25);
     stars[i][2] = random(0, maxDepth);   // distance
-    stars[i][3] = random(5)+1;           // "absolute magnitude"
+//    stars[i][3] = random(5)+1;           // "absolute magnitude"
+    stars[i][3] = random(magnitudeRange+1);           // "absolute magnitude"
   }
 }
 
@@ -43,7 +48,7 @@ void doStars() {
       stars[i][0] = random(-25, 25);
       stars[i][1] = random(-25, 25);
       stars[i][2] = maxDepth;
-      stars[i][3] = random(5)+1;
+      stars[i][3] = random(magnitudeRange+1);
     }
 
     // Convert the 3D coordinates to 2D using perspective projection.
@@ -56,8 +61,9 @@ void doStars() {
     if ((0 <= x && x < screen_size) && (0 <= y && y < screen_size)) {
       int size = (1 - stars[i][2] / maxDepth) * 8;
 
-      Brightness = HighestBrightness/5 * stars[i][3];
-      drawACircle(x - origin_x, y - origin_y, (size+1*3));
+      Brightness = (HighestBrightness-LowBrightness)/magnitudeRange * stars[i][3] + LowBrightness;
+//      Serial.printf("%f %f = %d\n", (HighestBrightness-LowBrightness)/magnitudeRange, stars[i][3], Brightness);
+      drawACircle(x - origin_x, y - origin_y, (size+1)*3);
     }
   }
 
