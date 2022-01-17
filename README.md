@@ -1,7 +1,11 @@
 # SCTVcode
 SCTV scope clock code
+
 The SCTV Scope Clock from Cathode Corner displays time, words and games on a 3 inch oscilloscope tube, using a Teensy 3.6 computer to generate X-Y-Z signals. 
+
 This code makes it run. 
+
+---
 
 The original code from Cathode Corner has been hacked up to add some new things:
 
@@ -17,5 +21,8 @@ The original code from Cathode Corner has been hacked up to add some new things:
 - a starfield screen effect
 - two 'memory display' screen effects that plot the content of memory onto the screen
 
+Compiling and installation are the same as for the original code.  However, I suggest adjusting the optimization settings to get slightly better performance (which means less flicker):
 
+Tools -> Optimize -> "Fastest + pure-code with LTO"
 
+The greyscale code requires the brightness knob to be turned up a bit more than before, to allow a somewhat higher dynamic range.  Just play around to find the brightest setting with decent focus.
