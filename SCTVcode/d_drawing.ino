@@ -43,7 +43,7 @@ void DoSeg()
     int xrad = (XSize * Scale) / 2;         // X size: radius is diameter/2 
     int yrad = (YSize * Scale) / 2;         // Y size
     int firstAngle = FirstO     * (nsteps >> 3);
-    int lastAngle = (LastO + 1) * (nsteps >> 3); 
+    int lastAngle = (LastO + 1) * (nsteps >> 3);
     int bigness = (xrad > yrad ? xrad : yrad );
     int stride = (circleSpeed) / bigness;
     if (stride < 1) stride = 1;
@@ -59,7 +59,6 @@ void DoSeg()
 
     // wait for the beam to reach the start point
     delayMicroseconds(motion/motionDelay + settlingDelay);
-//    digitalWrite(BlankPin, HIGH);        // start making photons
     analogWrite(BlankPin, Brightness);
     delayMicroseconds(glowDelay);        // wait for glow to start
 
@@ -70,11 +69,8 @@ void DoSeg()
       analogWrite(XDACPin, thisX);
       analogWrite(YDACPin, thisY);
     }
-    delayMicroseconds(glowDelay);        // wait for glow to start
-//    digitalWrite(BlankPin, LOW);        // done, hide dot now
-    analogWrite(BlankPin, 0);
-  }
-  if (Shape == lin) {
+  } 
+  else if (Shape == lin) {
     // draw a line 
     xstart = XStart * Scale + ChrXPos + XSaver + xPos + midDAC;  // X start position
     ystart = YStart * Scale + ChrYPos + YSaver + yPos + midDAC;  // Y start position
@@ -99,7 +95,6 @@ void DoSeg()
     analogWrite(YDACPin, ystart);
     
     delayMicroseconds(motion/motionDelay + settlingDelay);
-//    digitalWrite(BlankPin, HIGH);        // start making photons
     analogWrite(BlankPin, Brightness);
     delayMicroseconds(glowDelay);        // wait for glow to start
     
@@ -110,10 +105,11 @@ void DoSeg()
       analogWrite(XDACPin, thisX);
       analogWrite(YDACPin, thisY);
     }
-    delayMicroseconds(glowDelay);        // wait for glow to start
-//    digitalWrite(BlankPin, LOW);        // done, hide dot now
-    analogWrite(BlankPin, 0);
   }
+
+  //delayMicroseconds(glowDelay);        // wait for glow to start
+  analogWrite(BlankPin, 0);              // Turn off the beam.
+//  analogWrite(BlankPin, 4096);           // Leave the beam on to observe the 'rapids' movements between lit segments.
 }
 
 // Standalone shape drawing for non-drawlist features

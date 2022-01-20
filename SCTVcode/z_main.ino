@@ -2,8 +2,8 @@
 // ----------------------------- Main startup code ------------------------------
 void setup() 
 {
-  analogWriteResolution(12);    // Use the real DACs for X and Y position
-  analogWriteFrequency(BlankPin, 375000);
+  analogWriteResolution(12);                // Use the real DACs for X and Y position
+  analogWriteFrequency(BlankPin, 375000);   // Increase PWM frequency for variable brightness
   
   // Circle lookup tables
   for (i=0;i<nsteps;i++) {
@@ -87,7 +87,6 @@ void loop() {
 
 long speed = 0;
 
-
 // real code. This is not a test
 void loop() 
 {
@@ -164,7 +163,8 @@ void loop()
       if (theClock < 0) theClock = NClks - 1;
 
       theClockTitleFade = HighBrightness;  // Clock Title set to high brightness.
-
+//      theClockTitleMillis = millis();
+      
       if(customInitList[theClock]) {       // Run the initialization function if the new clock face has one
         (*customInitList[theClock])();
       }
@@ -179,7 +179,12 @@ void loop()
       Center(TheList);                // fill in the positions of each string in our copy
       DoAList(TheList);               // draw it on the screen
 
-      theClockTitleFade -= 30;  // Dim the title down to fade it out over time.
+      theClockTitleFade -= 30;
+
+//      if(millis() - theClockTitleMillis > 100) {
+//        theClockTitleFade -= 100;  // Dim the title down to fade it out over time.
+//        theClockTitleMillis = millis();
+//      }
     }
 
     Brightness = DefaultBrightness;

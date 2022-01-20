@@ -149,24 +149,22 @@ void baseClock() {
   }
 
   for(int i = 0; i < 60; i++) {                                    // Draw the tick marks.
+    if(i == Secs)                                                  // Bright if it is the current second
+      Brightness=HighBrightness;
+
     if(i%15 == 0)
       drawRadialLine(largeTickInside, largeTickOutside, 60, i);
     else if(i%5 == 0)
       drawRadialLine(midTickInside, midTickOutside, 60, i);
-    else if(i <= Secs) {
-      Brightness=LowBrightness;
-      drawRadialLine(smallTickInside, smallTickOutside, 240, i << 2);
-      Brightness=DefaultBrightness;
-    }
-  }
+    else {
+      if(i != Secs)                                                // Dim if it is not the current second
+        Brightness=LowBrightness;
 
-  for(int i = 0; i<=3; i++)  // highlight the current second.         // FIXME - should use Brightness.
-    if(Secs%15 == 0)
-      drawRadialLine(largeTickInside, largeTickOutside, 240, Secs << 2);
-    else if(Secs%5 == 0)
-      drawRadialLine(midTickInside, midTickOutside, 240, Secs << 2);
-    else
-      drawRadialLine(smallTickInside, smallTickOutside, 240, Secs << 2);
+      drawRadialLine(smallTickInside, smallTickOutside, 60, i);
+    }
+
+    Brightness=DefaultBrightness;
+  }
 
   drawACircle(0, 0, 40);  // Center circle fill
   drawACircle(0, 0, 20);  // Center circle fill

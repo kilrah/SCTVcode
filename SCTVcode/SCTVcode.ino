@@ -191,6 +191,7 @@ int HotItem;         // menu item currently highlighted
 int MenuCod;         // the address to execute when menu selected
 int theClock;        // which clock face to show
 int theClockTitleFade = 0;  // brightness of the clock title text, fades out over time.
+int theClockTitleMillis;
 
 int NItems;          // how many items in menu to make hot, found by DoAList???
 
