@@ -101,6 +101,7 @@ item * ClkList[] = {
   0,                    // 15 - Calabration - circles
   0,                    // 16 - Calibration - square
   calibrateFontList,    // 17 -
+  calibrateBrightnessList, // 18 - Calibration - brightness
   0,                    // 18 - tempest clock - TBD
   splashList,           // 19 - splash screen vanishes when knob touched
   //   flwList,     // four letter words at random
@@ -150,6 +151,7 @@ int clockTitlePosY[] = {
   0,  // 15
   0,  // 16
   0,  // 17
+  0,
   0,  // 18
   0,  // 19
   0
@@ -175,6 +177,7 @@ void (*customInitList[])(void) = {
   0,                // 15
   0,                // 16
   0,                // 17
+  0,
   0,                // 18
   0,                // 19
   0
@@ -200,6 +203,7 @@ void (*customDrawList[])(void) = {
   doCalibrateCircle,  // 15
   doCalibrateSquare,  // 16
   doCalibrateFont,    // 17
+  doCalibrateBrightness, // 18
   doTempest,          // 18
   0,                  // 19
   0
@@ -226,6 +230,7 @@ bool customKnobsList[] = {
   0,  // 16
   0,  // 17
   0,  // 18
+  0,
   0,  // 19
   0
 };

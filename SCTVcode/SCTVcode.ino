@@ -226,6 +226,10 @@ int YEnd;           // Y end of a line
 int Shape;          // shape code: lin/cir
 int FirstO;         // first octant to display
 int LastO;          // last octant to display
+
+float BMap[101];    // Linear Bightness map 0 to 1 ->  0.25 to 1.  -- This helps a bit.  -- used by setBrightnessPL
+float BMap2[101];   // Exponental Brightess map 0 to 1 -> 0.25 to 0.9  -- this helps a lot.  -- used by setBrightnessP
+
 const int DefaultBrightness = 2000;
 const int LowestBrightness = 1300;  // On my unit this is the lowest value that is visible.
 const int LowBrightness = 1500;

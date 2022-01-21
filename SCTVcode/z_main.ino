@@ -11,6 +11,15 @@ void setup()
     sintab[i] = int(65536.*sin(float(i*2)*pi/float(nsteps)));
   }
 
+  // Brightness lookup tables
+  for(int i=0; i<=99; i++) {
+    BMap[i] = mapf(i, 0, 100, 0.25, 1);
+    BMap2[i] = fscale(0, 100, 0.3, 0.9, i, -3);
+  }
+
+  BMap[100] = 1;
+  BMap2[100] = 1;
+
 // Set Arduino pins to proper directions
   pinMode(encButPin, INPUT_PULLUP);   // encoder pushbutton
   pinMode(encAPin,   INPUT_PULLUP);   // encoder quadrature signals
@@ -22,6 +31,15 @@ void setup()
   Wire.begin();          // RTC uses I2C
   Serial.begin(115200);    // debug port
   delay(100);
+/*
+  for(int i=0; i<100; i++) {
+    Serial.printf("%f, ", BMap[i]);
+  }
+  Serial.printf("\n");
+  for(int i=0; i<100; i++) {
+    Serial.printf("%f, ", BMap2[i]);
+  }
+*/
   EncDir = 0;    // no buttons being pushed or knobs being turned, we hope
   pushed = false;
   theClock = NClks;    // draw a splash screen until knob turned

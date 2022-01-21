@@ -1,3 +1,20 @@
+// Set brightness with an exponential stretch - this works the best
+void SetBrightnessP(int b) {
+  Brightness = 4096 * BMap2[b];
+//  Serial.printf("P: %d %d\n", b, Brightness);
+}
+
+// Set brightness with a sort of linear stretch
+void SetBrightnessPL(int b) {
+  Brightness = 4096 * BMap[b];
+//  Serial.printf("PL: %d %d\n", b, Brightness);
+}
+
+// Set brightness with no corrections.
+void SetBrightnessPR(int b) {
+  Brightness = 4096 * b / 100;
+//  Serial.printf("PR: %d %d %d\n", b, 0, Brightness);
+}
 
 // ------------------- Draw list display code ------------------------------
 
@@ -460,4 +477,70 @@ void updateScreenSaver() {
     YSaver = 15*abs(ScrX%8 - (nSavers%8)/2);
   }
   lastHour = Hrs;
+}
+
+// --------------------
+// A couple functions used to try to make the brightness scale more linear.
+
+float mapf(float x, float in_min, float in_max, float out_min, float out_max)
+{
+  return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
+}
+
+float fscale( float originalMin, float originalMax, float newBegin, float newEnd, float inputValue, float curve){
+  float OriginalRange = 0;
+  float NewRange = 0;
+  float zeroRefCurVal = 0;
+  float normalizedCurVal = 0;
+  float rangedValue = 0;
+  boolean invFlag = 0;
+
+
+  // condition curve parameter
+  // limit range
+
+  if (curve > 10) curve = 10;
+  if (curve < -10) curve = -10;
+
+  curve = (curve * -.1) ; // - invert and scale - this seems more intuitive - postive numbers give more weight to high end on output
+  curve = pow(10, curve); // convert linear scale into lograthimic exponent for other pow function
+
+  // Check for out of range inputValues
+  if (inputValue < originalMin) {
+    inputValue = originalMin;
+  }
+  if (inputValue > originalMax) {
+    inputValue = originalMax;
+  }
+
+  // Zero Refference the values
+  OriginalRange = originalMax - originalMin;
+
+  if (newEnd > newBegin){
+    NewRange = newEnd - newBegin;
+  }
+  else
+  {
+    NewRange = newBegin - newEnd;
+    invFlag = 1;
+  }
+
+  zeroRefCurVal = inputValue - originalMin;
+  normalizedCurVal  =  zeroRefCurVal / OriginalRange;   // normalize to 0 - 1 float
+
+  // Check for originalMin > originalMax  - the math for all other cases i.e. negative numbers seems to work out fine
+  if (originalMin > originalMax ) {
+    return 0;
+  }
+
+  if (invFlag == 0){
+    rangedValue =  (pow(normalizedCurVal, curve) * NewRange) + newBegin;
+
+  }
+  else     // invert the ranges
+  {  
+    rangedValue =  newBegin - (pow(normalizedCurVal, curve) * NewRange);
+  }
+
+  return rangedValue;
 }

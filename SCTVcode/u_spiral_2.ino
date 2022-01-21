@@ -14,8 +14,9 @@ void doSpiral2() {
     int x = ((costab[(t) % nsteps] * (t / 30)) >> 16) + midDAC + xPos;
     int y = ((sintab[(t) % nsteps] * (t / 30)) >> 16) + midDAC + yPos;
 
-    analogWrite(BlankPin, (HighestBrightness-LowBrightness)/256 * b[t/2+offset] + LowBrightness);
-
+//    analogWrite(BlankPin, (HighestBrightness-LowBrightness)/256 * b[t/2+offset] + LowBrightness);
+    SetBrightnessP(100/(float)256*b[t/2+offset]);
+    analogWrite(BlankPin, Brightness);
     analogWrite(XDACPin, x);
     analogWrite(YDACPin, y);
   }
