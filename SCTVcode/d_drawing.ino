@@ -73,6 +73,8 @@ void DoSeg()
     // go to the start point with beam off
     analogWrite(XDACPin, xstart);
     analogWrite(YDACPin, ystart);
+//    analogWriteDAC0(xstart);
+//    analogWriteDAC1(ystart);
 
     // wait for the beam to reach the start point
     delayMicroseconds(motion/motionDelay + settlingDelay);
@@ -85,6 +87,8 @@ void DoSeg()
       thisY = ((sintab[(i) % nsteps] * yrad) >> 16) + ycen;
       analogWrite(XDACPin, thisX);
       analogWrite(YDACPin, thisY);
+//      analogWriteDAC0(thisX);
+//      analogWriteDAC1(thisY);
     }
   } 
   else if (Shape == lin) {
@@ -108,8 +112,10 @@ void DoSeg()
     ymotion = abs(thisY - ystart);
     motion = (xmotion > ymotion ? xmotion : ymotion);   // how far to move from previous segment
  //   if (doingHand) Serial.printf("motion %4d   len %4d\n", motion, len);
-    analogWrite(XDACPin, xstart);
-    analogWrite(YDACPin, ystart);
+      analogWrite(XDACPin, xstart);
+      analogWrite(YDACPin, ystart);
+//      analogWriteDAC0(xstart);
+//      analogWriteDAC1(ystart);
     
     delayMicroseconds(motion/motionDelay + settlingDelay);
     analogWrite(BlankPin, Brightness);
@@ -121,6 +127,8 @@ void DoSeg()
       thisY = ((i*yinc)>>(8)) + ystart;
       analogWrite(XDACPin, thisX);
       analogWrite(YDACPin, thisY);
+//      analogWriteDAC0(thisX);
+//      analogWriteDAC1(thisY);
     }
   }
 

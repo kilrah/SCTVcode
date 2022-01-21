@@ -118,11 +118,11 @@ b = 10;
     drawACircle(x, y, 20);
     x+=200;
   } 
-
+/*
   for(int i=0; i < 100; i+=5) {
     drawALine(i*10-500, -1300+BMap2[i]*500, i*10-500, -1300);
   }
-
+*/
 /*
   for(int i=0, j=-1000; i<100; i++) {
     SetBrightnessP(i);

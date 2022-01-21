@@ -4,6 +4,8 @@ void setup()
 {
   analogWriteResolution(12);                // Use the real DACs for X and Y position
   analogWriteFrequency(BlankPin, 375000);   // Increase PWM frequency for variable brightness
+//  analogWriteFrequency(BlankPin, 937500);
+  // 14648.437
   
   // Circle lookup tables
   for (i=0;i<nsteps;i++) {

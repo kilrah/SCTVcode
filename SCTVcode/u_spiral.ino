@@ -44,8 +44,11 @@ void doSpiral() {
           digitalWrite(BlankPin, LOW);
 
         current = current >> 1;
+
   
-        analogWrite(XDACPin, x);
+//        analogWriteDAC0(x);
+//        analogWriteDAC1(y);
+        analogWrite(XDACPin, x);  
         analogWrite(YDACPin, y);
       }
     
