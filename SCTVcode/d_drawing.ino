@@ -178,6 +178,8 @@ void drawRadialCircle(int inside, int resolution, int angle, int diameter) {
   int ys = costab[handAngle]/500;      // swap X and Y, because 0 deg is at north CW like a clock, not east CCW like math
   int xs = sintab[handAngle]/500;
   drawACircle((inside * xs) >>8, (inside * ys) >>8, diameter);
+//  if(diameter==70)
+//    Serial.printf("i: %d r: %d a: %d d: %d -> xs: %d ys: %d -> %d (%d) %d (%d)\n", inside, resolution, angle, diameter, xs, ys, (inside * xs), (inside * xs)>>8, (inside * ys), (inside * ys)>>8);
 }
 
 // -------------------- Draw list centering code ---------------------

@@ -10,11 +10,12 @@ void setup()
     costab[i] = int(65536.*cos(float(i*2)*pi/float(nsteps)));
     sintab[i] = int(65536.*sin(float(i*2)*pi/float(nsteps)));
   }
+
 // Set Arduino pins to proper directions
   pinMode(encButPin, INPUT_PULLUP);   // encoder pushbutton
   pinMode(encAPin,   INPUT_PULLUP);   // encoder quadrature signals
   pinMode(encBPin,   INPUT_PULLUP);
-  pinMode(BlankPin, OUTPUT);   // high blanks the display
+  pinMode(BlankPin,  OUTPUT);   // high blanks the display
 
   InitEnc();
   rn1 = rn2 = rn3 = rn4 = 0x45;   // random number generator seed? Why not use random()?
@@ -236,8 +237,8 @@ void loop()
 
   speed += micros()-oldtime;
  
-  if(frame%20 ==0) {
-    Serial.printf("%6d %d %d %d\n", frame, micros()-oldtime, speed / 20, theClockTitleFade);
+  if(frame%100 ==0) {
+    Serial.printf("frame: %6d, this frame: %dms, avg/100: %dms\n", frame, micros()-oldtime, speed / 100);
     speed = 0;
   }
 
@@ -250,7 +251,6 @@ void loop()
 // LTO          - 240 =    100 38002 37998 // broken
 // fastest      - 180 =    460 25862 25862
 // fastest with all - 180 =    220 25010 25011
-
 
   frame++;   // turn off diagnostic printing
 }

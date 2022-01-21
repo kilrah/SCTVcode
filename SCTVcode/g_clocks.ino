@@ -150,7 +150,7 @@ void baseClock() {
 
   for(int i = 0; i < 60; i++) {                                    // Draw the tick marks.
     if(i == Secs)                                                  // Bright if it is the current second
-      Brightness=HighBrightness;
+      Brightness=HighestBrightness;
 
     if(i%15 == 0)
       drawRadialLine(largeTickInside, largeTickOutside, 60, i);
@@ -166,26 +166,28 @@ void baseClock() {
     Brightness=DefaultBrightness;
   }
 
-  drawACircle(0, 0, 40);  // Center circle fill
-  drawACircle(0, 0, 20);  // Center circle fill
-
   Brightness=HighBrightness;
 
-  drawACircle(0, 0, centerCircle);  // Center circle outline
+  drawACircle(0, 0, centerCircle);                                                                // Center circle outline
 
   drawRadialLine(centerCircle+15, 2000, 240, (Secs / 15) + (Mins << 2));                          // Hours
   drawRadialLine(centerCircle+15, 1500, 240, (Hrs % 12) * 20 + Mins / 3);                         // Minutes
   drawRadialLine(centerCircle+15, 1940, 1440, (float)1440/framesPerMin*(millis()-millisMinOld));  // Seconds - smoooooooooooooth.
 
-  drawRadialCircle(2000, 1440, (float)1440/framesPerMin*(millis()-millisMinOld), 70); // second hand circle
+  drawRadialCircle(2000, 1440, (float)1440/framesPerMin*(millis()-millisMinOld), 70);             // second hand circle outline
+
+  Brightness=MidBrightness;
+
+  drawACircle(0, 0, 40);  // Center circle fill
+  drawACircle(0, 0, 20);  // Center circle fill
+
+  drawRadialCircle(2000, 1440, (float)1440/framesPerMin*(millis()-millisMinOld), 50);             // second hand circle fill
+  drawRadialCircle(2000, 1440, (float)1440/framesPerMin*(millis()-millisMinOld), 30);             // second hand circle fill
+  drawRadialCircle(2000, 1440, (float)1440/framesPerMin*(millis()-millisMinOld), 10);             // second hand circle fill
 
   Brightness=DefaultBrightness;
 
-  drawRadialCircle(2000, 1440, (float)1440/framesPerMin*(millis()-millisMinOld), 50); // second hand circle
-  drawRadialCircle(2000, 1440, (float)1440/framesPerMin*(millis()-millisMinOld), 30); // second hand circle
-  drawRadialCircle(2000, 1440, (float)1440/framesPerMin*(millis()-millisMinOld), 10); // second hand circle
-
-  drawRadialLine(2080, 2200, 1440, (float)1440/framesPerMin*(millis()-millisMinOld));  // End of second hand - dimmer to appear thinner.
+  drawRadialLine(2080, 2200, 1440, (float)1440/framesPerMin*(millis()-millisMinOld));             // End of second hand - dimmer to appear thinner.
 }
 
 
