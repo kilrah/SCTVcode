@@ -1,17 +1,17 @@
-// Set brightness with an exponential stretch - this works the best
-void SetBrightnessP(int b) {
+// Set brightness between 0 and 100% with an exponential stretch - this works the best
+void setBrightness(int b) {
   Brightness = 4096 * BMap2[b];
 //  Serial.printf("P: %d %d\n", b, Brightness);
 }
 
-// Set brightness with a sort of linear stretch
-void SetBrightnessPL(int b) {
+// Set brightness with a sort of linear stretch - LINEAR
+void setBrightnessL(int b) {
   Brightness = 4096 * BMap[b];
 //  Serial.printf("PL: %d %d\n", b, Brightness);
 }
 
-// Set brightness with no corrections.
-void SetBrightnessPR(int b) {
+// Set brightness with no corrections. RAW
+void setBrightnessR(int b) {
   Brightness = 4096 * b / 100;
 //  Serial.printf("PR: %d %d %d\n", b, 0, Brightness);
 }

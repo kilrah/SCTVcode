@@ -231,6 +231,8 @@ int LastO;          // last octant to display
 float BMap[101];    // Linear Bightness map 0 to 1 ->  0.25 to 1.  -- This helps a bit.  -- used by setBrightnessPL
 float BMap2[101];   // Exponental Brightess map 0 to 1 -> 0.25 to 0.9  -- this helps a lot.  -- used by setBrightnessP
 
+#define BRIGHTNESS_DEFAULT 60
+
 const int DefaultBrightness = 2000;
 const int LowestBrightness = 1300;  // On my unit this is the lowest value that is visible.
 const int LowBrightness = 1500;
@@ -238,19 +240,7 @@ const int MidBrightness = 1700;
 const int HighBrightness = 3500;
 const int HighestBrightness = 4096;
 
-const int Bright100 = 4096 * 1;
-const int Bright90  = 4096 * .9;
-const int Bright80  = 4096 * .8;
-const int Bright70  = 4096 * .7;
-const int Bright60  = 4096 * .6;
-const int Bright50  = 4096 * .5;
-const int Bright40  = 4096 * .4;
-const int Bright30  = 4096 * .3;
-const int Bright20  = 4096 * .2;
-const int Bright10  = 4096 * .1;
-const int Bright00  = 0;
-
-int Brightness = DefaultBrightness;     // How bright?  0-4096
+int Brightness;     // How bright?  0-4096
 
 // The text, menu and field items are similar in format.
 // xpos and ypos may be zero for the centering code to figure out.

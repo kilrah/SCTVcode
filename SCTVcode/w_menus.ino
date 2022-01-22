@@ -85,7 +85,7 @@ struct item locMenu[] = {
 item * ClkList[] = {
   faceList,             // 0  - analog clock face
   clock2List,           // 1  - another analog clock face
-  clock3List,           // 2  - an analog clock face with a 3d cube in it for some reason
+  cubeClockList,           // 2  - an analog clock face with a 3d cube in it for some reason
   0,                    // 3  - spaceclock
   time4nList,           // 4  - 4 digit digital clock
   time6nList,           // 5  - 6 digit digital clock
@@ -161,8 +161,8 @@ int clockTitlePosY[] = {
 void (*customInitList[])(void) = {
   0,                // 0
   0,                // 1
-  0,                // 2
-  reset_spaceclock, // 3
+  resetCubeClock,   // 2
+  resetSpaceClock,  // 3
   0,                // 4
   0,                // 5
   0,                // 6
@@ -187,8 +187,8 @@ void (*customInitList[])(void) = {
 void (*customDrawList[])(void) = {
   DrawClk,            // 0
   clock2Draw,         // 1
-  clock3Draw,         // 2
-  spaceclockDraw,     // 3
+  cubeClockDraw,      // 2
+  spaceClockDraw,     // 3
   0,                  // 4
   0,                  // 5
   0,                  // 6

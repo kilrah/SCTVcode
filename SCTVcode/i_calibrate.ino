@@ -79,7 +79,7 @@ void doCalibrateBrightness() {
   int b = 10;
 
   for(int i=0; i< 10; i++) {
-    SetBrightnessPR(b);
+    setBrightnessR(b);
     b+=10;
     drawACircle(x, y, 100);
     drawACircle(x, y, 80);
@@ -94,7 +94,7 @@ y = 0;
 b = 10;
 
   for(int i=0; i< 10; i++) {
-    SetBrightnessPL(b);
+    setBrightnessL(b);
     b+=10;
     drawACircle(x, y, 100);
     drawACircle(x, y, 80);
@@ -109,7 +109,7 @@ y = -200;
 b = 10;
 
   for(int i=0; i< 10; i++) {
-    SetBrightnessP(b);
+    setBrightness(b);
     b+=10;
     drawACircle(x, y, 100);
     drawACircle(x, y, 80);

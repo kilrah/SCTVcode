@@ -118,10 +118,10 @@ void DrawClk() {
   // doingHand = true;
   drawRadialLine(200, 2500, 240, Secs<<2);
 
-  Brightness = HighBrightness;
+  setBrightness(80);
   drawRadialLine(200, 2000, 240, (Secs / 15) + (Mins << 2));
   drawRadialLine(200, 1500, 240, (Hrs % 12) * 20 + Mins / 3);
-  Brightness = DefaultBrightness;
+  setBrightness(BRIGHTNESS_DEFAULT);
 
   // doingHand = false;
 }
@@ -150,7 +150,7 @@ void baseClock() {
 
   for(int i = 0; i < 60; i++) {                                    // Draw the tick marks.
     if(i == Secs)                                                  // Bright if it is the current second
-      Brightness=HighestBrightness;
+      setBrightness(100);
 
     if(i%15 == 0)
       drawRadialLine(largeTickInside, largeTickOutside, 60, i);
@@ -158,15 +158,15 @@ void baseClock() {
       drawRadialLine(midTickInside, midTickOutside, 60, i);
     else {
       if(i != Secs)                                                // Dim if it is not the current second
-        Brightness=LowBrightness;
+        setBrightness(30);
 
       drawRadialLine(smallTickInside, smallTickOutside, 60, i);
     }
 
-    Brightness=DefaultBrightness;
+    setBrightness(BRIGHTNESS_DEFAULT);
   }
 
-  Brightness=HighBrightness;
+  setBrightness(80);
 
   drawACircle(0, 0, centerCircle);                                                                // Center circle outline
 
@@ -176,8 +176,8 @@ void baseClock() {
 
   drawRadialCircle(2000, 1440, (float)1440/framesPerMin*(millis()-millisMinOld), 70);             // second hand circle outline
 
-  Brightness=MidBrightness;
-
+  setBrightness(30);
+  
   drawACircle(0, 0, 40);  // Center circle fill
   drawACircle(0, 0, 20);  // Center circle fill
 
@@ -185,7 +185,7 @@ void baseClock() {
   drawRadialCircle(2000, 1440, (float)1440/framesPerMin*(millis()-millisMinOld), 30);             // second hand circle fill
   drawRadialCircle(2000, 1440, (float)1440/framesPerMin*(millis()-millisMinOld), 10);             // second hand circle fill
 
-  Brightness=DefaultBrightness;
+  setBrightness(BRIGHTNESS_DEFAULT);
 
   drawRadialLine(2080, 2200, 1440, (float)1440/framesPerMin*(millis()-millisMinOld));             // End of second hand - dimmer to appear thinner.
 }
@@ -210,7 +210,7 @@ void clock2Draw() {
 
 // ------------------------ another analog clock -----------------------------
 
-struct item clock3List[] = {
+struct item cubeClockList[] = {
   {text,40,0,0,BlankLn, 0,0},
   {text,10,0,1,HrsStr,  0,0},   // hours
   {text,10,0,1,ColStr,  0,0},   // colon
@@ -221,22 +221,24 @@ struct item clock3List[] = {
   {listend,0,0,0,BlankLn,0,0}
 };
 
-void clock3Draw() {
-  baseClock();
-  
+void resetCubeClock() {
   setCubeSize(0, 0, 75, 25, 32, 20, 0, 600);
+}
+
+void cubeClockDraw() {
+  baseClock();
 
   doCube();
 }
 
 // ------------------------ another analog clock -----------------------------
 
-void reset_spaceclock() {
+void resetSpaceClock() {
   reset_stars();
   set_star_count(256);
 }
 
-void spaceclockDraw() {
+void spaceClockDraw() {
   baseClock();
 
   doStars();

@@ -22,6 +22,8 @@ void setup()
   BMap[100] = 1;
   BMap2[100] = 1;
 
+  setBrightness(BRIGHTNESS_DEFAULT);
+
 // Set Arduino pins to proper directions
   pinMode(encButPin, INPUT_PULLUP);   // encoder pushbutton
   pinMode(encAPin,   INPUT_PULLUP);   // encoder quadrature signals
@@ -183,7 +185,7 @@ void loop()
       if (theClock >= NClks) theClock = 0;   // select the next clock face
       if (theClock < 0) theClock = NClks - 1;
 
-      theClockTitleFade = HighBrightness;  // Clock Title set to high brightness.
+      theClockTitleFade = 80;  // Clock Title set to high brightness.
 //      theClockTitleMillis = millis();
       
       if(customInitList[theClock]) {       // Run the initialization function if the new clock face has one
@@ -193,14 +195,14 @@ void loop()
       EncDir = 0;
     }
 
-    if(theClockTitleFade > 1000) {  // If the Clock Title brightness is visible - show it
-      Brightness = theClockTitleFade;
+    if(theClockTitleFade > 0) {  // If the Clock Title brightness is visible - show it
+      setBrightness(theClockTitleFade);
 
       copyList(clockTitles[theClock]);
       Center(TheList);                // fill in the positions of each string in our copy
       DoAList(TheList);               // draw it on the screen
 
-      theClockTitleFade -= 30;
+      theClockTitleFade--;
 
 //      if(millis() - theClockTitleMillis > 100) {
 //        theClockTitleFade -= 100;  // Dim the title down to fade it out over time.
@@ -208,7 +210,7 @@ void loop()
 //      }
     }
 
-    Brightness = DefaultBrightness;
+    setBrightness(BRIGHTNESS_DEFAULT);
 
     whichList = ClkList[theClock];       // point to the clock drawlist we are displaying now
 
