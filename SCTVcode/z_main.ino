@@ -185,7 +185,10 @@ void loop()
       if (theClock >= NClks) theClock = 0;   // select the next clock face
       if (theClock < 0) theClock = NClks - 1;
 
-      theClockTitleFade = 80;  // Clock Title set to high brightness.
+      if(clockTitles[theClock][0].string) 
+        theClockTitleFade = 80;  // Clock Title set to high brightness.
+      else
+        theClockTitleFade = 0;
 //      theClockTitleMillis = millis();
       
       if(customInitList[theClock]) {       // Run the initialization function if the new clock face has one
@@ -260,7 +263,7 @@ void loop()
   speed += micros()-oldtime;
  
   if(frame%100 ==0) {
-    Serial.printf("frame: %6d, this frame: %dms, avg/100: %dms\n", frame, micros()-oldtime, speed / 100);
+    Serial.printf("frame: %6d, this frame: %dms, avg/100: %dms titleFade: %d\n", frame, micros()-oldtime, speed / 100, theClockTitleFade);
     speed = 0;
   }
 

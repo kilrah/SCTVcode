@@ -103,7 +103,7 @@ item * ClkList[] = {
   calibrateFontList,        // 17 - Calibration - fonts
   calibrateBrightnessList,  // 18 - Calibration - brightness
   0,                        // 19 - tempest clock - TBD
-//  0,                        // 20 - drawing
+  0,                        // 20 - drawing
   splashList,               // 21 - splash screen vanishes when knob touched
   //   flwList,     // four letter words at random
   //   timefList,   // 6 digit digital clock with full date, day
@@ -111,28 +111,28 @@ item * ClkList[] = {
 };
 
 struct item clockTitles[][2] = {  //  Title string       X     Y    - If X is 0 then the string will be in the center of the display
-  { {text, 10, 0, 0, (char*)"Roman\n",                 -300, -600}, {listend, 0, 0, 0, BlankLn, 0, 0} },  // 0
+  { {text, 10, 0, 0, (char*)"Roman\n",                 -300,  -600}, {listend, 0, 0, 0, BlankLn, 0, 0} }, // 0
   { {text, 10, 0, 0, (char*)"Ticks\n",                 -250, -1000}, {listend, 0, 0, 0, BlankLn, 0, 0} }, // 1
-  { {text, 10, 0, 0, (char*)"Cube Clock\n",            -500, -1000}, {listend, 0, 0, 0, BlankLn, 0, 0} }, // 2
+  { {text, 10, 0, 0, 0,            -500, -1000}, {listend, 0, 0, 0, BlankLn, 0, 0} }, // 2
   { {text, 10, 0, 0, (char*)"Space Clock\n",           -600, -1000}, {listend, 0, 0, 0, BlankLn, 0, 0} }, // 3
-  { {text, 10, 0, 0, (char*)"\n",                         1, -1000}, {listend, 0, 0, 0, BlankLn, 0, 0} }, // 4
-  { {text, 10, 0, 0, (char*)"\n",                         1, -1000}, {listend, 0, 0, 0, BlankLn, 0, 0} }, // 5
-  { {text, 10, 0, 0, (char*)"\n",                         1, -1000}, {listend, 0, 0, 0, BlankLn, 0, 0} }, // 6
-  { {text, 10, 0, 0, (char*)"\n",                         1, -1000}, {listend, 0, 0, 0, BlankLn, 0, 0} }, // 7
-  { {text, 10, 0, 0, (char*)"\n",                         1, -1000}, {listend, 0, 0, 0, BlankLn, 0, 0} }, // 8
-  { {text, 10, 0, 0, (char*)"\n",                         1, -1000}, {listend, 0, 0, 0, BlankLn, 0, 0} }, // 9
-  { {text, 10, 0, 0, (char*)"\n",                         1, -1000}, {listend, 0, 0, 0, BlankLn, 0, 0} }, // 10
+  { {text, 10, 0, 0, 0,                         1, -1000}, {listend, 0, 0, 0, BlankLn, 0, 0} }, // 4
+  { {text, 10, 0, 0, 0,                         1, -1000}, {listend, 0, 0, 0, BlankLn, 0, 0} }, // 5
+  { {text, 10, 0, 0, 0,                         1, -1000}, {listend, 0, 0, 0, BlankLn, 0, 0} }, // 6
+  { {text, 10, 0, 0, 0,                         1, -1000}, {listend, 0, 0, 0, BlankLn, 0, 0} }, // 7
+  { {text, 10, 0, 0, 0,                         1, -1000}, {listend, 0, 0, 0, BlankLn, 0, 0} }, // 8
+  { {text, 10, 0, 0, 0,                         1, -1000}, {listend, 0, 0, 0, BlankLn, 0, 0} }, // 9
+  { {text, 10, 0, 0, 0,                         1, -1000}, {listend, 0, 0, 0, BlankLn, 0, 0} }, // 10
   { {text, 10, 0, 0, (char*)"3D Cube\n",                  0,     0}, {listend, 0, 0, 0, BlankLn, 0, 0} }, // 11
   { {text, 10, 0, 0, (char*)"Starfield\n",                0,     0}, {listend, 0, 0, 0, BlankLn, 0, 0} }, // 12
   { {text, 10, 0, 0, (char*)"Memory Spiral - Bits\n",     0,     0}, {listend, 0, 0, 0, BlankLn, 0, 0} }, // 13
   { {text, 10, 0, 0, (char*)"Memory Spiral - Bytes\n",    0,     0}, {listend, 0, 0, 0, BlankLn, 0, 0} }, // 14
-  { {text, 10, 0, 0, (char*)"\n",                         1, -1000}, {listend, 0, 0, 0, BlankLn, 0, 0} }, // 15
-  { {text, 10, 0, 0, (char*)"\n",                         1, -1000}, {listend, 0, 0, 0, BlankLn, 0, 0} }, // 16
-  { {text, 10, 0, 0, (char*)"\n",                         1, -1000}, {listend, 0, 0, 0, BlankLn, 0, 0} }, // 17
-  { {text, 10, 0, 0, (char*)"\n",                         1, -1000}, {listend, 0, 0, 0, BlankLn, 0, 0} }, // 18
-  { {text, 10, 0, 0, (char*)"\n",                         1, -1000}, {listend, 0, 0, 0, BlankLn, 0, 0} }, // 19
-//  { {text, 10, 0, 0, (char*)"\n",                         1, -1000}, {listend, 0, 0, 0, BlankLn, 0, 0} }, // 20
-  { {text, 10, 0, 0, (char*)"\n",                         1, -1000}, {listend, 0, 0, 0, BlankLn, 0, 0} }, // 21  
+  { {text, 10, 0, 0, 0,                         1, -1000}, {listend, 0, 0, 0, BlankLn, 0, 0} }, // 15
+  { {text, 10, 0, 0, 0,                         1, -1000}, {listend, 0, 0, 0, BlankLn, 0, 0} }, // 16
+  { {text, 10, 0, 0, 0,                         1, -1000}, {listend, 0, 0, 0, BlankLn, 0, 0} }, // 17
+  { {text, 10, 0, 0, 0,                         1, -1000}, {listend, 0, 0, 0, BlankLn, 0, 0} }, // 18
+  { {text, 10, 0, 0, 0,                         1, -1000}, {listend, 0, 0, 0, BlankLn, 0, 0} }, // 19
+  { {text, 10, 0, 0, 0,                         1, -1000}, {listend, 0, 0, 0, BlankLn, 0, 0} }, // 20
+  { {text, 10, 0, 0, 0,                         1, -1000}, {listend, 0, 0, 0, BlankLn, 0, 0} }, // 21  
   0
 };
 
@@ -158,7 +158,7 @@ void (*customInitList[])(void) = {
   0,                // 17
   0,                // 18
   0,                // 19
-//  0,                // 20
+  0,                // 20
   0,                // 21
   0
 };
@@ -185,7 +185,7 @@ void (*customDrawList[])(void) = {
   doCalibrateFont,        // 17
   doCalibrateBrightness,  // 18
   doTempest,              // 19
-//  doDrawing,              // 20
+  doDrawing,              // 20
   0,                      // 21
   0
 };
@@ -212,7 +212,7 @@ bool customKnobsList[] = {
   0,  // 17
   0,  // 18
   0,  // 19
-//  0,  // 20
+  0,  // 20
   0,  // 21
   0
 };
