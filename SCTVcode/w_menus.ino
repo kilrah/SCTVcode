@@ -76,148 +76,33 @@ struct item locMenu[] = {
   {listend, 0, 0, 0, BlankLn, 0, 0}
 };
 
-
-// --------------------------- Clock options -------------------------
-
-// This is the clock display option list
-
-// list of clock face draw lists
-item * ClkList[] = {
-  faceList,                 // 0  - analog clock face
-  clock2List,               // 1  - another analog clock face
-  cubeClockList,            // 2  - an analog clock face with a 3d cube in it for some reason
-  0,                        // 3  - spaceclock
-  time4nList,               // 4  - 4 digit digital clock
-  time6nList,               // 5  - 6 digit digital clock
-  time4dList,               // 6  - 4 digit digital clock with date
-  time6dList,               // 7  - 6 digit digital clock with date
-  haikuList,                // 8  - some poetry at random
-  pongList,                 // 9  - play Pong, special code is run for this
-  tetrisList,               // 10 - play Tetris
-  0,                        // 11 - 3d cube
-  0,                        // 12 - stars
-  0,                        // 13 - spiral
-  0,                        // 14 - spiral2
-  0,                        // 15 - Calabration - circles
-  0,                        // 16 - Calibration - square
-  calibrateFontList,        // 17 - Calibration - fonts
-  calibrateBrightnessList,  // 18 - Calibration - brightness
-  0,                        // 19 - tempest clock - TBD
-  0,                        // 20 - drawing
-  splashList,               // 21 - splash screen vanishes when knob touched
-  //   flwList,     // four letter words at random
-  //   timefList,   // 6 digit digital clock with full date, day
-  0
+face* faces[] = {
+  registerRomanClock(),
+  register2Clock(),
+  registerCubeClock(),
+  registerSpaceClock(),
+  registerDigital5(),
+  registerDigital4(),
+  registerDigital3(),
+  registerDigital2(),
+  registerDigital1(),
+  registerHaiku(),
+  registerPong(),
+  registerTetris(),
+  registerDrawing(),
+  registerCube(),
+  registerStars(),
+  registerTempest(),
+  registerSpiral1(),
+  registerSpiral2(),
+  registerCalibrateCircle(),
+  registerCalibrateSquare(),
+  registerCalibrateFont(),
+  registerCalibrateBrightness(),
+  registerSplash()
 };
 
-struct item clockTitles[][2] = {  //  Title string       X     Y    - If X is 0 then the string will be in the center of the display
-  { {text, 10, 0, 0, (char*)"Roman\n",                 -300,  -600}, {listend, 0, 0, 0, BlankLn, 0, 0} }, // 0
-  { {text, 10, 0, 0, (char*)"Ticks\n",                 -250, -1000}, {listend, 0, 0, 0, BlankLn, 0, 0} }, // 1
-  { {text, 10, 0, 0, 0,            -500, -1000}, {listend, 0, 0, 0, BlankLn, 0, 0} }, // 2
-  { {text, 10, 0, 0, (char*)"Space Clock\n",           -600, -1000}, {listend, 0, 0, 0, BlankLn, 0, 0} }, // 3
-  { {text, 10, 0, 0, 0,                         1, -1000}, {listend, 0, 0, 0, BlankLn, 0, 0} }, // 4
-  { {text, 10, 0, 0, 0,                         1, -1000}, {listend, 0, 0, 0, BlankLn, 0, 0} }, // 5
-  { {text, 10, 0, 0, 0,                         1, -1000}, {listend, 0, 0, 0, BlankLn, 0, 0} }, // 6
-  { {text, 10, 0, 0, 0,                         1, -1000}, {listend, 0, 0, 0, BlankLn, 0, 0} }, // 7
-  { {text, 10, 0, 0, 0,                         1, -1000}, {listend, 0, 0, 0, BlankLn, 0, 0} }, // 8
-  { {text, 10, 0, 0, 0,                         1, -1000}, {listend, 0, 0, 0, BlankLn, 0, 0} }, // 9
-  { {text, 10, 0, 0, 0,                         1, -1000}, {listend, 0, 0, 0, BlankLn, 0, 0} }, // 10
-  { {text, 10, 0, 0, (char*)"3D Cube\n",                  0,     0}, {listend, 0, 0, 0, BlankLn, 0, 0} }, // 11
-  { {text, 10, 0, 0, (char*)"Starfield\n",                0,     0}, {listend, 0, 0, 0, BlankLn, 0, 0} }, // 12
-  { {text, 10, 0, 0, (char*)"Memory Spiral - Bits\n",     0,     0}, {listend, 0, 0, 0, BlankLn, 0, 0} }, // 13
-  { {text, 10, 0, 0, (char*)"Memory Spiral - Bytes\n",    0,     0}, {listend, 0, 0, 0, BlankLn, 0, 0} }, // 14
-  { {text, 10, 0, 0, 0,                         1, -1000}, {listend, 0, 0, 0, BlankLn, 0, 0} }, // 15
-  { {text, 10, 0, 0, 0,                         1, -1000}, {listend, 0, 0, 0, BlankLn, 0, 0} }, // 16
-  { {text, 10, 0, 0, 0,                         1, -1000}, {listend, 0, 0, 0, BlankLn, 0, 0} }, // 17
-  { {text, 10, 0, 0, 0,                         1, -1000}, {listend, 0, 0, 0, BlankLn, 0, 0} }, // 18
-  { {text, 10, 0, 0, 0,                         1, -1000}, {listend, 0, 0, 0, BlankLn, 0, 0} }, // 19
-  { {text, 10, 0, 0, 0,                         1, -1000}, {listend, 0, 0, 0, BlankLn, 0, 0} }, // 20
-  { {text, 10, 0, 0, 0,                         1, -1000}, {listend, 0, 0, 0, BlankLn, 0, 0} }, // 21  
-  0
-};
-
-// list of function pointers for each face that needs to initialize things when it is selected
-void (*customInitList[])(void) = {
-  0,                // 0
-  0,                // 1
-  resetCubeClock,   // 2
-  resetSpaceClock,  // 3
-  0,                // 4
-  0,                // 5
-  0,                // 6
-  0,                // 7
-  0,                // 8
-  reset_pong,       // 9
-  reset_tetris,     // 10
-  reset_cube,       // 11
-  reset_stars,      // 12
-  0,                // 13
-  0,                // 14
-  0,                // 15
-  0,                // 16
-  0,                // 17
-  0,                // 18
-  0,                // 19
-  0,                // 20
-  0,                // 21
-  0
-};
-
-// list of function pointers for each face that needs to draw its own stuff
-void (*customDrawList[])(void) = {
-  DrawClk,                // 0
-  clock2Draw,             // 1
-  cubeClockDraw,          // 2
-  spaceClockDraw,         // 3
-  0,                      // 4
-  0,                      // 5
-  0,                      // 6
-  0,                      // 7
-  0,                      // 8
-  doPong,                 // 9
-  drawTetris,             // 10
-  doCube,                 // 11
-  doStars,                // 12
-  doSpiral,               // 13
-  doSpiral2,              // 14
-  doCalibrateCircle,      // 15
-  doCalibrateSquare,      // 16
-  doCalibrateFont,        // 17
-  doCalibrateBrightness,  // 18
-  doTempest,              // 19
-  doDrawing,              // 20
-  0,                      // 21
-  0
-};
-
-// list of bools signifying whether a face makes direct use of the position pots or not.  (usually games)
-bool customKnobsList[] = {
-  0,  // 0
-  0,  // 1
-  0,  // 2
-  0,  // 3
-  0,  // 4
-  0,  // 5
-  0,  // 6
-  0,  // 7
-  0,  // 8
-  1,  // 9
-  1,  // 10
-  0,  // 11
-  0,  // 12
-  0,  // 13
-  0,  // 14
-  0,  // 15
-  0,  // 16
-  0,  // 17
-  0,  // 18
-  0,  // 19
-  0,  // 20
-  0,  // 21
-  0
-};
-
-const int NClks = sizeof(ClkList) / sizeof(ClkList[0]) - 2;  // number of clock faces to choose from (splash doesn't count)
+const int NClks = sizeof(faces) / sizeof(faces[0]) - 1;  // number of clock faces to choose from (splash doesn't count)
 
 // -------------------------- Menu navigation -----------------------
 
@@ -242,7 +127,7 @@ void DoMenuFunc(int func) {
       HotItem = 1;
       break;
     case MainDCod:
-      whichList = ClkList[theClock];     // point to the clock drawlist we are displaying now
+      whichList = faces[theFace]->text;     // point to the face drawlist we are displaying now
       HotItem = 0;
       InMenu = false;
       break;

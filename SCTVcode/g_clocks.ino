@@ -73,6 +73,18 @@ struct item splashList[] = {
   {listend,0,0,0,BlankLn,0,0}
 };
 
+face * registerSplash() {
+  face* f = (face*) malloc(sizeof(face));
+
+  f->text = splashList;
+  f->title = 0;
+  f->reset = 0;
+  f->draw = 0;
+  f->uses_knobs = 0;
+
+  return f;
+}
+
 // ----------------------------- Analog clock drawing -------------------
 
 // The Face draw list has circles for minor marks and Roman
@@ -107,6 +119,22 @@ struct item faceList[] = {
   {text,10,0,0,romanXII,   -160,  880},    // 12 o'clock
   {listend,0,0,0,BlankLn,0,0}
 };
+
+face * registerRomanClock() {
+  face* f = (face*) malloc(sizeof(face));
+
+  f->text =  faceList;
+
+  f->title =  (item*) malloc(sizeof(item) * 2);
+  f->title[0] = {text, 10, 0, 0, (char*)"Roman\n",                 -300,  -600};
+  f->title[1] = {listend, 0, 0, 0, BlankLn, 0, 0};
+
+  f->reset = 0;
+  f->draw = DrawClk;
+  f->uses_knobs = 0;
+  
+  return f;
+}
 
 // DrawClk draws the three clock hands. They are drawn in fine
 // increments of 1.5 degrees per step. The steps are calculated
@@ -204,6 +232,22 @@ struct item clock2List[] = {
   {listend,0,0,0,BlankLn,0,0}
 };
 
+face * register2Clock() {
+  face* f = (face*) malloc(sizeof(face));
+
+  f->text =  clock2List;
+
+  f->title =  (item*) malloc(sizeof(item) * 2);
+  f->title[0] = {text, 10, 0, 0, (char*)"Ticks\n", -250, -1000};
+  f->title[1] = {listend, 0, 0, 0, BlankLn, 0, 0};
+
+  f->reset = 0;
+  f->draw = clock2Draw;
+  f->uses_knobs = 0;
+
+  return f;
+}
+
 void clock2Draw() {
   baseClock();
 }
@@ -221,24 +265,56 @@ struct item cubeClockList[] = {
   {listend,0,0,0,BlankLn,0,0}
 };
 
+face * registerCubeClock() {
+  face* f = (face*) malloc(sizeof(face));
+
+  f->text =  cubeClockList;
+
+  f->title =  (item*) malloc(sizeof(item) * 2);
+  f->title[0] = {text, 10, 0, 0, (char*)"Cube Clock\n", -500,  -1000};
+  f->title[1] = {listend, 0, 0, 0, BlankLn, 0, 0};
+
+  f->reset = resetCubeClock;
+  f->draw = doCubeClock;
+  f->uses_knobs = 0;
+
+  return f;
+}
+
 void resetCubeClock() {
   setCubeSize(0, 0, 75, 25, 32, 20, 0, 600);
 }
 
-void cubeClockDraw() {
+void doCubeClock() {
   baseClock();
 
   doCube();
 }
 
-// ------------------------ another analog clock -----------------------------
+// ------------------------ space clock -----------------------------
+
+face * registerSpaceClock() {
+  face* f = (face*) malloc(sizeof(face));
+
+  f->text = 0;
+
+  f->title =  (item*) malloc(sizeof(item) * 2);
+  f->title[0] = {text, 10, 0, 0, (char*)"Space Clock\n", -600, -1000};
+  f->title[1] = {listend, 0, 0, 0, BlankLn, 0, 0};
+
+  f->reset = resetSpaceClock;
+  f->draw = doSpaceClock;
+  f->uses_knobs = 0;
+
+  return f;
+}
 
 void resetSpaceClock() {
   reset_stars();
   set_star_count(256);
 }
 
-void spaceClockDraw() {
+void doSpaceClock() {
   baseClock();
 
   doStars();
@@ -263,6 +339,18 @@ struct item timefList[]  = {
   {listend,0,0,0,BlankLn, 0,0}
 };
 
+face * registerDigital1() {
+  face* f = (face*) malloc(sizeof(face));
+
+  f->text = timefList;
+  f->title = 0;
+  f->reset = 0;
+  f->draw = 0;
+  f->uses_knobs = 0;
+
+  return f;
+}
+
 // 6 digit digital clock with date draw list
 struct item time6dList[] = {
   {text,16,0,0,MonthStr,0,0},  // months
@@ -276,6 +364,17 @@ struct item time6dList[] = {
   {listend,0,0,0,BlankLn, 0,0}
 };
 
+face * registerDigital2() {
+  face* f = (face*) malloc(sizeof(face));
+
+  f->text = time6dList;
+  f->title = 0;
+  f->reset = 0;
+  f->draw = 0;
+  f->uses_knobs = 0;
+
+  return f;
+}
 
 // 4 digit digital clock with date draw list
 struct item time4dList[] = {
@@ -291,6 +390,18 @@ struct item time4dList[] = {
 };
 
 
+face * registerDigital3() {
+  face* f = (face*) malloc(sizeof(face));
+
+  f->text = time4dList;
+  f->title = 0;
+  f->reset = 0;
+  f->draw = 0;
+  f->uses_knobs = 0;
+
+  return f;
+}
+
 // 6 digit digital clock draw list
 struct item time6nList[] = {
   {text,10,0,0,BlankLn, 0,0},  // make hh:mm line lower for better centered appearance
@@ -302,6 +413,17 @@ struct item time6nList[] = {
   {listend,0,0,0,BlankLn,0,0}
 };
 
+face * registerDigital4() {
+  face* f = (face*) malloc(sizeof(face));
+
+  f->text = time6nList;
+  f->title = 0;
+  f->reset = 0;
+  f->draw = 0;
+  f->uses_knobs = 0;
+
+  return f;
+}
 
 // 4 digit digital clock draw list
 struct item time4nList[] = {
@@ -311,6 +433,18 @@ struct item time4nList[] = {
   {text,40,0,0,BlankLn, 0,0}, // next line
   {listend,0,0,0,BlankLn,0,0}
 };
+
+face * registerDigital5() {
+  face* f = (face*) malloc(sizeof(face));
+
+  f->text = time4nList;
+  f->title = 0;
+  f->reset = 0;
+  f->draw = 0;
+  f->uses_knobs = 0;
+
+  return f;
+}
 
 // ----------------------- Time string generator -----------------------
 

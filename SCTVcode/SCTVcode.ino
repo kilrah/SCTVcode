@@ -190,7 +190,7 @@ int LastEnc;        // encoder previous state
 // Menu processing variables
 int HotItem;         // menu item currently highlighted
 int MenuCod;         // the address to execute when menu selected
-int theClock;        // which clock face to show
+int theFace;         // which face to show
 int theClockTitleFade = 0;  // brightness of the clock title text, fades out over time.
 int theClockTitleMillis;
 
@@ -260,6 +260,14 @@ struct item {
   int ypos;
 };
 
+
+typedef struct face {
+  item * text;
+  item * title;
+  void (*reset)(void);
+  void (*draw)(void);
+  bool uses_knobs;
+} face;
 
 const int maxItems = 20;    // a list is limited to this many things
 

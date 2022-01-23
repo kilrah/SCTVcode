@@ -34,6 +34,18 @@ struct item pongList[] = {
   {listend,0,0,0,BlankLn,0,0}
 };
 
+face * registerPong() {
+  face* f = (face*) malloc(sizeof(face));
+
+  f->text = pongList;
+  f->title = 0;
+  f->reset = reset_pong;
+  f->draw = doPong;
+  f->uses_knobs = 0;
+
+  return f;
+}
+
 void reset_pong() {
         lScore = 0;                 // reset the score when entering Pong
         rScore = 0;

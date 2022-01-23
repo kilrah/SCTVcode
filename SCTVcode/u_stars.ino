@@ -16,6 +16,22 @@ const float magnitudeRange = 25;
 // the star field - starCount stars represented as x, y and z co-ordinates
 double stars[starCount][4];
 
+face * registerStars() {
+  face* f = (face*) malloc(sizeof(face));
+
+  f->text = 0;
+
+  f->title =  (item*) malloc(sizeof(item) * 2);
+  f->title[0] = {text, 10, 0, 0, (char*)"Stars\n",                 -300,  -600};
+  f->title[1] = {listend, 0, 0, 0, BlankLn, 0, 0};
+
+  f->reset = reset_stars;
+  f->draw = doStars;
+  f->uses_knobs = 0;
+
+  return f;
+}
+
 void set_star_count(int c) {  // Reduce to increase performance.
   usedStarCount = c;
 }

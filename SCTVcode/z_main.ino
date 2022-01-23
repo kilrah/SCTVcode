@@ -46,7 +46,7 @@ void setup()
 */
   EncDir = 0;    // no buttons being pushed or knobs being turned, we hope
   pushed = false;
-  theClock = NClks;    // draw a splash screen until knob turned
+  theFace = NClks;    // draw a splash screen until knob turned
   InMenu = false;
 //  FlwStr[4] = '\n';
 //  MakeFLW();
@@ -62,6 +62,12 @@ void setup()
 
   myusb.begin();     // start the USB device service
   readRTClocale();   // get the locale data if it was stored
+
+  Serial.printf("%d %d %d %d\n", sizeof faces, sizeof faces[0], sizeof faces / sizeof faces[0], NClks);
+
+  for (unsigned i = 0; i < (sizeof faces / sizeof faces[0]); i++) {
+    Serial.printf("%d %30.30s", faces[i]->uses_knobs, faces[i]->title ? faces[i]->title[0].string : "<untitled>\n");
+  }
   
   attachInterrupt(encAPin, DoEnc, CHANGE);  // Fix lack of encoder responsiveness under high load
 }
@@ -111,6 +117,7 @@ void loop() {
 long speed = 0;
 
 // real code. This is not a test
+
 void loop() 
 {
   int oldtime = micros();
@@ -152,7 +159,7 @@ void loop()
   while (userial.available())
     myGps.encode(userial.read());
 
-  if(customKnobsList[theClock] == false)  // If the current face uses the position controls as paddles then skip the positioning stuff.
+  if(faces[theFace]->uses_knobs == false)  // If the current face uses the position controls as paddles then skip the positioning stuff.
   {
     xPos = yPos = 0;
     for (i=0;i<40;i++) {
@@ -181,18 +188,18 @@ void loop()
   {  // it's a clock, not a menu
     if (EncDir != 0) 
     {   // If knob turned, choose the next clock face
-      theClock += EncDir;
-      if (theClock >= NClks) theClock = 0;   // select the next clock face
-      if (theClock < 0) theClock = NClks - 1;
+      theFace += EncDir;
+      if (theFace >= NClks) theFace = 0;   // select the next clock face
+      if (theFace < 0) theFace = NClks - 1;
 
-      if(clockTitles[theClock][0].string) 
+      if(faces[theFace]->title) 
         theClockTitleFade = 80;  // Clock Title set to high brightness.
       else
         theClockTitleFade = 0;
 //      theClockTitleMillis = millis();
       
-      if(customInitList[theClock]) {       // Run the initialization function if the new clock face has one
-        (*customInitList[theClock])();
+      if(faces[theFace]->reset) {       // Run the initialization function if the new clock face has one
+        (*faces[theFace]->reset)();
       }
 
       EncDir = 0;
@@ -201,7 +208,7 @@ void loop()
     if(theClockTitleFade > 0) {  // If the Clock Title brightness is visible - show it
       setBrightness(theClockTitleFade);
 
-      copyList(clockTitles[theClock]);
+      copyList(faces[theFace]->title);
       Center(TheList);                // fill in the positions of each string in our copy
       DoAList(TheList);               // draw it on the screen
 
@@ -215,10 +222,10 @@ void loop()
 
     setBrightness(BRIGHTNESS_DEFAULT);
 
-    whichList = ClkList[theClock];       // point to the clock drawlist we are displaying now
+    whichList = faces[theFace]->text;       // point to the clock drawlist we are displaying now
 
-    if(customDrawList[theClock]) {       // Run the custom drawing function if the current clock face has one
-      (*customDrawList[theClock])();
+    if(faces[theFace]->draw) {       // Run the custom drawing function if the current clock face has one
+      (*faces[theFace]->draw)();
     }
 
     if (pushed) 

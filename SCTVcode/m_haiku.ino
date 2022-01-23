@@ -340,6 +340,18 @@ struct item haikuList[] = {
   {listend,0,0,0,BlankLn,0,0}
 };
 
+face * registerHaiku() {
+  face* f = (face*) malloc(sizeof(face));
+
+  f->text = haikuList;
+  f->title = 0;
+  f->reset = 0;
+  f->draw = 0; // don't call doHaiku here...
+  f->uses_knobs = 0;
+
+  return f;
+}
+
 void doHaiku(void)
 {
   hptr = random(nHaikus);

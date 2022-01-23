@@ -1,6 +1,22 @@
 // This face reads through memory and plots what it finds on the screen as a spiral.
 // It walks along until reaching the 256KB point and then loops back to 0.
 
+face * registerSpiral2() {
+  face* f = (face*) malloc(sizeof(face));
+
+  f->text = 0;
+
+  f->title =  (item*) malloc(sizeof(item) * 2);
+  f->title[0] = {text, 10, 0, 0, (char*)"Memory Spiral - Bytes\n", 0, 0};
+  f->title[1] = {listend, 0, 0, 0, BlankLn, 0, 0};
+
+  f->reset = 0;
+  f->draw = doSpiral2;
+  f->uses_knobs = 0;
+
+  return f;
+}
+
 void doSpiral2() {
   static int offset = 0;
   byte* b = 0; // beginning of memory...

@@ -1,7 +1,31 @@
+
+face * registerCalibrateCircle() {
+  face* f = (face*) malloc(sizeof(face));
+
+  f->text = 0;
+  f->title = 0;
+  f->reset = 0;
+  f->draw = doCalibrateCircle;
+  f->uses_knobs = 0;
+
+  return f;
+}
+
 void doCalibrateCircle() {
   for (int i = 100; i < 3000; i += 200) {
     drawACircle(0, 0, i);
   }
+}
+face * registerCalibrateSquare() {
+  face* f = (face*) malloc(sizeof(face));
+
+  f->text = 0;
+  f->title = 0;
+  f->reset = 0;
+  f->draw = doCalibrateSquare;
+  f->uses_knobs = 0;
+
+  return f;
 }
 
 void doCalibrateSquare() {
@@ -43,6 +67,18 @@ struct item calibrateFontList[] = {
   {listend,0,0,0,BlankLn,0,0}
 };
 
+face * registerCalibrateFont() {
+  face* f = (face*) malloc(sizeof(face));
+
+  f->text = calibrateFontList;
+  f->title = 0;
+  f->reset = 0;
+  f->draw = doCalibrateFont;
+  f->uses_knobs = 0;
+
+  return f;
+}
+
 void doCalibrateFont() {
   static int f = 0;
   static int count = 1;
@@ -75,6 +111,19 @@ struct item calibrateBrightnessList[] = {
   {text,4,0,0,(char *)"Exp",    1000, -250},
   {listend,0,0,0,BlankLn,0,0}
 };
+
+
+face * registerCalibrateBrightness() {
+  face* f = (face*) malloc(sizeof(face));
+
+  f->text = calibrateBrightnessList;
+  f->title = 0;
+  f->reset = 0;
+  f->draw = doCalibrateBrightness;
+  f->uses_knobs = 0;
+
+  return f;
+}
 
 void doCalibrateBrightness() {
   int x = -1000;

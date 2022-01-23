@@ -204,3 +204,15 @@ struct item tetrisList[] = {
   {text,10,0,0,scoreStr,800, 0},
   {listend,0,0,0,BlankLn,0,0}
 };
+
+face * registerTetris() {
+  face* f = (face*) malloc(sizeof(face));
+
+  f->text = tetrisList;
+  f->title = 0;
+  f->reset = reset_tetris;
+  f->draw = drawTetris; // don't call doHaiku here...
+  f->uses_knobs = 0;
+
+  return f;
+}

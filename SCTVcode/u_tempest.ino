@@ -75,6 +75,18 @@ byte lev_open[16] = { 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 1, 0, 1 };
 
 int tempest_level = 0;
 
+face * registerTempest() {
+  face* f = (face*) malloc(sizeof(face));
+
+  f->text = 0;
+  f->title = 0;
+  f->reset = 0;
+  f->draw = doTempest;
+  f->uses_knobs = 0;
+
+  return f;
+}
+
 void doTempest() {
   int scale = 10;
   int y_offset_scale = 2;

@@ -14,7 +14,23 @@ void reset_spiral() {
 }
 */
 
-void doSpiral() {
+face * registerSpiral1() {
+  face* f = (face*) malloc(sizeof(face));
+
+  f->text = 0;
+
+  f->title =  (item*) malloc(sizeof(item) * 2);
+  f->title[0] = {text, 10, 0, 0, (char*)"Memory Spiral - Bits\n", 0, 0};
+  f->title[1] = {listend, 0, 0, 0, BlankLn, 0, 0};
+
+  f->reset = 0;
+  f->draw = doSpiral1;
+  f->uses_knobs = 0;
+
+  return f;
+}
+
+void doSpiral1() {
   static int offset = 10*1024;
   byte* b = 0;
 
