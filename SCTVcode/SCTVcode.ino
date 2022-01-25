@@ -31,7 +31,7 @@
 // V 0.4.2 09/12/21 DF  Added haikus, Tetris objects, split into files
 // V 0.4.3 09/24/21 DF  Improved Tetris
 // V 0.5.0 09/29/21 DF  Adding GPS over USB for SCTV-C
-// V 0.5.1 09/30/21 DF  GPS works, can be plugged and unplugged  
+// V 0.5.1 09/30/21 DF  GPS works, can be plugged and unplugged
 // V 0.5.2 10/01/21 DF  Improved Pong end of game, added ball delay 
 // V 0.5.3 11/23/21 DF  Added 50 Hz menu option for our worldwide friends 
 // V 1.0.0 11/30/21 DF  Made screensaver bigger, issued as a release
@@ -77,7 +77,7 @@ char versionNo[]  = "Version 1.0.2\n";
 // The clock displays are draw lists with their text strings modified
 // by the timekeeping code.
 //
-// All text strings are centered in the display for best appearance.
+// All text strings are by default centered in the display for best appearance.
 //
 // The draw list contains one or more entries per line of text. Each
 // string is a zero-terminated string of ASCII characters. The last string
@@ -97,7 +97,6 @@ char versionNo[]  = "Version 1.0.2\n";
 //
 //
 // ---------------------------- Hardware definitions -----------------------------
-
 
 #include <Arduino.h> 
 #include <Wire.h>    // I2C library
@@ -231,10 +230,10 @@ int LastO;          // last octant to display
 float BMap[101];    // Linear Bightness map 0 to 1 ->  0.25 to 1.  -- This helps a bit.  -- used by setBrightnessPL
 float BMap2[101];   // Exponental Brightess map 0 to 1 -> 0.25 to 0.9  -- this helps a lot.  -- used by setBrightnessP
 
-#define BRIGHTNESS_DEFAULT 60
+#define BRIGHTNESS_DEFAULT 100
 
 int Brightness;         // Brightness control for faces. 0-4096
-//int SystemBrightness;   // Brightness control for the system.  Used to fade between faces. 0-4096
+int Strokes = 1;        // This is used by setBrightness to handle the >100% brightnesses.  1 = draw an item once.  2 = twice, etc.
 
 // The text, menu and field items are similar in format.
 // xpos and ypos may be zero for the centering code to figure out.
@@ -254,26 +253,26 @@ struct item {
   int type;        // see list above
   int scale;       // scale factor
   int func;        // function to execute (mod or menu numeration) if used, 0 if not
-  int font;        // font number to use
-  char *string;     // the string to display
+  int font;        // font to use
+  char *string;    // the string to display
   int xpos;        // where it goes, or used when calculating where it goes
   int ypos;
 };
-
-
-typedef struct face {
-  item * text;
-  item * title;
-  void (*reset)(void);
-  void (*draw)(void);
-  bool uses_knobs;
-} face;
 
 const int maxItems = 20;    // a list is limited to this many things
 
 struct item TheList[maxItems];    // the list above is copied into here to allow modification
 
 item * whichList;  // pointer to current draw list
+
+// A face describes each screen.
+typedef struct face {
+  item * text;          // the itemList if there is text to display.  0 otherwise.
+  item * title;         // the itemList if there is a title to display.  0 otherwise.
+  void (*reset)(void);  // A function pointer to a reset function to be called when switching to the face.  Called once when the knob is moved.  0 if there is not one.
+  void (*draw)(void);   // A function pointer to a custom draw function.  0 if there is no custom drawing (ie: a text-only face).
+  bool uses_knobs;      // true if the face uses the position knobs for special functions.  false if they should be used for the usual position function.
+} face;
 
 // Menu flag bits are now variables
 bool InMenu = false;     // 1 if currently in a menu at all

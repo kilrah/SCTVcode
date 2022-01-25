@@ -146,7 +146,7 @@ void DrawClk() {
   // doingHand = true;
   drawRadialLine(200, 2500, 240, Secs<<2);
 
-  setBrightness(80);
+  setBrightness(102);
   drawRadialLine(200, 2000, 240, (Secs / 15) + (Mins << 2));
   drawRadialLine(200, 1500, 240, (Hrs % 12) * 20 + Mins / 3);
   setBrightness(BRIGHTNESS_DEFAULT);
@@ -178,15 +178,17 @@ void baseClock() {
 
   for(int i = 0; i < 60; i++) {                                    // Draw the tick marks.
     if(i == Secs)                                                  // Bright if it is the current second
-      setBrightness(100);
-
+      setBrightness(101);
+    else
+      setBrightness(80);
+      
     if(i%15 == 0)
       drawRadialLine(largeTickInside, largeTickOutside, 60, i);
     else if(i%5 == 0)
       drawRadialLine(midTickInside, midTickOutside, 60, i);
     else {
       if(i != Secs)                                                // Dim if it is not the current second
-        setBrightness(30);
+        setBrightness(50);
 
       drawRadialLine(smallTickInside, smallTickOutside, 60, i);
     }
@@ -194,7 +196,7 @@ void baseClock() {
     setBrightness(BRIGHTNESS_DEFAULT);
   }
 
-  setBrightness(80);
+  setBrightness(101);
 
   drawACircle(0, 0, centerCircle);                                                                // Center circle outline
 
@@ -250,6 +252,7 @@ face * register2Clock() {
 
 void clock2Draw() {
   baseClock();
+  setBrightness(70);  // hack: This ends up dimming the text.
 }
 
 // ------------------------ another analog clock -----------------------------
@@ -289,6 +292,8 @@ void doCubeClock() {
   baseClock();
 
   doCube();
+
+  setBrightness(70);  // hack: This ends up dimming the text.
 }
 
 // ------------------------ space clock -----------------------------

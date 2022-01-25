@@ -76,6 +76,7 @@ struct item locMenu[] = {
   {listend, 0, 0, 0, BlankLn, 0, 0}
 };
 
+// Register each face in desired order.  Last face is the splash screen that is shown at boot time.
 face* faces[] = {
   registerRomanClock(),
   register2Clock(),

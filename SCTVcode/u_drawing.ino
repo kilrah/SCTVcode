@@ -639,30 +639,48 @@ short wowie[][1000][2] = {
 };
 
 void doDrawing() {
-  int x = -20000, y = -20000;
+//  int x = -20000, y = -20000;
+  int x = wowie[0][0][0];
+  int y = wowie[0][0][1];
+  
   int x2 = 0, y2 = 0;
   int dist;
 
 //  Serial.printf("0: %d %d = %d\n", sizeof wowie, sizeof wowie[0], sizeof wowie / sizeof wowie[0]);
   // 2656000 8000 - should be 332.
 
+  // go to the start point with beam off
+  analogWrite(XDACPin, x);
+  analogWrite(YDACPin, y);
+
+//  Serial.printf("%d : % 3.3d % 3.3d -> % 3.3d % 3.3d -> %d\n", 0, x, y, x2, y2, dist);
+
+  // wait for the beam to reach the start point
+  delayMicroseconds(10);
+  digitalWrite(BlankPin, HIGH);
+  delayMicroseconds(glowDelay);        // wait for glow to start
+
   for (int i = (sizeof wowie / sizeof wowie[0]) - 1; i >= 0; i--) {
     //Serial.printf("1: %d %d %d\n", sizeof wowie[0], sizeof wowie[0][0], sizeof wowie[0] / sizeof wowie[0][0]);
     for (int j = 0; j < 999; j++) {
       //Serial.printf("%d %d - %d %d\n", i, j, (int)wowie[i][j][0], (int)wowie[i][j][1]);
 
-      x2 = ((wowie[i][j][0] / (float)600) - 0.5) * -2000;
-      y2 = ((wowie[i][j][1] / (float)600) - 0.5) * -2000;
+      x2 = (((wowie[i][j][0] / (float)600) - 0.5) * -2000) + midDAC + xPos + XSaver;
+      y2 = (((wowie[i][j][1] / (float)600) - 0.5) * -2000) + midDAC + yPos + YSaver;
 
       if (wowie[i][j][0] == 0 && wowie[i][j][1] == 0)
         break;
 
-      dist = (int)sqrt(((x2 - x) * (x2 - x)) + ((y2 - y) * (y2 - y)));
+//      dist = (int)sqrt(((x2 - x) * (x2 - x)) + ((y2 - y) * (y2 - y)));
 
 //      if (abs(x - x2) < 100 && abs(y - y2) < 100)
-      if(dist < 200)
-        drawALine(x, y, x2, y2);
+//      if(dist < 200)
+//        drawALine(x, y, x2, y2);
 
+  analogWriteDAC0(x2);
+  analogWriteDAC1(y2);
+
+//      delayMicroseconds(10);
 //      Serial.printf("%d : % 3.3d % 3.3d -> % 3.3d % 3.3d -> %d\n", j, x, y, x2, y2, dist);
 
       x = x2;
@@ -670,5 +688,6 @@ void doDrawing() {
 
     }
   }
+  digitalWrite(BlankPin, LOW);
 
 }

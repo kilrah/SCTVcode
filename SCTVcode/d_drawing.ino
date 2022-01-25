@@ -1,18 +1,42 @@
 // Set brightness between 0 and 100% with an exponential stretch - this works the best
+// Values above 100 result in each stroke being drawn multiple times.  101 = 2 repeats, 102 = three, 103 = four, etc.
+// Repeating strokes rapidly increase rendering time.
 void setBrightness(int b) {
-  Brightness = 4096 * BMap2[b];
+  if(b > 100) {
+    Brightness = 4096;
+    Strokes = b - 100;
+  } else {
+    Brightness = 4096 * BMap2[b];
+    Strokes = 1;
+  }
 //  Serial.printf("P: %d %d\n", b, Brightness);
 }
 
 // Set brightness with a sort of linear stretch - LINEAR
+// Values above 100 result in each stroke being drawn multiple times.  101 = 2 repeats, 102 = three, 103 = four, etc.
+// Repeating strokes rapidly increase rendering time.
 void setBrightnessL(int b) {
-  Brightness = 4096 * BMap[b];
+  if(b > 100) {
+    Brightness = 4096;
+    Strokes = b - 100;
+  } else {
+    Brightness = 4096 * BMap[b];
+    Strokes = 1;
+  }
 //  Serial.printf("PL: %d %d\n", b, Brightness);
 }
 
 // Set brightness with no corrections. RAW
+// Values above 100 result in each stroke being drawn multiple times.  101 = 2 repeats, 102 = three, 103 = four, etc.
+// Repeating strokes rapidly increase rendering time.
 void setBrightnessR(int b) {
-  Brightness = 4096 * b / 100;
+  if(b > 100) {
+    Brightness = 4096;
+    Strokes = b - 100;
+  } else {
+    Brightness = 4096 * b / 100;
+    Strokes = 1;
+  }
 //  Serial.printf("PR: %d %d %d\n", b, 0, Brightness);
 }
 
@@ -69,25 +93,31 @@ void DoSeg()
     ymotion = abs(thisY - ystart);
     motion = (xmotion > ymotion ? xmotion : ymotion);   // how far to move from previous segment
 
-    // go to the start point with beam off
-    analogWrite(XDACPin, xstart);
-    analogWrite(YDACPin, ystart);
-//    analogWriteDAC0(xstart);
-//    analogWriteDAC1(ystart);
+    for(int b = Strokes; b > 0; b--) {
+      // go to the start point with beam off
+  //    analogWrite(XDACPin, xstart);
+  //    analogWrite(YDACPin, ystart);
+      analogWriteDAC0(xstart);
+      analogWriteDAC1(ystart);
+  
+      // wait for the beam to reach the start point
+      delayMicroseconds(motion/motionDelay + settlingDelay);
+      analogWrite(BlankPin, Brightness);
+      delayMicroseconds(glowDelay);        // wait for glow to start
+  
+      // draw the circle with the beam on, stride is 24.8 bits to allow fine rate control
+      for (i=(firstAngle<<8); i<(lastAngle<<8); i+=stride) {
+        thisX = ((costab[(i>>8) % nsteps] * xrad) >> 16) + xcen;
+        thisY = ((sintab[(i>>8) % nsteps] * yrad) >> 16) + ycen;
+        analogWrite(XDACPin, thisX);
+        analogWrite(YDACPin, thisY);
+  //      analogWriteDAC0(thisX);
+  //      analogWriteDAC1(thisY);
+      }
 
-    // wait for the beam to reach the start point
-    delayMicroseconds(motion/motionDelay + settlingDelay);
-    analogWrite(BlankPin, Brightness);
-    delayMicroseconds(glowDelay);        // wait for glow to start
-
-    // draw the circle with the beam on, sride is 24.8 bits to allow fine rate control
-    for (i=(firstAngle<<8); i<(lastAngle<<8); i+=stride) {
-      thisX = ((costab[(i>>8) % nsteps] * xrad) >> 16) + xcen;
-      thisY = ((sintab[(i>>8) % nsteps] * yrad) >> 16) + ycen;
-      analogWrite(XDACPin, thisX);
-      analogWrite(YDACPin, thisY);
-//      analogWriteDAC0(thisX);
-//      analogWriteDAC1(thisY);
+      //delayMicroseconds(glowDelay);        // wait for glow to start
+      analogWrite(BlankPin, 0);              // Turn off the beam.
+//  analogWrite(BlankPin, 4096);           // Leave the beam on to observe the 'rapids' movements between lit segments.
     }
   } 
   else if (Shape == lin) {
@@ -104,17 +134,19 @@ void DoSeg()
     else
       len = (int)sqrt(xlen * xlen + ylen * ylen);
 
-    if (len <= 0) len = lineStride; 
+    if (len <= 0) len = lineStride;
     int xinc = ((xlen<<8)/len);
     int yinc = ((ylen<<8)/len);
     xmotion = abs(thisX - xstart);
     ymotion = abs(thisY - ystart);
     motion = (xmotion > ymotion ? xmotion : ymotion);   // how far to move from previous segment
  //   if (doingHand) Serial.printf("motion %4d   len %4d\n", motion, len);
-      analogWrite(XDACPin, xstart);
-      analogWrite(YDACPin, ystart);
-//      analogWriteDAC0(xstart);
-//      analogWriteDAC1(ystart);
+
+    for(int b = Strokes; b > 0; b--) {
+//      analogWrite(XDACPin, xstart);
+//      analogWrite(YDACPin, ystart);
+      analogWriteDAC0(xstart);
+      analogWriteDAC1(ystart);
     
     delayMicroseconds(motion/motionDelay + settlingDelay);
     analogWrite(BlankPin, Brightness);
@@ -129,11 +161,13 @@ void DoSeg()
 //      analogWriteDAC0(thisX);
 //      analogWriteDAC1(thisY);
     }
-  }
 
   //delayMicroseconds(glowDelay);        // wait for glow to start
   analogWrite(BlankPin, 0);              // Turn off the beam.
 //  analogWrite(BlankPin, 4096);           // Leave the beam on to observe the 'rapids' movements between lit segments.
+    }
+  }
+
 }
 
 // Standalone shape drawing for non-drawlist features
