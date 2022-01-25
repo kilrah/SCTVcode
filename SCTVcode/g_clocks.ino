@@ -457,7 +457,7 @@ face * registerDigital6() {
   f->text = time6dList;
   
   f->title =  (item*) malloc(sizeof(item) * 2);
-  f->title[0] = {text, 10, 0, 0, (char*)"Studio\n", -300, -1000};
+  f->title[0] = {text, 10, 0, 0, (char*)"Studio\n", -350, -1300};
   f->title[1] = {listend, 0, 0, 0, BlankLn, 0, 0};
 
   f->reset = 0;
@@ -472,22 +472,22 @@ void doSecFractionDots()
   static elapsedMillis currentMillis;
   static int lastSecond;
 
-  if(lastSecond != Secs) {
-    currentMillis = 0;
-    lastSecond = Secs;
-  }
-
-  // Always "draw" all dots to keep frame time consistent
+  // Always "draw" all dots to keep frame time consistent, just "mute" those after current time
+  setBrightness(BRIGHTNESS_DEFAULT);
   for (uint32_t i = 0; i <= 100; i++) {
-    if(i <= currentMillis/10)
-      setBrightness(100);
-    else
+    if(i > currentMillis/10)
       setBrightness(0);
       
     drawRadialCircle(2700, 100, i, 30); 
   }
+
+  if(lastSecond != Secs) {
+    currentMillis = 0;
+    lastSecond = Secs;
+  }
+  
   // Set brightness for text
-  setBrightness(100);
+  setBrightness(BRIGHTNESS_DEFAULT);
 }
 
 // ----------------------- Time string generator -----------------------
