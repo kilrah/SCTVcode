@@ -217,7 +217,7 @@ void baseClock() {
 
   setBrightness(BRIGHTNESS_DEFAULT);
 
-  drawRadialLine(2080, 2200, 1440, (float)1440/framesPerMin*(millis()-millisMinOld));             // End of second hand - dimmer to appear thinner.
+  drawRadialLine(2090, 2200, 1440, (float)1440/framesPerMin*(millis()-millisMinOld));             // End of second hand - dimmer to appear thinner.
 }
 
 
@@ -474,10 +474,11 @@ void doSecFractionDots()
 
   // Always "draw" all dots to keep frame time consistent, just "mute" those after current time
   setBrightness(BRIGHTNESS_DEFAULT);
+
   for (uint32_t i = 0; i <= 100; i++) {
     if(i > currentMillis/10)
       setBrightness(0);
-      
+
     drawRadialCircle(2700, 100, i, 30); 
   }
 

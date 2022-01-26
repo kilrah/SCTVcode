@@ -95,8 +95,6 @@ void DoSeg()
 
     for(int b = Strokes; b > 0; b--) {
       // go to the start point with beam off
-  //    analogWrite(XDACPin, xstart);
-  //    analogWrite(YDACPin, ystart);
       analogWriteDAC0(xstart);
       analogWriteDAC1(ystart);
   
@@ -111,8 +109,6 @@ void DoSeg()
         thisY = ((sintab[(i>>8) % nsteps] * yrad) >> 16) + ycen;
         analogWrite(XDACPin, thisX);
         analogWrite(YDACPin, thisY);
-  //      analogWriteDAC0(thisX);
-  //      analogWriteDAC1(thisY);
       }
 
       //delayMicroseconds(glowDelay);        // wait for glow to start
@@ -143,8 +139,6 @@ void DoSeg()
  //   if (doingHand) Serial.printf("motion %4d   len %4d\n", motion, len);
 
     for(int b = Strokes; b > 0; b--) {
-//      analogWrite(XDACPin, xstart);
-//      analogWrite(YDACPin, ystart);
       analogWriteDAC0(xstart);
       analogWriteDAC1(ystart);
     
@@ -158,8 +152,6 @@ void DoSeg()
       thisY = ((i*yinc)>>(8)) + ystart;
       analogWrite(XDACPin, thisX);
       analogWrite(YDACPin, thisY);
-//      analogWriteDAC0(thisX);
-//      analogWriteDAC1(thisY);
     }
 
   //delayMicroseconds(glowDelay);        // wait for glow to start
@@ -214,12 +206,13 @@ void drawACircle(int xcenter, int ycenter, int diameter, int fo, int lo) {
 // angle - what angle should the line be drawn at?  0 = up.
 void drawRadialLine(int inside, int outside, int resolution, int angle) {
   int handAngle = (angle*nsteps/resolution) % nsteps;  // get angle in range of new sin/cos tab
-  YSize = costab[handAngle]/500;      // swap X and Y, because 0 deg is at north CW like a clock, not east CCW like math
-  XSize = sintab[handAngle]/500;
-  XStart = (inside * XSize) >>8;
-  YStart = (inside * YSize) >>8;
-  XEnd   = (outside * XSize) >>8;
-  YEnd   = (outside * YSize) >>8;
+  float ys = (float)costab[handAngle]/500;      // swap X and Y, because 0 deg is at north CW like a clock, not east CCW like math
+  float xs = (float)sintab[handAngle]/500;
+
+  XStart = int(inside *xs) >>8;
+  YStart = int(inside * ys) >>8;
+  XEnd   = int(outside * xs) >>8;
+  YEnd   = int(outside * ys) >>8;
   Scale = 1;
   ChrXPos = ChrYPos = 0;
   Shape = lin;
@@ -233,11 +226,13 @@ void drawRadialLine(int inside, int outside, int resolution, int angle) {
 // diameter - how big of a circle?
 void drawRadialCircle(int inside, int resolution, int angle, int diameter) {
   int handAngle = (angle*nsteps/resolution) % nsteps;  // get angle in range of new sin/cos tab
-  int ys = costab[handAngle]/500;      // swap X and Y, because 0 deg is at north CW like a clock, not east CCW like math
-  int xs = sintab[handAngle]/500;
-  drawACircle((inside * xs) >>8, (inside * ys) >>8, diameter);
-//  if(diameter==70)
-//    Serial.printf("i: %d r: %d a: %d d: %d -> xs: %d ys: %d -> %d (%d) %d (%d)\n", inside, resolution, angle, diameter, xs, ys, (inside * xs), (inside * xs)>>8, (inside * ys), (inside * ys)>>8);
+  float ys = (float)costab[handAngle]/500;      // swap X and Y, because 0 deg is at north CW like a clock, not east CCW like math
+  float xs = (float)sintab[handAngle]/500;
+
+  drawACircle(int(inside * xs) >>8, int(inside * ys) >>8, diameter);
+//  if(diameter==30)
+//    Serial.printf("i: %d r: %d a: %d d: %d -> handangle: %d sin: %d cos: %d xs: %f ys: %f -> %f (%d) %f (%d)\n", 
+//                  inside, resolution, angle, diameter, handAngle, sintab[handAngle], costab[handAngle], xs, ys, (inside * xs), int(inside * xs)>>8, (inside * ys), int(inside * ys)>>8);
 }
 
 // -------------------- Draw list centering code ---------------------
