@@ -206,13 +206,13 @@ void drawACircle(int xcenter, int ycenter, int diameter, int fo, int lo) {
 // angle - what angle should the line be drawn at?  0 = up.
 void drawRadialLine(int inside, int outside, int resolution, int angle) {
   int handAngle = (angle*nsteps/resolution) % nsteps;  // get angle in range of new sin/cos tab
-  float ys = (float)costab[handAngle]/500;      // swap X and Y, because 0 deg is at north CW like a clock, not east CCW like math
-  float xs = (float)sintab[handAngle]/500;
+  int ys = (float)costab[handAngle];      // swap X and Y, because 0 deg is at north CW like a clock, not east CCW like math
+  int xs = (float)sintab[handAngle];
 
-  XStart = int(inside *xs) >>8;
-  YStart = int(inside * ys) >>8;
-  XEnd   = int(outside * xs) >>8;
-  YEnd   = int(outside * ys) >>8;
+  XStart = (inside * xs / 500) >>8;
+  YStart = (inside * ys / 500) >>8;
+  XEnd   = (outside * xs / 500) >>8;
+  YEnd   = (outside * ys / 500) >>8;
   Scale = 1;
   ChrXPos = ChrYPos = 0;
   Shape = lin;
@@ -226,10 +226,10 @@ void drawRadialLine(int inside, int outside, int resolution, int angle) {
 // diameter - how big of a circle?
 void drawRadialCircle(int inside, int resolution, int angle, int diameter) {
   int handAngle = (angle*nsteps/resolution) % nsteps;  // get angle in range of new sin/cos tab
-  float ys = (float)costab[handAngle]/500;      // swap X and Y, because 0 deg is at north CW like a clock, not east CCW like math
-  float xs = (float)sintab[handAngle]/500;
+  int ys = costab[handAngle];      // swap X and Y, because 0 deg is at north CW like a clock, not east CCW like math
+  int xs = sintab[handAngle];
 
-  drawACircle(int(inside * xs) >>8, int(inside * ys) >>8, diameter);
+  drawACircle((inside * xs / 500) >>8, (inside * ys / 500) >>8, diameter);
 //  if(diameter==30)
 //    Serial.printf("i: %d r: %d a: %d d: %d -> handangle: %d sin: %d cos: %d xs: %f ys: %f -> %f (%d) %f (%d)\n", 
 //                  inside, resolution, angle, diameter, handAngle, sintab[handAngle], costab[handAngle], xs, ys, (inside * xs), int(inside * xs)>>8, (inside * ys), int(inside * ys)>>8);
