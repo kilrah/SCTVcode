@@ -254,6 +254,8 @@ struct item {
   int scale;       // scale factor
   int func;        // function to execute (mod or menu numeration) if used, 0 if not
   int font;        // font to use
+  int brightness;  // brightness - 0 - 100 - 100+
+  int style;       //
   char *string;    // the string to display
   int xpos;        // where it goes, or used when calculating where it goes
   int ypos;

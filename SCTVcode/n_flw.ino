@@ -20,8 +20,8 @@ int FLWLen = sizeof(FLWs);
 
 // Four letter word draw list
 struct item flwList[] = {
-  {text,40,0,0,FlwStr,0,0},  // the nasty word itself
-  {listend,0,0,0,BlankLn,0,0}
+  {text,40,0,0,0,0,FlwStr,0,0},  // the nasty word itself
+  {listend,0,0,0,0,0,BlankLn,0,0}
 };
 
 void MakeFLW() {

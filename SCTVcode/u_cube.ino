@@ -27,8 +27,8 @@ face * registerCube() {
   f->text = 0;
 
   f->title =  (item*) malloc(sizeof(item) * 2);
-  f->title[0] = {text, 10, 0, 0, (char*)"3D Cube\n", 0, 0};
-  f->title[1] = {listend, 0, 0, 0, BlankLn, 0, 0};
+  f->title[0] = {text, 10, 0, 0, 0,0, (char*)"3D Cube\n", 0, 0};
+  f->title[1] = {listend, 0, 0, 0, 0,0, BlankLn, 0, 0};
 
   f->reset = reset_cube;
   f->draw = doCube;

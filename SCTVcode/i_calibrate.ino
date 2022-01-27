@@ -59,12 +59,12 @@ char chars5[] =
 
 
 struct item calibrateFontList[] = {
-  {text,10,0,0,chars1,  0,0},
-  {text,10,0,0,chars2,  0,0},
-  {text,10,0,0,chars3,  0,0},
-  {text,10,0,0,chars4,  0,0},
-  {text,10,0,0,chars5,  0,0},
-  {listend,0,0,0,BlankLn,0,0}
+  {text,10,0,0,0,0,chars1,  0,0},
+  {text,10,0,0,0,0,chars2,  0,0},
+  {text,10,0,0,0,0,chars3,  0,0},
+  {text,10,0,0,0,0,chars4,  0,0},
+  {text,10,0,0,0,0,chars5,  0,0},
+  {listend,0,0,0,0,0,BlankLn,0,0}
 };
 
 face * registerCalibrateFont() {
@@ -96,20 +96,20 @@ void doCalibrateFont() {
 
 
 struct item calibrateBrightnessList[] = {
-  {text,3,0,0,(char *)"10%",  -1100, 300},
-  {text,3,0,0,(char *)"20%",  -900 , 300},
-  {text,3,0,0,(char *)"30%",  -700 , 300},
-  {text,3,0,0,(char *)"40%",  -500 , 300},
-  {text,3,0,0,(char *)"50%",  -300 , 300},
-  {text,3,0,0,(char *)"60%",  -100 , 300},
-  {text,3,0,0,(char *)"70%",  100  , 300},
-  {text,3,0,0,(char *)"80%",  300  , 300},
-  {text,3,0,0,(char *)"90%",  500  , 300},
-  {text,3,0,0,(char *)"100%",  700 , 300},
-  {text,4,0,0,(char *)"Raw",    1000, 150},
-  {text,4,0,0,(char *)"Linear", 1000, -50},
-  {text,4,0,0,(char *)"Exp",    1000, -250},
-  {listend,0,0,0,BlankLn,0,0}
+  {text,3,0,0,0,0,(char *)"10%",  -1100, 300},
+  {text,3,0,0,0,0,(char *)"20%",  -900 , 300},
+  {text,3,0,0,0,0,(char *)"30%",  -700 , 300},
+  {text,3,0,0,0,0,(char *)"40%",  -500 , 300},
+  {text,3,0,0,0,0,(char *)"50%",  -300 , 300},
+  {text,3,0,0,0,0,(char *)"60%",  -100 , 300},
+  {text,3,0,0,0,0,(char *)"70%",  100  , 300},
+  {text,3,0,0,0,0,(char *)"80%",  300  , 300},
+  {text,3,0,0,0,0,(char *)"90%",  500  , 300},
+  {text,3,0,0,0,0,(char *)"100%",  700 , 300},
+  {text,4,0,0,0,0,(char *)"Raw",    1000, 150},
+  {text,4,0,0,0,0,(char *)"Linear", 1000, -50},
+  {text,4,0,0,0,0,(char *)"Exp",    1000, -250},
+  {listend,0,0,0,0,0,BlankLn,0,0}
 };
 
 

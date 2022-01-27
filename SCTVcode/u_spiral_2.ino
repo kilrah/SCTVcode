@@ -7,8 +7,8 @@ face * registerSpiral2() {
   f->text = 0;
 
   f->title =  (item*) malloc(sizeof(item) * 2);
-  f->title[0] = {text, 10, 0, 0, (char*)"Memory Spiral - Bytes\n", 0, 0};
-  f->title[1] = {listend, 0, 0, 0, BlankLn, 0, 0};
+  f->title[0] = {text, 10, 0, 0, 0,0, (char*)"Memory Spiral - Bytes\n", 0, 0};
+  f->title[1] = {listend, 0, 0, 0, 0,0, BlankLn, 0, 0};
 
   f->reset = 0;
   f->draw = doSpiral2;
