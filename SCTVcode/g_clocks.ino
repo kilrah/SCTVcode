@@ -461,16 +461,23 @@ face * registerDigital4() {
   return f;
 }
 
+/*
+ * 15:27
+ * 
+ * 33.123
+ */
+
 // 4 digit digital clock draw list
 struct item time4nList[] = {
+  {text,   10,0,0,  0,0,0,BlankLn,  0,0},
   {text,   40,0,0,  0,4,9,HrsStr,   0,0},  // hours
   {text,   40,0,0, 70,0,0,ColStr,   0,0},  // colon
   {text,   40,0,0,100,4,9,MinStr,   0,0},  // mins
   {text,   40,0,0,  0,0,0,BlankLn,  0,0}, // next line
   {text,   10,0,0,  0,0,0,BlankLn,  0,0},
   {text,   10,0,0,  0,0,0,SecStr,   0,0},  // secs
-  {text,   10,0,0,  0,0,0,PeriodStr,0,0},  // secs
-  {text,   10,0,0,  0,0,0,MSecStr,  0,0},  // secs
+  {text,   10,0,0,  0,0,0,PeriodStr,0,0},  // .
+  {text,   10,0,0,  0,0,0,MSecStr,  0,0},  // msecs
   {text,    0,0,0,  0,0,0,BlankLn,  0,0},
   {listend, 0,0,0,  0,0,0,BlankLn,  0,0}
 };
