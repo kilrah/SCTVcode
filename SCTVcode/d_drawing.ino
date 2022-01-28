@@ -373,7 +373,7 @@ void copyList(struct item *list)
     q->func   = p->func;
     q->font   = p->font;
     q->brightness   = p->brightness;
-    q->style   = p->style;
+    q->shadow   = p->shadow;
     q->string = p->string; 
     q->xpos   = p->xpos;  
     q->ypos   = p->ypos; 
@@ -447,6 +447,7 @@ void DoAList(struct item *list)
     StrPtr = p->string;   // read string pointer
     ChrXPos = p->xpos;  // read position of string (not used by most!)
     ChrYPos = p->ypos;
+
     // seg tells it to draw a circle or a line. This code does a circle. Need to do a line also. 
     if (p->type == seg) {
       XCenter = YCenter = 0;  // position done by ChrX,YPos
@@ -467,10 +468,21 @@ void DoAList(struct item *list)
       { // it's a menu item, so save its code pointer and count up items
         TheItem++;
       }
+
       DupPtr = StrPtr;   // save pointer and position for displaying twice to highlight
       DupXPos = ChrXPos;
       SetScale();
+
       DispStr();
+
+      if(p->shadow) {
+        StrPtr = DupPtr;
+        ChrXPos = DupXPos;
+        ChrXPos-=p->shadow;
+        ChrYPos+=p->shadow;
+        DispStr();
+      }
+
       if ((p->type != text) && (TheItem == HotItem)) 
       {  // hot, either highlight or blink item
         MenuCod = p->func;
