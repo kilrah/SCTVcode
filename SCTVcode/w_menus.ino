@@ -28,28 +28,28 @@ char setTimDat[] = "Set Time & Date\n";
 char setLocale[] = "Set Locale\n";
 char setFLW[] = "Set FLW\n";
 struct item mainMenu[] = {
-  {menu, 10, MainDCod, 0, DoneStr,  0, 0},
-  {menu, 10, TimMCod, 0, setTimDat , 0, 0},
-  {menu, 10, LocMCod, 0, setLocale, 0, 0},
-  //{menu,10,FlwMCod,0,setFLW,    0,0},   // not used yet
-  {listend, 0, 0, 0, BlankLn, 0, 0}
+  {menu, 10, MainDCod, 0, 0,0, DoneStr,  0, 0},
+  {menu, 10, TimMCod, 0, 0,0,setTimDat , 0, 0},
+  {menu, 10, LocMCod, 0, 0,0,setLocale, 0, 0},
+  //{menu,10,FlwMCod,0,0,0,setFLW,    0,0},   // not used yet
+  {listend, 0, 0, 0, 0,0,BlankLn, 0, 0}
 };
 
 // The time setting menu
 struct item timeMenu[] = {
-  {menu , 10, TimDCod, 0, DoneStr, 0, 0},
-  {field, 10, ModHrs, 0, HrsStr,  0, 0},
-  {text , 10, 0,      0, ColStr,  0, 0},
-  {field, 10, ModMin, 0, MinStr,  0, 0},
-  {text , 10, 0,      0, ColStr,  0, 0},
-  {field, 10, ModSec, 0, SecStr,  0, 0},
-  {field, 10, ModCen, 0, CenStr,  0, 0}, // just for completeness
-  {field, 10, ModYrs, 0, YrsStr,  0, 0},
-  {text , 10, 0,      0, DashStr, 0, 0},
-  {field, 10, ModMon, 0, MonthStr, 0, 0},
-  {text , 10, 0,      0, DashStr, 0, 0},
-  {field, 10, ModDay, 0, DayStr,  0, 0},
-  {listend, 0, 0, 0, BlankLn, 0, 0}
+  {menu , 10, TimDCod, 0, 0,0,DoneStr, 0, 0},
+  {field, 10, ModHrs, 0, 0,0,HrsStr,  0, 0},
+  {text , 10, 0,      0, 0,0,ColStr,  0, 0},
+  {field, 10, ModMin, 0, 0,0,MinStr,  0, 0},
+  {text , 10, 0,      0, 0,0,ColStr,  0, 0},
+  {field, 10, ModSec, 0, 0,0,SecStr,  0, 0},
+  {field, 10, ModCen, 0, 0,0,CenStr,  0, 0}, // just for completeness
+  {field, 10, ModYrs, 0, 0,0,YrsStr,  0, 0},
+  {text , 10, 0,      0, 0,0,DashStr, 0, 0},
+  {field, 10, ModMon, 0, 0,0,MonthStr, 0, 0},
+  {text , 10, 0,      0, 0,0,DashStr, 0, 0},
+  {field, 10, ModDay, 0, 0,0,DayStr,  0, 0},
+  {listend, 0, 0, 0, 0,0,BlankLn, 0, 0}
 };
 
 // The locale setting menu does DST, time zone, 12/24 hour select
@@ -59,21 +59,21 @@ char DSTlin[] = "DST ";
 char Hzlin1[] = "Mains: ";
 char Hzlin2[] = " Hertz\n";
 struct item locMenu[] = {
-  //  {text ,10,0,       BlankLn, 0,0},
-  {menu , 10, MainCod, 0, DoneStr, 0, 0},
-  {text , 10, 0,       0, zoneGMT, 0, 0}, // Start of time zone text
-  {field, 10, ModZone, 0, ZoneStr, 0, 0}, // timezone sign and hours
-  {text , 10, 0,       0, ColStr,  0, 0},
-  {field, 10, ModZmin, 0, ZMinStr, 0, 0}, // timezone minutes
-  {text , 10, 0,       0, BlankLn, 0, 0},
-  {field, 10, ModHrSel, 0, HrSelStr, 0, 0}, // 12 or 24
-  {text , 10, 0,       0, hourMode, 0, 0}, // hour mode
-  {text , 10, 0,       0, DSTlin,   0, 0}, // Daylight string
-  {field, 10, ModDST,  0, DSTStr,   0, 0}, // gets "on" or "off"
-  {text , 10, 0,       0, Hzlin1,   0, 0}, // Hertz string
-  {field, 10, ModHz,   0, HzStr,    0, 0}, // gets "50" or "60"
-  {text , 10, 0,       0, Hzlin2,   0, 0}, // Hertz string
-  {listend, 0, 0, 0, BlankLn, 0, 0}
+  //  {text ,10,0,       0,0,BlankLn, 0,0},
+  {menu , 10, MainCod, 0, 0,0,DoneStr, 0, 0},
+  {text , 10, 0,       0, 0,0,zoneGMT, 0, 0}, // Start of time zone text
+  {field, 10, ModZone, 0, 0,0,ZoneStr, 0, 0}, // timezone sign and hours
+  {text , 10, 0,       0, 0,0,ColStr,  0, 0},
+  {field, 10, ModZmin, 0, 0,0,ZMinStr, 0, 0}, // timezone minutes
+  {text , 10, 0,       0, 0,0,BlankLn, 0, 0},
+  {field, 10, ModHrSel, 0, 0,0,HrSelStr, 0, 0}, // 12 or 24
+  {text , 10, 0,       0, 0,0,hourMode, 0, 0}, // hour mode
+  {text , 10, 0,       0, 0,0,DSTlin,   0, 0}, // Daylight string
+  {field, 10, ModDST,  0, 0,0,DSTStr,   0, 0}, // gets "on" or "off"
+  {text , 10, 0,       0, 0,0,Hzlin1,   0, 0}, // Hertz string
+  {field, 10, ModHz,   0, 0,0,HzStr,    0, 0}, // gets "50" or "60"
+  {text , 10, 0,       0, 0,0,Hzlin2,   0, 0}, // Hertz string
+  {listend, 0, 0, 0,0,0, BlankLn, 0, 0}
 };
 
 // Register each face in desired order.  Last face is the splash screen that is shown at boot time.
@@ -82,6 +82,7 @@ face* faces[] = {
   register2Clock(),
   registerCubeClock(),
   registerSpaceClock(),
+  //registerDigital7(),
   registerDigital6(),
   registerDigital5(),
   registerDigital4(),
