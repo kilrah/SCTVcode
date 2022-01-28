@@ -483,7 +483,7 @@ void initDigital5() {
 }
 
 void deinitDigital5() {
-  FastDraw=1;
+  FastDraw=0;
 }
 
 // 4 digit digital clock draw list
