@@ -82,7 +82,7 @@ face* faces[] = {
   register2Clock(),
   registerCubeClock(),
   registerSpaceClock(),
-  //registerDigital7(),
+  registerDigital7(),
   registerDigital6(),
   registerDigital5(),
   registerDigital4(),
