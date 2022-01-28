@@ -5,10 +5,11 @@ face * registerDrawing() {
   f->text = 0;
 
   f->title =  (item*) malloc(sizeof(item) * 2);
-  f->title[0] = {text, 10, 0, 0, 0,0, (char*)"Viking\n", -300, 1000};
-  f->title[1] = {listend, 0, 0, 0, 0,0, BlankLn, 0, 0};
+  f->title[0] = {text, 10, 0, 0, 0,0,0, (char*)"Viking\n", -300, 1000};
+  f->title[1] = {listend, 0, 0, 0, 0,0,0, BlankLn, 0, 0};
 
-  f->reset = 0;
+  f->init = 0;
+  f->uninit = 0;
   f->draw = doDrawing;
   f->uses_knobs = 0;
 

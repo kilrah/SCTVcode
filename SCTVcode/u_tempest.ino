@@ -80,7 +80,8 @@ face * registerTempest() {
 
   f->text = 0;
   f->title = 0;
-  f->reset = 0;
+  f->init = 0;
+  f->uninit = 0;
   f->draw = doTempest;
   f->uses_knobs = 0;
 

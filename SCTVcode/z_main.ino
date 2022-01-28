@@ -188,6 +188,10 @@ void loop()
   {  // it's a clock, not a menu
     if (EncDir != 0) 
     {   // If knob turned, choose the next clock face
+      if(faces[theFace]->uninit) {       // Run the un-initialization function if the old clock face has one
+        (*faces[theFace]->uninit)();
+      }
+
       theFace += EncDir;
       if (theFace >= NClks) theFace = 0;   // select the next clock face
       if (theFace < 0) theFace = NClks - 1;
@@ -198,8 +202,8 @@ void loop()
         theClockTitleFade = 0;
 //      theClockTitleMillis = millis();
       
-      if(faces[theFace]->reset) {       // Run the initialization function if the new clock face has one
-        (*faces[theFace]->reset)();
+      if(faces[theFace]->init) {       // Run the initialization function if the new clock face has one
+        (*faces[theFace]->init)();
       }
 
       EncDir = 0;

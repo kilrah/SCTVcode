@@ -178,11 +178,20 @@ void DoSeg()
       delayMicroseconds(glowDelay);        // wait for glow to start
   
       // draw the circle with the beam on, stride is 24.8 bits to allow fine rate control
-      for (i=(firstAngle<<8); i<(lastAngle<<8); i+=stride) {
-        thisX = ((costab[(i>>8) % nsteps] * xrad) >> 16) + xcen;
-        thisY = ((sintab[(i>>8) % nsteps] * yrad) >> 16) + ycen;
-        analogWrite(XDACPin, thisX);
-        analogWrite(YDACPin, thisY);
+      if(FastDraw) {
+        for (i=(firstAngle<<8); i<(lastAngle<<8); i+=stride) {
+          thisX = ((costab[(i>>8) % nsteps] * xrad) >> 16) + xcen;
+          thisY = ((sintab[(i>>8) % nsteps] * yrad) >> 16) + ycen;
+          analogWriteDAC0(thisX);
+          analogWriteDAC1(thisY);
+        }
+      } else {
+        for (i=(firstAngle<<8); i<(lastAngle<<8); i+=stride) {
+          thisX = ((costab[(i>>8) % nsteps] * xrad) >> 16) + xcen;
+          thisY = ((sintab[(i>>8) % nsteps] * yrad) >> 16) + ycen;
+          analogWrite(XDACPin, thisX);
+          analogWrite(YDACPin, thisY);
+        }
       }
 
       //delayMicroseconds(glowDelay);        // wait for glow to start
@@ -221,11 +230,20 @@ void DoSeg()
     delayMicroseconds(glowDelay);        // wait for glow to start
     
  //   if (doingHand) Serial.printf("len %4d   stride %4d\n", len, lineStride);
-    for (i=0; i<(len); i += lineStride) {
-      thisX = ((i*xinc)>>(8)) + xstart;
-      thisY = ((i*yinc)>>(8)) + ystart;
-      analogWrite(XDACPin, thisX);
-      analogWrite(YDACPin, thisY);
+    if(FastDraw) {
+      for (i=0; i<(len); i += lineStride) {
+        thisX = ((i*xinc)>>(8)) + xstart;
+        thisY = ((i*yinc)>>(8)) + ystart;
+          analogWriteDAC0(thisX);
+          analogWriteDAC1(thisY);
+      }
+    } else {
+      for (i=0; i<(len); i += lineStride) {
+        thisX = ((i*xinc)>>(8)) + xstart;
+        thisY = ((i*yinc)>>(8)) + ystart;
+        analogWrite(XDACPin, thisX);
+        analogWrite(YDACPin, thisY);
+      }
     }
 
   //delayMicroseconds(glowDelay);        // wait for glow to start
@@ -233,7 +251,6 @@ void DoSeg()
 //  analogWrite(BlankPin, 4096);           // Leave the beam on to observe the 'rapids' movements between lit segments.
     }
   }
-
 }
 
 // -------------------- Draw list centering code ---------------------
@@ -374,6 +391,7 @@ void copyList(struct item *list)
     q->font   = p->font;
     q->brightness   = p->brightness;
     q->shadow   = p->shadow;
+    q->shadow_spacing   = p->shadow_spacing;
     q->string = p->string; 
     q->xpos   = p->xpos;  
     q->ypos   = p->ypos; 
@@ -434,6 +452,7 @@ void DoAList(struct item *list)
   int TheItem = 0;         // menu item currently being processed
   char *DupPtr;        // duplicate StrPtr for bright work
   int DupXPos;        // copy for highlighted strings
+  int DupYPos;        // copy for highlighted strings
 
   InField = false;
   while (p->type != listend) 
@@ -471,16 +490,19 @@ void DoAList(struct item *list)
 
       DupPtr = StrPtr;   // save pointer and position for displaying twice to highlight
       DupXPos = ChrXPos;
+      DupYPos = ChrYPos;
       SetScale();
 
       DispStr();
 
       if(p->shadow) {
-        StrPtr = DupPtr;
-        ChrXPos = DupXPos;
-        ChrXPos-=p->shadow;
-        ChrYPos+=p->shadow;
-        DispStr();
+        for(int n=1; n < p->shadow + 1; n++) {
+          StrPtr = DupPtr;
+          ChrXPos = DupXPos - p->shadow_spacing*n;
+          ChrYPos = DupYPos + p->shadow_spacing*n;
+
+          DispStr();
+        }
       }
 
       if ((p->type != text) && (TheItem == HotItem)) 

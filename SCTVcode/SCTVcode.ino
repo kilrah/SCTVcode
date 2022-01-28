@@ -235,6 +235,8 @@ float BMap2[101];   // Exponental Brightess map 0 to 1 -> 0.25 to 0.9  -- this h
 int Brightness;         // Brightness control for faces. 0-4096
 int Strokes = 1;        // This is used by setBrightness to handle the >100% brightnesses.  1 = draw an item once.  2 = twice, etc.
 
+int FastDraw = 0;       // 0 = Use analogWrite to move the beam.  1 = use analogWriteDAC* to move the beam.  1 is faster, but lower quality.  Useful if a face is overly flickery. 
+
 // The text, menu and field items are similar in format.
 // xpos and ypos may be zero for the centering code to figure out.
 // Segments are not centered.
@@ -250,14 +252,15 @@ const int seg     = 4;  // size, function, segptr,    xpos, ypos   segment (spec
 
 // Each item of a drawlist is one of these:
 struct item {
-  int type;        // see list above
-  int scale;       // scale factor
-  int func;        // function to execute (mod or menu numeration) if used, 0 if not
-  int font;        // font to use
-  int brightness;  // brightness - 1 to 100 to 100+  -  0 = don't change the brightness.
-  int shadow;       //
-  char *string;    // the string to display
-  int xpos;        // where it goes, or used when calculating where it goes
+  int type;           // see list above
+  int scale;          // scale factor
+  int func;           // function to execute (mod or menu numeration) if used, 0 if not
+  int font;           // font to use
+  int brightness;     // brightness - 1 to 100 to 100+  -  0 = don't change the brightness.
+  int shadow;         // 0 = no shadow.  >0 = draw extra copies of the text
+  int shadow_spacing; // if shadow > 0, this number is the offset at which to draw the additional copies.
+  char *string;       // the string to display
+  int xpos;           // where it goes, or used when calculating where it goes
   int ypos;
 };
 
@@ -271,7 +274,8 @@ item * whichList;  // pointer to current draw list
 typedef struct face {
   item * text;          // the itemList if there is text to display.  0 otherwise.
   item * title;         // the itemList if there is a title to display.  0 otherwise.
-  void (*reset)(void);  // A function pointer to a reset function to be called when switching to the face.  Called once when the knob is moved.  0 if there is not one.
+  void (*init)(void);  // A function pointer to a reset function to be called when switching to the face.  Called once when the knob is moved.  0 if there is not one.
+  void (*uninit)(void);  // A function pointer to a reset function to be called when switching to the face.  Called once when the knob is moved.  0 if there is not one.
   void (*draw)(void);   // A function pointer to a custom draw function.  0 if there is no custom drawing (ie: a text-only face).
   bool uses_knobs;      // true if the face uses the position knobs for special functions.  false if they should be used for the usual position function.
 } face;

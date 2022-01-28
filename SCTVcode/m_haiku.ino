@@ -331,13 +331,13 @@ char poetStr[50];
 char spacesStr[] = "    - ";
 
 struct item haikuList[] = {
-  {text,10,0,0,0,0,haiku1Str,  0,0},   // haiku display is centered, as is everything
-  {text,10,0,0,0,0,haiku2Str,  0,0}, 
-  {text,10,0,0,0,0,haiku3Str,  0,0}, 
-  {text,6,0,0,0,0,BlankLn,    0,0}, 
-  {text,6,0,0,0,0,spacesStr,  0,0},    // poet's name is offset to the right
-  {text,6,0,0,0,0,poetStr,    0,0}, 
-  {listend,0,0,0,0,0,BlankLn,0,0}
+  {text,10,0,0,0,0,0,haiku1Str,  0,0},   // haiku display is centered, as is everything
+  {text,10,0,0,0,0,0,haiku2Str,  0,0}, 
+  {text,10,0,0,0,0,0,haiku3Str,  0,0}, 
+  {text,6,0,0,0,0,0,BlankLn,    0,0}, 
+  {text,6,0,0,0,0,0,spacesStr,  0,0},    // poet's name is offset to the right
+  {text,6,0,0,0,0,0,poetStr,    0,0}, 
+  {listend,0,0,0,0,0,0,BlankLn,0,0}
 };
 
 face * registerHaiku() {
@@ -345,7 +345,8 @@ face * registerHaiku() {
 
   f->text = haikuList;
   f->title = 0;
-  f->reset = 0;
+  f->init = 0;
+  f->uninit = 0;
   f->draw = 0; // don't call doHaiku here...
   f->uses_knobs = 0;
 

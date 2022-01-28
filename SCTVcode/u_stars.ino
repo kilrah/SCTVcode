@@ -22,10 +22,11 @@ face * registerStars() {
   f->text = 0;
 
   f->title =  (item*) malloc(sizeof(item) * 2);
-  f->title[0] = {text, 10, 0, 0, 0,0, (char*)"Stars\n",                 -300,  -600};
-  f->title[1] = {listend, 0, 0, 0, 0,0, BlankLn, 0, 0};
+  f->title[0] = {text, 10, 0, 0, 0,0,0, (char*)"Stars\n",                 -300,  -600};
+  f->title[1] = {listend, 0, 0, 0, 0,0,0, BlankLn, 0, 0};
 
-  f->reset = reset_stars;
+  f->init = reset_stars;
+  f->uninit = 0;
   f->draw = doStars;
   f->uses_knobs = 0;
 

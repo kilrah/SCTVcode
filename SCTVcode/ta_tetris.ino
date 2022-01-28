@@ -201,8 +201,8 @@ void drawTetris(void)
 // Tetris draw list just does the score. Court is drawn by drawTetris().
 char scoreStr[] = "00000";
 struct item tetrisList[] = {
-  {text,10,0,0,0,0,scoreStr,800, 0},
-  {listend,0,0,0,0,0,BlankLn,0,0}
+  {text,10,0,0,0,0,0,scoreStr,800, 0},
+  {listend,0,0,0,0,0,0,BlankLn,0,0}
 };
 
 face * registerTetris() {
@@ -210,7 +210,8 @@ face * registerTetris() {
 
   f->text = tetrisList;
   f->title = 0;
-  f->reset = reset_tetris;
+  f->init = reset_tetris;
+  f->uninit = 0;
   f->draw = drawTetris; // don't call doHaiku here...
   f->uses_knobs = 0;
 

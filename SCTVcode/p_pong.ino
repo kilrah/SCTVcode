@@ -29,9 +29,9 @@ int rScore = 0;
 char lScoreStr[] = "00";
 char rScoreStr[] = "00";
 struct item pongList[] = {
-  {text,10,0,0,0,0,lScoreStr, leftWall/2-100, topWall+scoreHeight},
-  {text,10,0,0,0,0,rScoreStr,rightWall/2-100, topWall+scoreHeight},
-  {listend,0,0,0,0,0,BlankLn,0,0}
+  {text,10,0,0,0,0,0,lScoreStr, leftWall/2-100, topWall+scoreHeight},
+  {text,10,0,0,0,0,0,rScoreStr,rightWall/2-100, topWall+scoreHeight},
+  {listend,0,0,0,0,0,0,BlankLn,0,0}
 };
 
 face * registerPong() {
@@ -39,7 +39,8 @@ face * registerPong() {
 
   f->text = pongList;
   f->title = 0;
-  f->reset = reset_pong;
+  f->init = reset_pong;
+  f->uninit = 0;
   f->draw = doPong;
   f->uses_knobs = 0;
 

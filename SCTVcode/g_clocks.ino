@@ -64,13 +64,13 @@ char fromStr[]    = "from\n";
 char cathCorn[]   = "Cathode Corner\n";
 char copyR[]   = "(C)2021 David Forbes\n";
 struct item splashList[] = {
-  {text,12,0,0,0,0,scopeClock,0,0},
-  {text,8,0,0,0,0,fromStr,   0,0},
-  {text,12,0,0,0,0,cathCorn,  0,0},
-  {text,10,0,0,0,0,BlankLn,   0,0},
-  {text,6,0,0,0,0,versionNo, 0,0},
-  {text,6,0,0,0,0,copyR, 0,0},
-  {listend,0,0,0,0,0,BlankLn,0,0}
+  {text,12,0,0,0,0,0,scopeClock,0,0},
+  {text,8,0,0,0,0,0,fromStr,   0,0},
+  {text,12,0,0,0,0,0,cathCorn,  0,0},
+  {text,10,0,0,0,0,0,BlankLn,   0,0},
+  {text,6,0,0,0,0,0,versionNo, 0,0},
+  {text,6,0,0,0,0,0,copyR, 0,0},
+  {listend,0,0,0,0,0,0,BlankLn,0,0}
 };
 
 face * registerSplash() {
@@ -78,7 +78,8 @@ face * registerSplash() {
 
   f->text = splashList;
   f->title = 0;
-  f->reset = 0;
+  f->init = 0;
+  f->uninit = 0;
   f->draw = 0;
   f->uses_knobs = 0;
 
@@ -105,19 +106,19 @@ char romanX[]    = "X";
 char romanXI[]   = "XI";
 char romanXII[]  = "XII";
 struct item faceList[] = {
-  {text,10,0,0,0,0,romanI,      490,  760},    //  1 o'clock
-  {text,10,0,0,0,0,romanII,     820,  400},    //  2 o'clock
-  {text,10,0,0,0,0,romanIII,    900, -100},    //  3 o'clock
-  {text,10,0,0,0,0,romanIIII,   740, -590},    //  4 o'clock
-  {text,10,0,0,0,0,romanV,      400, -960},    //  5 o'clock
-  {text,10,0,0,0,0,romanVI,    -100,-1080},    //  6 o'clock
-  {text,10,0,0,0,0,romanVII,   -600, -960},    //  7 o'clock
-  {text,10,0,0,0,0,romanVIII, -1000, -600},    //  7 o'clock
-  {text,10,0,0,0,0,romanIX,   -1040, -100},    //  9 o'clock
-  {text,10,0,0,0,0,romanX,     -940,  400},    // 10 o'clock
-  {text,10,0,0,0,0,romanXI,    -600,  760},    // 11 o'clock
-  {text,10,0,0,0,0,romanXII,   -160,  880},    // 12 o'clock
-  {listend,0,0,0,0,0,BlankLn,0,0}
+  {text,10,0,0,0,0,0,romanI,      490,  760},    //  1 o'clock
+  {text,10,0,0,0,0,0,romanII,     820,  400},    //  2 o'clock
+  {text,10,0,0,0,0,0,romanIII,    900, -100},    //  3 o'clock
+  {text,10,0,0,0,0,0,romanIIII,   740, -590},    //  4 o'clock
+  {text,10,0,0,0,0,0,romanV,      400, -960},    //  5 o'clock
+  {text,10,0,0,0,0,0,romanVI,    -100,-1080},    //  6 o'clock
+  {text,10,0,0,0,0,0,romanVII,   -600, -960},    //  7 o'clock
+  {text,10,0,0,0,0,0,romanVIII, -1000, -600},    //  7 o'clock
+  {text,10,0,0,0,0,0,romanIX,   -1040, -100},    //  9 o'clock
+  {text,10,0,0,0,0,0,romanX,     -940,  400},    // 10 o'clock
+  {text,10,0,0,0,0,0,romanXI,    -600,  760},    // 11 o'clock
+  {text,10,0,0,0,0,0,romanXII,   -160,  880},    // 12 o'clock
+  {listend,0,0,0,0,0,0,BlankLn,0,0}
 };
 
 face * registerRomanClock() {
@@ -126,10 +127,11 @@ face * registerRomanClock() {
   f->text =  faceList;
 
   f->title =  (item*) malloc(sizeof(item) * 2);
-  f->title[0] = {text, 10, 0, 0, 0, 0, (char*)"Roman\n",                 -300,  -600};
-  f->title[1] = {listend, 0, 0, 0, 0, 0, BlankLn, 0, 0};
+  f->title[0] = {text, 10, 0, 0, 0, 0, 0, (char*)"Roman\n",                 -300,  -600};
+  f->title[1] = {listend, 0, 0, 0, 0, 0, 0, BlankLn, 0, 0};
 
-  f->reset = 0;
+  f->init = 0;
+  f->uninit = 0;
   f->draw = DrawClk;
   f->uses_knobs = 0;
   
@@ -224,14 +226,14 @@ void baseClock() {
 // ------------------------ another analog clock -----------------------------
 
 struct item clock2List[] = {
-  {text,40,0,0,0,0,BlankLn, 0,0},
-  {text,10,0,0,0,0,HrsStr,  0,0},   // hours
-  {text,10,0,0,0,0,ColStr,  0,0},   // colon
-  {text,10,0,0,0,0,MinStr,  0,0},   // mins
-  {text,10,0,0,0,0,ColStr,  0,0},   // colon
-  {text,10,0,0,0,0,SecStr,  0,0},   // secs
-  {text,7,0,0,0,0,WDayStr, 0,0},   // day of week
-  {listend,0,0,0,0,0,BlankLn,0,0}
+  {text,40,0,0,0,0,0, BlankLn, 0,0},
+  {text,10,0,0,0,0,0, HrsStr,  0,0},   // hours
+  {text,10,0,0,0,0,0, ColStr,  0,0},   // colon
+  {text,10,0,0,0,0,0, MinStr,  0,0},   // mins
+  {text,10,0,0,0,0,0, ColStr,  0,0},   // colon
+  {text,10,0,0,0,0,0, SecStr,  0,0},   // secs
+  {text,7,0,0,0,0,0, WDayStr, 0,0},   // day of week
+  {listend,0,0,0,0,0,0, BlankLn,0,0}
 };
 
 face * register2Clock() {
@@ -240,10 +242,11 @@ face * register2Clock() {
   f->text =  clock2List;
 
   f->title =  (item*) malloc(sizeof(item) * 2);
-  f->title[0] = {text, 10, 0, 0, 0,0, (char*)"Ticks\n", -250, -1000};
-  f->title[1] = {listend, 0, 0, 0, 0,0, BlankLn, 0, 0};
+  f->title[0] = {text, 10, 0, 0, 0,0, 0,(char*)"Ticks\n", -250, -1000};
+  f->title[1] = {listend, 0, 0, 0, 0,0, 0,BlankLn, 0, 0};
 
-  f->reset = 0;
+  f->init = 0;
+  f->uninit = 0;
   f->draw = clock2Draw;
   f->uses_knobs = 0;
 
@@ -258,14 +261,14 @@ void clock2Draw() {
 // ------------------------ another analog clock -----------------------------
 
 struct item cubeClockList[] = {
-  {text,40,0,0,0,0,BlankLn, 0,0},
-  {text,10,0,1,0,0,HrsStr,  0,0},   // hours
-  {text,10,0,1,0,0,ColStr,  0,0},   // colon
-  {text,10,0,1,0,0,MinStr,  0,0},   // mins
-  {text,10,0,1,0,0,ColStr,  0,0},   // colon
-  {text,10,0,1,0,0,SecStr,  0,0},   // secs
-  {text,7,0,1,0,0,WDayStr, 0,0},   // day of week
-  {listend,0,0,0,0,0,BlankLn,0,0}
+  {text,40,0,0,0,0,0, BlankLn, 0,0},
+  {text,10,0,1,0,0,0, HrsStr,  0,0},   // hours
+  {text,10,0,1,0,0,0, ColStr,  0,0},   // colon
+  {text,10,0,1,0,0,0, MinStr,  0,0},   // mins
+  {text,10,0,1,0,0,0, ColStr,  0,0},   // colon
+  {text,10,0,1,0,0,0, SecStr,  0,0},   // secs
+  {text,7,0,1,0,0,0, WDayStr, 0,0},   // day of week
+  {listend,0,0,0,0,0,0, BlankLn,0,0}
 };
 
 face * registerCubeClock() {
@@ -274,10 +277,11 @@ face * registerCubeClock() {
   f->text =  cubeClockList;
 
   f->title =  (item*) malloc(sizeof(item) * 2);
-  f->title[0] = {text, 10, 0, 0, 0,0, (char*)"Cube Clock\n", -500,  -1000};
-  f->title[1] = {listend, 0, 0, 0, 0,0, BlankLn, 0, 0};
+  f->title[0] = {text, 10, 0, 0, 0,0, 0,(char*)"Cube Clock\n", -500,  -1000};
+  f->title[1] = {listend, 0, 0, 0, 0,0, 0,BlankLn, 0, 0};
 
-  f->reset = resetCubeClock;
+  f->init = resetCubeClock;
+  f->uninit = 0;
   f->draw = doCubeClock;
   f->uses_knobs = 0;
 
@@ -304,10 +308,11 @@ face * registerSpaceClock() {
   f->text = 0;
 
   f->title =  (item*) malloc(sizeof(item) * 2);
-  f->title[0] = {text, 10, 0, 0, 0,0, (char*)"Space Clock\n", -600, -1000};
-  f->title[1] = {listend, 0, 0, 0, 0,0, BlankLn, 0, 0};
+  f->title[0] = {text, 10, 0, 0, 0,0, 0,(char*)"Space Clock\n", -600, -1000};
+  f->title[1] = {listend, 0, 0, 0, 0,0, 0,BlankLn, 0, 0};
 
-  f->reset = resetSpaceClock;
+  f->init = resetSpaceClock;
+  f->uninit = 0;
   f->draw = doSpaceClock;
   f->uses_knobs = 0;
 
@@ -336,19 +341,19 @@ void doSpaceClock() {
 
 // total time/date/day digital clock draw list
 struct item timefList[]  = {
-  {text,20,0,0,100,0,HrsStr,  0,0},   // hours
-  {text,20,0,0,70,0,ColStr,  0,0},   // colon
-  {text,20,0,0,100,0,MinStr,  0,0},   // mins
-  {text,20,0,0,70,0,ColStr,  0,0},   // colon
-  {text,20,0,0,100,0,SecStr,  0,0},   // secs
-  {text,20,0,0,0,0,WDayStr, 0,0},   // day of week
-  {text,20,0,0,0,0,MonthStr,0,0},   // month
-  {text,20,0,0,0,0,SpaStr,  0,0},
-  {text,20,0,0,0,0,DayStr,  0,0},   // day
-  {text,20,0,0,0,0,CenStr,  0,0},   // the full year
-  {text,20,0,0,0,0,YrsStr,  0,0},
-  {text,20,0,0,0,0,BlankLn, 0,0},
-  {listend,0,0,0,0,0,BlankLn, 0,0}
+  {text,20,0,0,100,0,0, HrsStr,  0,0},   // hours
+  {text,20,0,0,70,0,0, ColStr,  0,0},   // colon
+  {text,20,0,0,100,0,0, MinStr,  0,0},   // mins
+  {text,20,0,0,70,0,0, ColStr,  0,0},   // colon
+  {text,20,0,0,100,0,0, SecStr,  0,0},   // secs
+  {text,20,0,0,0,0,0, WDayStr, 0,0},   // day of week
+  {text,20,0,0,0,0,0, MonthStr,0,0},   // month
+  {text,20,0,0,0,0,0, SpaStr,  0,0},
+  {text,20,0,0,0,0,0, DayStr,  0,0},   // day
+  {text,20,0,0,0,0,0, CenStr,  0,0},   // the full year
+  {text,20,0,0,0,0,0, YrsStr,  0,0},
+  {text,20,0,0,0,0,0, BlankLn, 0,0},
+  {listend,0,0,0,0,0,0, BlankLn, 0,0}
 };
 
 face * registerDigital1() {
@@ -356,9 +361,10 @@ face * registerDigital1() {
 
   f->text = timefList;
   f->title =  (item*) malloc(sizeof(item) * 2);
-  f->title[0] = {text, 10, 0, 0, 0,0, (char*)"Digital 1\n", -400, -1200};
-  f->title[1] = {listend, 0, 0, 0, 0,0, BlankLn, 0, 0};
-  f->reset = 0;
+  f->title[0] = {text, 10, 0, 0, 0,0, 0,(char*)"Digital 1\n", -400, -1200};
+  f->title[1] = {listend, 0, 0, 0, 0,0, 0,BlankLn, 0, 0};
+  f->init = 0;
+  f->uninit = 0;
   f->draw = 0;
   f->uses_knobs = 0;
 
@@ -367,15 +373,15 @@ face * registerDigital1() {
 
 // 6 digit digital clock with date draw list
 struct item time6dList[] = {
-  {text,16,0,0,0,0,MonthStr,0,0},  // months
-  {text,16,0,0,0,0,SpaStr,  0,0},  // space
-  {text,16,0,0,0,0,DayStr,  0,0},  // days
-  {text,40,0,0,0,0,HrsStr,  0,0},  // hours
-  {text,40,0,0,70,0,ColStr,  0,0},  // colon
-  {text,40,0,0,100,0,MinStr,  0,0},  // mins
-  {text,40,0,0,0,0,BlankLn, 0,0},  // next line
-  {text,30,0,0,0,0,SecStr,  0,0},  // secs
-  {listend,0,0,0,0,0,BlankLn, 0,0}
+  {text,16,0,0,0,0,0,MonthStr,0,0},  // months
+  {text,16,0,0,0,0,0,SpaStr,  0,0},  // space
+  {text,16,0,0,0,0,0,DayStr,  0,0},  // days
+  {text,40,0,0,0,0,0,HrsStr,  0,0},  // hours
+  {text,40,0,0,70,0,0,ColStr,  0,0},  // colon
+  {text,40,0,0,100,0,0,MinStr,  0,0},  // mins
+  {text,40,0,0,0,0,0,BlankLn, 0,0},  // next line
+  {text,30,0,0,0,0,0,SecStr,  0,0},  // secs
+  {listend,0,0,0,0,0,0,BlankLn, 0,0}
 };
 
 face * registerDigital2() {
@@ -383,9 +389,10 @@ face * registerDigital2() {
 
   f->text = time6dList;
   f->title =  (item*) malloc(sizeof(item) * 2);
-  f->title[0] = {text, 10, 0, 0, 0,0, (char*)"Digital 2\n", -400, -1200};
-  f->title[1] = {listend, 0, 0, 0, 0,0, BlankLn, 0, 0};
-  f->reset = 0;
+  f->title[0] = {text, 10, 0, 0, 0,0, 0,(char*)"Digital 2\n", -400, -1200};
+  f->title[1] = {listend, 0, 0, 0, 0,0, 0,BlankLn, 0, 0};
+  f->init = 0;
+  f->uninit = 0;
   f->draw = 0;
   f->uses_knobs = 0;
 
@@ -394,15 +401,15 @@ face * registerDigital2() {
 
 // 4 digit digital clock with date draw list
 struct item time4dList[] = {
-  {text,16,0,0,0,0,WDayStr, 0,0},  // weekday
-  {text,40,0,0,0,0,HrsStr,  0,0},  // hours
-  {text,40,0,0,70,0,ColStr,  0,0},  // colon
-  {text,40,0,0,100,0,MinStr,  0,0},  // mins
-  {text,40,0,0,0,0,BlankLn, 0,0},  // next line
-  {text,16,0,0,0,0,MonthStr,0,0},  // months
-  {text,16,0,0,0,0,SpaStr,  0,0},  // space
-  {text,16,0,0,0,0,DayStr,  0,0},  // days
-  {listend,0,0,0,0,0,BlankLn,0,0}
+  {text,16,0,0,0,0,0,WDayStr, 0,0},  // weekday
+  {text,40,0,0,0,0,0,HrsStr,  0,0},  // hours
+  {text,40,0,0,70,0,0,ColStr,  0,0},  // colon
+  {text,40,0,0,100,0,0,MinStr,  0,0},  // mins
+  {text,40,0,0,0,0,0,BlankLn, 0,0},  // next line
+  {text,16,0,0,0,0,0,MonthStr,0,0},  // months
+  {text,16,0,0,0,0,0,SpaStr,  0,0},  // space
+  {text,16,0,0,0,0,0,DayStr,  0,0},  // days
+  {listend,0,0,0,0,0,0,BlankLn,0,0}
 };
 
 
@@ -411,9 +418,10 @@ face * registerDigital3() {
 
   f->text = time4dList;
   f->title =  (item*) malloc(sizeof(item) * 2);
-  f->title[0] = {text, 10, 0, 0, 0,0, (char*)"Digital 3\n", -400, -1200};
-  f->title[1] = {listend, 0, 0, 0, 0,0, BlankLn, 0, 0};
-  f->reset = 0;
+  f->title[0] = {text, 10, 0, 0, 0,0, 0,(char*)"Digital 3\n", -400, -1200};
+  f->title[1] = {listend, 0, 0, 0, 0,0, 0,BlankLn, 0, 0};
+  f->init = 0;
+  f->uninit = 0;
   f->draw = 0;
   f->uses_knobs = 0;
 
@@ -422,13 +430,13 @@ face * registerDigital3() {
 
 // 6 digit digital clock draw list
 struct item time6nList[] = {
-  {text,10,0,0,0,0,BlankLn, 0,0},  // make hh:mm line lower for better centered appearance
-  {text,40,0,0,0,0,HrsStr,  0,0},  // hours
-  {text,40,0,0,70,0,ColStr,  0,0},  // colon
-  {text,40,0,0,100,0,MinStr,  0,0},  // mins
-  {text,40,0,0,0,0,BlankLn, 0,0},  // next line
-  {text,30,0,0,0,0,SecStr,  0,0},  // secs
-  {listend,0,0,0,0,0,BlankLn,0,0}
+  {text,10,0,0,0,0,0,BlankLn, 0,0},  // make hh:mm line lower for better centered appearance
+  {text,40,0,0,0,0,0,HrsStr,  0,0},  // hours
+  {text,40,0,0,70,0,0,ColStr,  0,0},  // colon
+  {text,40,0,0,100,0,0,MinStr,  0,0},  // mins
+  {text,40,0,0,0,0,0,BlankLn, 0,0},  // next line
+  {text,30,0,0,0,0,0,SecStr,  0,0},  // secs
+  {listend,0,0,0,0,0,0,BlankLn,0,0}
 };
 
 face * registerDigital4() {
@@ -436,9 +444,10 @@ face * registerDigital4() {
 
   f->text = time6nList;
   f->title =  (item*) malloc(sizeof(item) * 2);
-  f->title[0] = {text, 10, 0, 0, 0,0, (char*)"Digital 4\n", -400, -1200};
-  f->title[1] = {listend, 0, 0, 0, 0,0, BlankLn, 0, 0};
-  f->reset = 0;
+  f->title[0] = {text, 10, 0, 0, 0,0, 0,(char*)"Digital 4\n", -400, -1200};
+  f->title[1] = {listend, 0, 0, 0, 0,0, 0,BlankLn, 0, 0};
+  f->init = 0;
+  f->uninit = 0;
   f->draw = 0;
   f->uses_knobs = 0;
 
@@ -447,35 +456,43 @@ face * registerDigital4() {
 
 // 4 digit digital clock draw list
 struct item time4nList[] = {
-  {text,40,0,0,0,30,HrsStr,  0,0},  // hours
-  {text,40,0,0,70,0,ColStr,  0,0},  // colon
-  {text,40,0,0,100,30,MinStr,  0,0},  // mins
-  {text,40,0,0,0,0,BlankLn, 0,0}, // next line
-  {listend,0,0,0,0,0,BlankLn,0,0}
+  {text,40,0,0,  0,4,9,HrsStr,  0,0},  // hours
+  {text,40,0,0, 70,0,0,ColStr,  0,0},  // colon
+  {text,40,0,0,100,4,9,MinStr,  0,0},  // mins
+  {text,40,0,0,0,0,0,BlankLn, 0,0}, // next line
+  {listend,0,0,0,0,0,0,BlankLn,0,0}
 };
 
 face * registerDigital5() {
   face* f = (face*) malloc(sizeof(face));
 
-  f->text = time4nList;
+  f->text = time4nList;  
   f->title =  (item*) malloc(sizeof(item) * 2);
-  f->title[0] = {text, 10, 0, 0, 0,0, (char*)"Digital 5\n", -400, -1200};
-  f->title[1] = {listend, 0, 0, 0, 0,0, BlankLn, 0, 0};
-  f->reset = 0;
+  f->title[0] = {text, 10, 0, 0, 0,0, 0,(char*)"Digital 5\n", -400, -1200};
+  f->title[1] = {listend, 0, 0, 0, 0,0, 0,BlankLn, 0, 0};
+  f->init = initDigital5;
+  f->uninit = deinitDigital5;
   f->draw = 0;
   f->uses_knobs = 0;
 
   return f;
 }
 
+void initDigital5() {
+  FastDraw=1;
+}
+
+void deinitDigital5() {
+  FastDraw=1;
+}
 
 // 4 digit digital clock draw list
 struct item time4ndsList[] = {
-  {text,40,0,0,0,0,HrsStr,  0,0},  // hours
-  {text,40,0,0,70,0,ColStr,  0,0},  // colon
-  {text,40,0,0,100,0,MinStr,  0,0},  // mins
-  {text,40,0,0,0,0,BlankLn, 0,0}, // next line
-  {listend,0,0,0,0,0,BlankLn,0,0}
+  {text,40,0,0,0,0,0,HrsStr,  0,0},  // hours
+  {text,40,0,0,70,0,0,ColStr,  0,0},  // colon
+  {text,40,0,0,100,0,0,MinStr,  0,0},  // mins
+  {text,40,0,0,0,0,0,BlankLn, 0,0}, // next line
+  {listend,0,0,0,0,0,0,BlankLn,0,0}
 };
 
 face * registerDigital6() {
@@ -483,9 +500,10 @@ face * registerDigital6() {
 
   f->text = time4ndsList;
   f->title =  (item*) malloc(sizeof(item) * 2);
-  f->title[0] = {text, 10, 0, 0, 0,0, (char*)"Digital 6\n", -400, -1200};
-  f->title[1] = {listend, 0, 0, 0, 0,0, BlankLn, 0, 0};
-  f->reset = 0;
+  f->title[0] = {text, 10, 0, 0, 0,0, 0,(char*)"Digital 6\n", -400, -1200};
+  f->title[1] = {listend, 0, 0, 0, 0,0, 0,BlankLn, 0, 0};
+  f->init = 0;
+  f->uninit = 0;
   f->draw = 0;
   f->uses_knobs = 0;
 
@@ -498,10 +516,11 @@ face * registerDigital7() {
   f->text = time6dList;
   
   f->title =  (item*) malloc(sizeof(item) * 2);
-  f->title[0] = {text, 10, 0, 0, 0,0, (char*)"Studio\n", -350, -1300};
-  f->title[1] = {listend, 0, 0, 0, 0,0, BlankLn, 0, 0};
+  f->title[0] = {text, 10, 0, 0, 0,0, 0,(char*)"Studio\n", -350, -1300};
+  f->title[1] = {listend, 0, 0, 0, 0,0, 0,BlankLn, 0, 0};
 
-  f->reset = 0;
+  f->init = 0;
+  f->uninit = 0;
   f->draw = doSecFractionDots;
   f->uses_knobs = 0;
 
