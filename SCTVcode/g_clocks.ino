@@ -40,17 +40,19 @@ char DSTStr[] = "Off\n";
 char HzStr[] = "00";
 
 // Time strings - These are updated by makeTimeStrings()
-char CenStr[] = "00";
-char YrsStr[] = "00";
-char MonStr[] = "00";
-char DayStr[] = "00\n";
-char HrsStr[] = "00";
-char MinStr[] = "00";
-char SecStr[] = "00\n";
+char CenStr[]  = "00";
+char YrsStr[]  = "00";
+char MonStr[]  = "00";
+char DayStr[]  = "00\n";
+char HrsStr[]  = "00";
+char MinStr[]  = "00";
+char SecStr[]  = "00";
+char MSecStr[] = "000";
 
 // Some fixed strings
 char BlankLn[] = "\n";
 char ColStr[]  = ":";
+char PeriodStr[] = ".";
 char DashStr[] = "-";
 char SlaStr[]  = "/";
 char SpaStr[]  = " ";
@@ -232,6 +234,7 @@ struct item clock2List[] = {
   {text,10,0,0,0,0,0, MinStr,  0,0},   // mins
   {text,10,0,0,0,0,0, ColStr,  0,0},   // colon
   {text,10,0,0,0,0,0, SecStr,  0,0},   // secs
+  {text,10,0,0,0,0,0, BlankLn,  0,0},   // secs
   {text,7,0,0,0,0,0, WDayStr, 0,0},   // day of week
   {listend,0,0,0,0,0,0, BlankLn,0,0}
 };
@@ -267,6 +270,7 @@ struct item cubeClockList[] = {
   {text,10,0,1,0,0,0, MinStr,  0,0},   // mins
   {text,10,0,1,0,0,0, ColStr,  0,0},   // colon
   {text,10,0,1,0,0,0, SecStr,  0,0},   // secs
+  {text,10,0,1,0,0,0, BlankLn,  0,0},   // secs
   {text,7,0,1,0,0,0, WDayStr, 0,0},   // day of week
   {listend,0,0,0,0,0,0, BlankLn,0,0}
 };
@@ -320,7 +324,7 @@ face * registerSpaceClock() {
 }
 
 void resetSpaceClock() {
-  reset_stars();
+  init_stars();
   set_star_count(256);
 }
 
@@ -346,13 +350,14 @@ struct item timefList[]  = {
   {text,20,0,0,100,0,0, MinStr,  0,0},   // mins
   {text,20,0,0,70,0,0, ColStr,  0,0},   // colon
   {text,20,0,0,100,0,0, SecStr,  0,0},   // secs
+  {text,20,0,0,0,0,0, BlankLn,  0,0},
   {text,20,0,0,0,0,0, WDayStr, 0,0},   // day of week
   {text,20,0,0,0,0,0, MonthStr,0,0},   // month
   {text,20,0,0,0,0,0, SpaStr,  0,0},
   {text,20,0,0,0,0,0, DayStr,  0,0},   // day
   {text,20,0,0,0,0,0, CenStr,  0,0},   // the full year
   {text,20,0,0,0,0,0, YrsStr,  0,0},
-  {text,20,0,0,0,0,0, BlankLn, 0,0},
+  {text,10,0,0,0,0,0, BlankLn, 0,0},
   {listend,0,0,0,0,0,0, BlankLn, 0,0}
 };
 
@@ -381,6 +386,7 @@ struct item time6dList[] = {
   {text,40,0,0,100,0,0,MinStr,  0,0},  // mins
   {text,40,0,0,0,0,0,BlankLn, 0,0},  // next line
   {text,30,0,0,0,0,0,SecStr,  0,0},  // secs
+  {text,20,0,0,0,0,0, BlankLn, 0,0},
   {listend,0,0,0,0,0,0,BlankLn, 0,0}
 };
 
@@ -430,12 +436,13 @@ face * registerDigital3() {
 
 // 6 digit digital clock draw list
 struct item time6nList[] = {
-  {text,10,0,0,0,0,0,BlankLn, 0,0},  // make hh:mm line lower for better centered appearance
-  {text,40,0,0,0,0,0,HrsStr,  0,0},  // hours
+  {text,10,0,0,0,0,0,BlankLn,  0,0},  // make hh:mm line lower for better centered appearance
+  {text,40,0,0,0,0,0,HrsStr,   0,0},  // hours
   {text,40,0,0,70,0,0,ColStr,  0,0},  // colon
-  {text,40,0,0,100,0,0,MinStr,  0,0},  // mins
-  {text,40,0,0,0,0,0,BlankLn, 0,0},  // next line
-  {text,30,0,0,0,0,0,SecStr,  0,0},  // secs
+  {text,40,0,0,100,0,0,MinStr, 0,0},  // mins
+  {text,40,0,0,0,0,0,BlankLn,  0,0},  // next line
+  {text,30,0,0,0,0,0,SecStr,   0,0},  // secs
+  {text,20,0,0,0,0,0,BlankLn,  0,0},
   {listend,0,0,0,0,0,0,BlankLn,0,0}
 };
 
@@ -456,11 +463,16 @@ face * registerDigital4() {
 
 // 4 digit digital clock draw list
 struct item time4nList[] = {
-  {text,40,0,0,  0,4,9,HrsStr,  0,0},  // hours
-  {text,40,0,0, 70,0,0,ColStr,  0,0},  // colon
-  {text,40,0,0,100,4,9,MinStr,  0,0},  // mins
-  {text,40,0,0,0,0,0,BlankLn, 0,0}, // next line
-  {listend,0,0,0,0,0,0,BlankLn,0,0}
+  {text,   40,0,0,  0,4,9,HrsStr,   0,0},  // hours
+  {text,   40,0,0, 70,0,0,ColStr,   0,0},  // colon
+  {text,   40,0,0,100,4,9,MinStr,   0,0},  // mins
+  {text,   40,0,0,  0,0,0,BlankLn,  0,0}, // next line
+  {text,   10,0,0,  0,0,0,BlankLn,  0,0},
+  {text,   10,0,0,  0,0,0,SecStr,   0,0},  // secs
+  {text,   10,0,0,  0,0,0,PeriodStr,0,0},  // secs
+  {text,   10,0,0,  0,0,0,MSecStr,  0,0},  // secs
+  {text,    0,0,0,  0,0,0,BlankLn,  0,0},
+  {listend, 0,0,0,  0,0,0,BlankLn,  0,0}
 };
 
 face * registerDigital5() {
@@ -557,6 +569,12 @@ void doSecFractionDots()
 // current time in ASCII. The month and weekday strings are set also.
 void makeTimeStrings() {
   int hours, zon;  // temp storage for manipulation
+
+  if(lastSecs != Secs) {
+    lastMSecs = millis();
+    lastSecs = Secs;
+  }
+
   if (Hr12) 
   {
     HrSelStr[0] = '1';
@@ -607,8 +625,14 @@ void makeTimeStrings() {
   }
   MinStr[0] = (Mins / 10) | '0';
   MinStr[1] = (Mins % 10) | '0';
+
   SecStr[0] = (Secs / 10) | '0';
   SecStr[1] = (Secs % 10) | '0';
+
+  MSecs = millis() - lastMSecs;
+
+  snprintf(MSecStr, 4, "%3.3d", MSecs);
+
   HzStr[0] = (Hertz / 10) | '0';
   if (DST) 
   {

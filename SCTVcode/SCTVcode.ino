@@ -160,6 +160,9 @@ int Days = 1;       // days range 1-31
 int Hrs = 0;        // hours range 0-23
 int Mins = 0;       // minutes range 0-59            All of these have signed math when menu modifies them! 
 int Secs = 0;       // seconds range 0-59
+int MSecs = 0;
+int lastSecs;
+int lastMSecs = millis();
 int Ticks = 0;      // ticks range 0-59 (0-49 if 50 Hz)
 int Jiffies = 0;    // 300 Hz jiffies 0-4 or 0-5
 int Blink;          // increments at tick rate, use Blnkbit to blink
