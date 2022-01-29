@@ -461,23 +461,27 @@ face * registerDigital4() {
   return f;
 }
 
-/*
+
+/****************************** Digital 5
+ * 
  * 15:27
  * 
  * 33.123
+ * 
+ * Uses FastDraw for the extra strokes.
  */
 
 // 4 digit digital clock draw list
-struct item time4nList[] = {
+struct item digital5List[] = {
   {text,   10,0,0,  0,0,0,BlankLn,  0,0},
-  {text,   40,0,0,  0,4,9,HrsStr,   0,0},  // hours
-  {text,   40,0,0, 70,0,0,ColStr,   0,0},  // colon
-  {text,   40,0,0,100,4,9,MinStr,   0,0},  // mins
+  {text,   40,0,3,  0,4,9,HrsStr,   0,0},  // hours
+  {text,   40,0,3, 60,0,0,ColStr,   0,0},  // colon
+  {text,   40,0,3,100,4,9,MinStr,   0,0},  // mins
   {text,   40,0,0,  0,0,0,BlankLn,  0,0}, // next line
   {text,   10,0,0,  0,0,0,BlankLn,  0,0},
-  {text,   10,0,0,  0,0,0,SecStr,   0,0},  // secs
-  {text,   10,0,0,  0,0,0,PeriodStr,0,0},  // .
-  {text,   10,0,0,  0,0,0,MSecStr,  0,0},  // msecs
+  {text,   10,0,3,  0,0,0,SecStr,   0,0},  // secs
+  {text,   10,0,3,  0,0,0,SpaStr,0,0},  // .
+  {text,   10,0,3,  0,0,0,MSecStr,  0,0},  // msecs
   {text,    0,0,0,  0,0,0,BlankLn,  0,0},
   {listend, 0,0,0,  0,0,0,BlankLn,  0,0}
 };
@@ -485,13 +489,13 @@ struct item time4nList[] = {
 face * registerDigital5() {
   face* f = (face*) malloc(sizeof(face));
 
-  f->text = time4nList;  
+  f->text = digital5List;
   f->title =  (item*) malloc(sizeof(item) * 2);
   f->title[0] = {text, 10, 0, 0, 0,0, 0,(char*)"Digital 5\n", -400, -1200};
   f->title[1] = {listend, 0, 0, 0, 0,0, 0,BlankLn, 0, 0};
   f->init = initDigital5;
   f->uninit = deinitDigital5;
-  f->draw = 0;
+  f->draw = doDigital5;
   f->uses_knobs = 0;
 
   return f;
@@ -505,6 +509,72 @@ void deinitDigital5() {
   FastDraw=0;
 }
 
+void doDigital5() {
+  if(MSecs > 500) {
+    digital5List[2].brightness = 1;
+  } else {
+    digital5List[2].brightness = 60;
+  }
+}
+
+/****************************** Digital 6
+ * 
+ * 15:27
+ * 
+ * 33.123
+ * 
+ * Uses FastDraw for the extra strokes.
+ */
+
+// 4 digit digital clock draw list
+struct item digital6List[] = {
+  {text,   10,0,0,  0,0,0,BlankLn,  0,0},
+  {text,   40,0,0,  0,4,9,HrsStr,   0,0},  // hours
+  {text,   40,0,0, 60,0,0,ColStr,   0,0},  // colon
+  {text,   40,0,0,100,4,9,MinStr,   0,0},  // mins
+  {text,   40,0,0,  0,0,0,BlankLn,  0,0}, // next line
+  {text,   10,0,0,  0,0,0,BlankLn,  0,0},
+  {text,   10,0,0,  0,0,0,SecStr,   0,0},  // secs
+  {text,   10,0,0,  0,0,0,PeriodStr,0,0},  // .
+  {text,   10,0,0,  0,0,0,MSecStr,  0,0},  // msecs
+  {text,    0,0,0,  0,0,0,BlankLn,  0,0},
+  {listend, 0,0,0,  0,0,0,BlankLn,  0,0}
+};
+
+face * registerDigital6() {
+  face* f = (face*) malloc(sizeof(face));
+
+  f->text = digital6List;
+  f->title =  (item*) malloc(sizeof(item) * 2);
+  f->title[0] = {text, 10, 0, 0, 0,0, 0,(char*)"Digital 6\n", -400, -1200};
+  f->title[1] = {listend, 0, 0, 0, 0,0, 0,BlankLn, 0, 0};
+  f->init = initDigital6;
+  f->uninit = deinitDigital6;
+  f->draw = doDigital6;
+  f->uses_knobs = 0;
+
+  return f;
+}
+
+void initDigital6() {
+  FastDraw=1;
+}
+
+void deinitDigital6() {
+  FastDraw=0;
+}
+
+void doDigital6() {
+  if(MSecs > 500) {
+    digital6List[2].brightness = 1;
+  } else {
+    digital6List[2].brightness = 60;
+  }
+}
+
+/****************************** Digital 7
+ * 
+ */
 // 4 digit digital clock draw list
 struct item time4ndsList[] = {
   {text,40,0,0,0,0,0,HrsStr,  0,0},  // hours
@@ -514,12 +584,12 @@ struct item time4ndsList[] = {
   {listend,0,0,0,0,0,0,BlankLn,0,0}
 };
 
-face * registerDigital6() {
+face * registerDigital7() {
   face* f = (face*) malloc(sizeof(face));
 
   f->text = time4ndsList;
   f->title =  (item*) malloc(sizeof(item) * 2);
-  f->title[0] = {text, 10, 0, 0, 0,0, 0,(char*)"Digital 6\n", -400, -1200};
+  f->title[0] = {text, 10, 0, 0, 0,0, 0,(char*)"Digital 7\n", -400, -1200};
   f->title[1] = {listend, 0, 0, 0, 0,0, 0,BlankLn, 0, 0};
   f->init = 0;
   f->uninit = 0;
@@ -529,7 +599,10 @@ face * registerDigital6() {
   return f;
 }
 
-face * registerDigital7() {
+/* Studio
+ * 
+ */
+face * registerStudioClock() {
   face* f = (face*) malloc(sizeof(face));
 
   f->text = time6dList;

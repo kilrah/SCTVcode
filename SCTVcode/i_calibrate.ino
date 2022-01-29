@@ -87,7 +87,7 @@ void doCalibrateFont() {
   static int count = 1;
 
   if(count++%100 == 0) {
-    //f = (f+1) % 5;
+    f = (f+1) % 5;
 
     calibrateFontList[0].font = f;
     calibrateFontList[1].font = f;

@@ -498,8 +498,8 @@ void DoAList(struct item *list)
       if(p->shadow) {
         for(int n=1; n < p->shadow + 1; n++) {
           StrPtr = DupPtr;
-          ChrXPos = DupXPos - p->shadow_spacing*n;
-          ChrYPos = DupYPos + p->shadow_spacing*n;
+          ChrXPos = DupXPos + p->shadow_spacing*n;
+          ChrYPos = DupYPos - p->shadow_spacing*n;
 
           DispStr();
         }
