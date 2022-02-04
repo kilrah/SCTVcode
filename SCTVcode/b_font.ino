@@ -682,7 +682,9 @@ const int incAster[] = {incSEGB incSEGC incSEGE incSEGF incSEGG 0x8c};
 const int incPlus[] = {incSEGB incSEGC incSEGG 0x8c};
 const int incComma[] = {incSEGC 0x8c};
 const int incMinus[] = {incSEGG 0x8c};
-const int incPeriod[] = {incSEGD 0x8c};
+//const int incPeriod[] = {incSEGD 0x8c};
+const int incPeriod[]   = { cir, 2, 5, 2, 2, 6,13, 
+                           cir, 2, 5, 1, 1, 6,13, 0x84};
 const int incSlash[] = {incSEGB incSEGE incSEGG 0x8c};
 const int incZero[] = {incSEGA incSEGB incSEGC incSEGD incSEGE incSEGF 0x8c};
 const int incOne[] = {incSEGB incSEGC 0x8c};

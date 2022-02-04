@@ -1,4 +1,3 @@
-// --------- Clock code ---------------------------
 
 // name the months of the year
 const char janStr[] = "Jan";
@@ -461,7 +460,6 @@ face * registerDigital4() {
   return f;
 }
 
-
 /****************************** Digital 5
  * 
  * 15:27
@@ -599,13 +597,216 @@ face * registerDigital7() {
   return f;
 }
 
-/* Studio
+/****************************** Digital 8
  * 
+ * 15:27
+ * 
+ * 33.123
+ * 
+ * Uses FastDraw for the extra strokes.
  */
+
+// 4 digit digital clock draw list
+struct item digital8List[] = {
+  {text,   35,0,0,  0,3,9,HrsStr,  0,0},  // hours
+  {text,   35,0,0, 60,0,0,ColStr,  0,0},  // colon
+  {text,   35,0,0,100,3,9,MinStr,  0,0},  // mins
+  {text,   35,0,0,  0,0,0,BlankLn, 0,0}, // next line
+  {text,   25,0,0,  0,1,9,SecStr,  0,0},  // secs
+  {text,   25,0,0, 60,1,9,PeriodStr, 0,0},  // .
+  {text,   25,0,0,100,1,9,MSecStr, 0,0},  // msecs
+  {text,   25,0,0,  0,0,0,BlankLn, 0,0},
+  {listend, 0,0,0,  0,0,0,BlankLn, 0,0}
+};
+
+face * registerDigital8() {
+  face* f = (face*) malloc(sizeof(face));
+
+  f->text = digital8List;
+  f->title =  (item*) malloc(sizeof(item) * 2);
+  f->title[0] = {text, 10, 0, 0, 0,0, 0,(char*)"Digital 8\n", -400, -1200};
+  f->title[1] = {listend, 0, 0, 0, 0,0, 0,BlankLn, 0, 0};
+  f->init = initDigital8;
+  f->uninit = deinitDigital8;
+  f->draw = doDigital8;
+  f->uses_knobs = 0;
+
+  return f;
+}
+
+void initDigital8() {
+  FastDraw=1;
+}
+
+void deinitDigital8() {
+  FastDraw=0;
+}
+
+void doDigital8() {
+  if(MSecs > 500) {
+    digital8List[1].brightness = 1;
+  } else {
+    digital8List[1].brightness = 60;
+  }
+}
+
+/****************************** Digital 9 - Nixie
+ * 
+ * 15:27
+ * 
+ * Uses FastDraw for the extra strokes.
+ */
+
+ // Rolling-clock digital thingy...
+
+int clock9bright = 40;
+
+// 4 digit digital clock draw list
+struct item nixieList[] = {
+  {text,   35,0,0,100,1,9,HrsStr,  0,0},  // hours
+  {text,   35,0,0, 60,0,0,SpaStr,  0,0},  // 1 - colon
+  {text,   35,0,0,100,1,9,MinStr,  0,0},  // mins
+  {text,   35,0,0,100,0,0,BlankLn, 0,0},
+  {listend, 0,0,0,  0,0,0,BlankLn, 0,0}
+};
+
+struct item nixieList0[] = {
+  {text,   35,0,0, clock9bright,0,0,(char *)"00 00\n",  0,0},  // hours
+  {listend, 0,0,0,  0,0,0,BlankLn, 0,0}
+};
+
+struct item nixieList1[] = {
+  {text,   35,0,0, clock9bright,0,0,(char *)"11 11\n",  0,0},  // hours
+  {listend, 0,0,0,  0,0,0,BlankLn, 0,0}
+};
+
+struct item nixieList2[] = {
+  {text,   35,0,0, clock9bright,0,0,(char *)"22 22\n",  0,0},  // hours
+  {listend, 0,0,0,  0,0,0,BlankLn, 0,0}
+};
+
+struct item nixieList3[] = {
+  {text,   35,0,0, clock9bright,0,0,(char *)"33 33\n",  0,0},  // hours
+  {listend, 0,0,0,  0,0,0,BlankLn, 0,0}
+};
+
+struct item nixieList4[] = {
+  {text,   35,0,0, clock9bright,0,0,(char *)"44 44\n",  0,0},  // hours
+  {listend, 0,0,0,  0,0,0,BlankLn, 0,0}
+};
+
+struct item nixieList5[] = {
+  {text,   35,0,0, clock9bright,0,0,(char *)"55 55\n",  0,0},  // hours
+  {listend, 0,0,0,  0,0,0,BlankLn, 0,0}
+};
+
+struct item nixieList6[] = {
+  {text,   35,0,0, clock9bright,0,0,(char *)"66 66\n",  0,0},  // hours
+  {listend, 0,0,0,  0,0,0,BlankLn, 0,0}
+};
+
+struct item nixieList7[] = {
+  {text,   35,0,0, clock9bright,0,0,(char *)"77 77\n",  0,0},  // hours
+  {listend, 0,0,0,  0,0,0,BlankLn, 0,0}
+};
+
+struct item nixieList8[] = {
+  {text,   35,0,0, clock9bright,0,0,(char *)"88 88\n",  0,0},  // hours
+  {listend, 0,0,0,  0,0,0,BlankLn, 0,0}
+};
+
+struct item nixieList9[] = {
+  {text,   35,0,0, clock9bright,0,0,(char *)"99 99\n",  0,0},  // hours
+  {listend, 0,0,0,  0,0,0,BlankLn, 0,0}
+};
+
+face * registerNixie() {
+  face* f = (face*) malloc(sizeof(face));
+
+  f->text = nixieList;
+  f->title =  (item*) malloc(sizeof(item) * 2);
+  f->title[0] = {text, 10, 0, 0, 0,0, 0,(char*)"Nixie\n", -300, -1200};
+  f->title[1] = {listend, 0, 0, 0, 0,0, 0,BlankLn, 0, 0};
+  f->init = initNixie;
+  f->uninit = deinitNixie;
+  f->draw = doNixie;
+  f->uses_knobs = 0;
+
+  return f;
+}
+
+void initNixie() {
+  FastDraw=1;
+}
+
+void deinitNixie() {
+  FastDraw=0;
+  setBrightness(100);
+}
+
+void doNixie() {
+  int frame_flicker = 2;
+
+  if(frame%frame_flicker == 0) {
+    copyList(nixieList0);
+    Center(TheList);                // fill in the positions of each string in our copy
+    DoAList(TheList);               // draw it on the screen
+    copyList(nixieList1);
+    Center(TheList);                // fill in the positions of each string in our copy
+    DoAList(TheList);               // draw it on the screen
+    copyList(nixieList2);
+    Center(TheList);                // fill in the positions of each string in our copy
+    DoAList(TheList);               // draw it on the screen
+    copyList(nixieList3);
+    Center(TheList);                // fill in the positions of each string in our copy
+    DoAList(TheList);               // draw it on the screen
+    copyList(nixieList4);
+    Center(TheList);                // fill in the positions of each string in our copy
+    DoAList(TheList);               // draw it on the screen
+  } else if(frame%frame_flicker == 1) {
+    copyList(nixieList5);
+    Center(TheList);                // fill in the positions of each string in our copy
+    DoAList(TheList);               // draw it on the screen
+    copyList(nixieList6);
+    Center(TheList);                // fill in the positions of each string in our copy
+    DoAList(TheList);               // draw it on the screen
+    copyList(nixieList7);
+    Center(TheList);                // fill in the positions of each string in our copy
+    DoAList(TheList);               // draw it on the screen
+    copyList(nixieList8);
+    Center(TheList);                // fill in the positions of each string in our copy
+    DoAList(TheList);               // draw it on the screen
+    copyList(nixieList9);
+    Center(TheList);                // fill in the positions of each string in our copy
+    DoAList(TheList);               // draw it on the screen
+  }
+
+}
+
+/****************************** Studio
+ * 
+ * Feb 3
+ * 13:35
+ *  59
+ */
+
+struct item studioList[] = {
+  {text,16,0,0,0,0,0,MonthStr,0,0},  // months
+  {text,16,0,0,0,0,0,SpaStr,  0,0},  // space
+  {text,16,0,0,0,0,0,DayStr,  0,0},  // days
+  {text,40,0,0,0,0,0,HrsStr,  0,0},  // hours
+  {text,40,0,0,70,0,0,ColStr,  0,0},  // colon
+  {text,40,0,0,100,0,0,MinStr,  0,0},  // mins
+  {text,40,0,0,0,0,0,BlankLn, 0,0},  // next line
+  {text,30,0,0,0,0,0,SecStr,  0,0},  // secs
+  {text,20,0,0,0,0,0, BlankLn, 0,0},
+  {listend,0,0,0,0,0,0,BlankLn, 0,0}
+};
+ 
 face * registerStudioClock() {
   face* f = (face*) malloc(sizeof(face));
 
-  f->text = time6dList;
+  f->text = studioList;
   
   f->title =  (item*) malloc(sizeof(item) * 2);
   f->title[0] = {text, 10, 0, 0, 0,0, 0,(char*)"Studio\n", -350, -1300};
@@ -649,11 +850,6 @@ void doSecFractionDots()
 // current time in ASCII. The month and weekday strings are set also.
 void makeTimeStrings() {
   int hours, zon;  // temp storage for manipulation
-
-  if(lastSecs != Secs) {
-    lastMSecs = millis();
-    lastSecs = Secs;
-  }
 
   if (Hr12) 
   {
@@ -708,6 +904,11 @@ void makeTimeStrings() {
 
   SecStr[0] = (Secs / 10) | '0';
   SecStr[1] = (Secs % 10) | '0';
+
+  if(lastSecs != Secs) {
+    lastMSecs = millis();
+    lastSecs = Secs;
+  }
 
   MSecs = millis() - lastMSecs;
 
