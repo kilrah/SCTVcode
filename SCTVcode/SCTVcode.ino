@@ -267,7 +267,7 @@ struct item {
   int ypos;
 };
 
-const int maxItems = 20;    // a list is limited to this many things
+const int maxItems = 40;    // a list is limited to this many things
 
 struct item TheList[maxItems];    // the list above is copied into here to allow modification
 

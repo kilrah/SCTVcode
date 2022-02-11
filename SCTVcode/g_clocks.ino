@@ -650,14 +650,267 @@ void doDigital8() {
   }
 }
 
-/****************************** Digital 9 - Nixie
+/****************************** Digital 9
+ * 
+ */
+
+int digitial9digits[5][6] = {
+  {0, 0, 0, 0, 0, 0},
+  {0, 0, 0, 0, 0, 0},
+  {0, 0, 0, 0, 0, 0},
+  {0, 0, 0, 0, 0, 0},
+  {0, 0, 0, 0, 0, 0}
+};
+
+char digitial9digitsStr[5][6][2] = {
+  {"0", "0", "0", "0", "0", "0"},
+  {"0", "0", "0", "0", "0", "0"},
+  {"0", "0", "0", "0", "0", "0"},
+  {"0", "0", "0", "0", "0", "0"},
+  {"0", "0", "0", "0", "0", "0"}
+};
+
+ // Rolling-clock digital thingy...
+
+int digital9PrevHrs;
+int digital9PrevMin;
+int digital9PrevSec;
+
+char digital9PrevHrsStr[]  = "00";
+char digital9PrevMinStr[]  = "00";
+char digital9PrevSecStr[]  = "00";
+
+int digital9PrevPrevHrs;
+int digital9PrevPrevMin;
+int digital9PrevPrevSec;
+
+char digital9PrevPrevHrsStr[]  = "00";
+char digital9PrevPrevMinStr[]  = "00";
+char digital9PrevPrevSecStr[]  = "00";
+
+int digital9NextHrs;
+int digital9NextMin;
+int digital9NextSec;
+
+char digital9NextHrsStr[]  = "00";
+char digital9NextMinStr[]  = "00";
+char digital9NextSecStr[]  = "00";
+
+int digital9NextNextHrs;
+int digital9NextNextMin;
+int digital9NextNextSec;
+
+char digital9NextNextHrsStr[]  = "00";
+char digital9NextNextMinStr[]  = "00";
+char digital9NextNextSecStr[]  = "00";
+
+// 4 digit digital clock draw list
+struct item digital9List[] = {
+
+  {text,    25,0,0,100,0,0,HrsStr,  0,0},  // hours
+  {text,    25,0,0, 70,0,0,ColStr,  0,0},  // colon
+  {text,    25,0,0,100,0,0,MinStr,  0,0},  // mins
+  {text,    25,0,0,  0,0,0,ColStr,  0,0},  // colon
+  {text,    25,0,0,  0,0,0,SecStr,  0,0},  // secs  
+  {text,    25,0,0,  0,0,0,BlankLn, 0,0}, // next line
+
+  {listend,  0,0,0,  0,0,0,BlankLn,0,0}
+};
+
+struct item digital9ListOuter[] = {
+  {text,    25,0,0, 60,0,0,digital9PrevPrevHrsStr,  0,0},  // hours
+  {text,    25,0,0, 60,0,0,ColStr,          0,0},  // colon
+  {text,    25,0,0, 60,0,0,digital9PrevPrevMinStr,  0,0},  // mins
+  {text,    25,0,0, 60,0,0,ColStr,          0,0},  // colon
+  {text,    25,0,0, 60,0,0,digital9PrevPrevSecStr,  0,0},  // secs  
+  {text,    25,0,0, 60,0,0,BlankLn,         0,0}, // next line
+  {text,    25,0,0, 60,0,0,digital9PrevHrsStr,      0,0},  // hours
+  {text,    25,0,0, 60,0,0,ColStr,          0,0},  // colon
+  {text,    25,0,0, 60,0,0,digital9PrevMinStr,      0,0},  // mins
+  {text,    25,0,0, 60,0,0,ColStr,          0,0},  // colon
+  {text,    25,0,0, 60,0,0,digital9PrevSecStr,      0,0},  // secs  
+  {text,    25,0,0, 60,0,0,BlankLn,         0,0}, // next line
+  {text,    25,0,0,  0,0,0,BlankLn, 0,0}, // next line - skip the middle
+  {text,    25,0,0, 60,0,0,digital9NextHrsStr,      0,0},  // hours
+  {text,    25,0,0, 60,0,0,ColStr,          0,0},  // colon
+  {text,    25,0,0, 60,0,0,digital9NextMinStr,      0,0},  // mins
+  {text,    25,0,0, 60,0,0,ColStr,          0,0},  // colon
+  {text,    25,0,0, 60,0,0,digital9NextSecStr,      0,0},  // secs  
+  {text,    25,0,0, 60,0,0,BlankLn,         0,0}, // next line
+  {text,    25,0,0, 60,0,0,digital9NextNextHrsStr,  0,0},  // hours
+  {text,    25,0,0, 60,0,0,ColStr,          0,0},  // colon
+  {text,    25,0,0, 60,0,0,digital9NextNextMinStr,  0,0},  // mins
+  {text,    25,0,0, 60,0,0,ColStr,          0,0},  // colon
+  {text,    25,0,0, 60,0,0,digital9NextNextSecStr,  0,0},  // secs  
+  {text,    25,0,0, 60,0,0,BlankLn,         0,0}, // next line
+  {listend,  0,0,0,  0,0,0,BlankLn,0,0}
+};
+
+struct item digital9col6[] = {
+  {text,    25,0,0, 60,0,0,digital9PrevPrevSecStr,  0,0},  // secs  
+  {text,    25,0,0, 60,0,0,BlankLn,         0,0}, // next line
+  {text,    25,0,0, 60,0,0,digital9PrevSecStr,      0,0},  // secs  
+  {text,    25,0,0, 60,0,0,BlankLn,         0,0}, // next line
+  {text,    25,0,0,  0,0,0,BlankLn, 0,0}, // next line - skip the middle
+  {text,    25,0,0, 60,0,0,digital9NextSecStr,      0,0},  // secs  
+  {text,    25,0,0, 60,0,0,BlankLn,         0,0}, // next line
+  {text,    25,0,0, 60,0,0,digital9NextNextSecStr,  0,0},  // secs  
+  {text,    25,0,0, 60,0,0,BlankLn,         0,0}, // next line
+  {listend,  0,0,0,  0,0,0,BlankLn,0,0}
+};
+
+face * registerDigital9() {
+  face* f = (face*) malloc(sizeof(face));
+
+  f->text = digital9List;
+  f->title =  (item*) malloc(sizeof(item) * 2);
+  f->title[0] = {text, 10, 0, 0, 0,0, 0,(char*)"Digital 9\n", -400, -1200};
+  f->title[1] = {listend, 0, 0, 0, 0,0, 0,BlankLn, 0, 0};
+  f->init = 0;
+  f->uninit = 0;
+  f->draw = doDigital9;
+  f->uses_knobs = 0;
+
+  return f;
+}
+
+void doDigital9() {
+/* digitial9digits
+// 0  1  2  3  4  5 
+  {0, 0, 0, 0, 0, 0}, // 0 prevprev
+  {0, 0, 0, 0, 0, 0}, // 1 prev
+  {0, 0, 0, 0, 0, 0}, // 2 now
+  {0, 0, 0, 0, 0, 0}, // 3 next
+  {0, 0, 0, 0, 0, 0}  // 4 nextnext
+ */
+
+  digitial9digits[0][0] = Hrs / 10 - 2;
+  digitial9digits[0][1] = Hrs % 10 - 2;
+  digitial9digits[0][2] = Mins / 10 - 2;
+  digitial9digits[0][3] = Mins % 10 - 2;
+  digitial9digits[0][4] = Secs / 10 - 2;
+  digitial9digits[0][5] = Secs % 10 - 2;
+
+  // propagate down through the array
+  for(int i = 0; i < 5; i++) {
+    for(int j = 0; j < 6; j++) {
+      if(i < 4) digitial9digits[i+1][j] = digitial9digits[i][j] + 1;
+
+      if(j == 0) digitial9digits[i][j] = abs(digitial9digits[i][j] % 2);
+      if(j == 1) digitial9digits[i][j] = abs(digitial9digits[i][j] % 10);
+      if(j == 2) digitial9digits[i][j] = abs(digitial9digits[i][j] % 7);
+      if(j == 3) digitial9digits[i][j] = abs(digitial9digits[i][j] % 10);
+      if(j == 4) digitial9digits[i][j] = abs(digitial9digits[i][j] % 7);
+      if(j == 5) digitial9digits[i][j] = abs(digitial9digits[i][j] % 10);
+    }
+  }
+/*
+  for(int i = 0; i < 5; i++) {
+    Serial.printf("%d: %d %d %d %d %d %d\n", i, digitial9digits[i][0], digitial9digits[i][1], digitial9digits[i][2], digitial9digits[i][3], digitial9digits[i][4], digitial9digits[i][5]);
+  }
+
+  Serial.printf("\n");
+*/
+
+  Serial.printf("%02d:%02d:%02d\n", Hrs, Mins, Secs);
+  for(int i = 0; i < 5; i++) {
+    for(int j = 0; j < 6; j++) {
+      digitial9digitsStr[i][j][0] = digitial9digits[i][j] | '0' ;
+    }
+  }
+
+
+  for(int i = 0; i < 5; i++) {
+    Serial.printf("%d: %s %s %s %s %s %s\n", i, digitial9digitsStr[i][0], digitial9digitsStr[i][1], digitial9digitsStr[i][2], digitial9digitsStr[i][3], digitial9digitsStr[i][4], digitial9digitsStr[i][5]);
+  }
+
+  Serial.printf("\n--\n");
+  
+  digital9PrevHrs = Hrs - 1;
+  if(digital9PrevHrs == -1)
+    digital9PrevHrs = 23;
+  digital9PrevPrevHrs = digital9PrevHrs - 1;
+  if(digital9PrevPrevHrs == -1)
+    digital9PrevPrevHrs = 23;
+
+  digital9PrevMin = Mins - 1;
+  if(digital9PrevMin == -1)
+    digital9PrevMin = 23;
+  digital9PrevPrevMin = digital9PrevMin - 1;
+  if(digital9PrevPrevMin == -1)
+    digital9PrevPrevMin = 23;
+
+  digital9PrevSec = Secs - 1;
+  if(digital9PrevSec == -1)
+    digital9PrevSec = 59;
+  digital9PrevPrevSec = digital9PrevSec - 1;
+  if(digital9PrevPrevSec == -1)
+    digital9PrevPrevSec = 59;
+
+  digital9NextHrs = Hrs + 1;
+  if(digital9NextHrs == 13)
+    digital9NextHrs = 0;
+  digital9NextNextHrs = digital9NextHrs + 1;
+  if(digital9NextNextHrs == 13)
+    digital9NextNextHrs = 0;
+
+  digital9NextMin = Mins + 1;
+  if(digital9NextMin == 13)
+    digital9NextMin = 0;
+  digital9NextNextMin = digital9NextMin + 1;
+  if(digital9NextNextMin == 13)
+    digital9NextNextMin = 0;
+
+  digital9NextSec = Secs + 1;
+  if(digital9NextSec == 60)
+    digital9NextSec = 0;
+  digital9NextNextSec = digital9NextSec + 1;
+  if(digital9NextNextSec == 60)
+    digital9NextNextSec = 0;
+
+  digital9PrevHrsStr[0] = (digital9PrevHrs / 10) | '0';
+  digital9PrevHrsStr[1] = (digital9PrevHrs % 10) | '0';
+  digital9PrevPrevHrsStr[0] = (digital9PrevPrevHrs / 10) | '0';
+  digital9PrevPrevHrsStr[1] = (digital9PrevPrevHrs % 10) | '0';
+
+  digital9NextHrsStr[0] = (digital9NextHrs / 10) | '0';
+  digital9NextHrsStr[1] = (digital9NextHrs % 10) | '0';
+  digital9NextNextHrsStr[0] = (digital9NextNextHrs / 10) | '0';
+  digital9NextNextHrsStr[1] = (digital9NextNextHrs % 10) | '0';
+
+  digital9PrevMinStr[0] = (digital9PrevMin / 10) | '0';
+  digital9PrevMinStr[1] = (digital9PrevMin % 10) | '0';
+  digital9PrevPrevMinStr[0] = (digital9PrevPrevMin / 10) | '0';
+  digital9PrevPrevMinStr[1] = (digital9PrevPrevMin % 10) | '0';
+
+  digital9NextMinStr[0] = (digital9NextMin / 10) | '0';
+  digital9NextMinStr[1] = (digital9NextMin % 10) | '0';
+  digital9NextNextMinStr[0] = (digital9NextNextMin / 10) | '0';
+  digital9NextNextMinStr[1] = (digital9NextNextMin % 10) | '0';
+  
+  digital9PrevSecStr[0] = (digital9PrevSec / 10) | '0';
+  digital9PrevSecStr[1] = (digital9PrevSec % 10) | '0';
+  digital9PrevPrevSecStr[0] = (digital9PrevPrevSec / 10) | '0';
+  digital9PrevPrevSecStr[1] = (digital9PrevPrevSec % 10) | '0';
+
+  digital9NextSecStr[0] = (digital9NextSec / 10) | '0';
+  digital9NextSecStr[1] = (digital9NextSec % 10) | '0';
+  digital9NextNextSecStr[0] = (digital9NextNextSec / 10) | '0';
+  digital9NextNextSecStr[1] = (digital9NextNextSec % 10) | '0';
+
+  FastDraw = 1;
+  copyList(digital9ListOuter);
+  Center(TheList);                // fill in the positions of each string in our copy
+  DoAList(TheList);               // draw it on the screen
+  FastDraw = 0;
+}
+
+/****************************** Nixie
  * 
  * 15:27
  * 
  * Uses FastDraw for the extra strokes.
  */
-
- // Rolling-clock digital thingy...
 
 int clock9bright = 40;
 
@@ -780,7 +1033,6 @@ void doNixie() {
     Center(TheList);                // fill in the positions of each string in our copy
     DoAList(TheList);               // draw it on the screen
   }
-
 }
 
 /****************************** Studio
