@@ -163,6 +163,7 @@ int Secs = 0;       // seconds range 0-59
 int MSecs = 0;
 int lastSecs;
 int lastMSecs = millis();
+
 int Ticks = 0;      // ticks range 0-59 (0-49 if 50 Hz)
 int Jiffies = 0;    // 300 Hz jiffies 0-4 or 0-5
 int Blink;          // increments at tick rate, use Blnkbit to blink
@@ -180,7 +181,6 @@ int rtcValid = 0;   // set to rtcMagic when RTC data written to tell if it's tru
 
 int HundrSec = 0;   // hundredths of seconds, maybe not needed but GPS provides it
 unsigned long GPSage;  // GPS time since last valid reading, may indicate invalid
-
 
 unsigned int lastMicros;     // for display refresh
 
@@ -230,8 +230,7 @@ int Shape;          // shape code: lin/cir
 int FirstO;         // first octant to display
 int LastO;          // last octant to display
 
-float BMap[101];    // Linear Bightness map 0 to 1 ->  0.25 to 1.  -- This helps a bit.  -- used by setBrightnessPL
-float BMap2[101];   // Exponental Brightess map 0 to 1 -> 0.25 to 0.9  -- this helps a lot.  -- used by setBrightnessP
+float BMap[101];    // Exponental Brightess map 0 to 1 -> 0.25 to 0.9
 
 #define BRIGHTNESS_DEFAULT 100
 
@@ -254,6 +253,7 @@ const int field   = 3;  // size, function, stringptr, xpos, ypos   changeable fi
 const int seg     = 4;  // size, function, segptr,    xpos, ypos   segment (special character)
 
 // Each item of a drawlist is one of these:
+// type, scale, func, font, brightness, shadow, shadow spacing, string, x, y
 struct item {
   int type;           // see list above
   int scale;          // scale factor

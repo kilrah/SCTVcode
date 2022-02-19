@@ -15,12 +15,10 @@ void setup()
 
   // Brightness lookup tables
   for(int i=0; i<=99; i++) {
-    BMap[i] = mapf(i, 0, 100, 0.25, 1);
-    BMap2[i] = fscale(0, 100, 0.3, 0.9, i, -3);
+    BMap[i] = fscale(0, 100, 0.3, 0.9, i, -3);
   }
 
   BMap[100] = 1;
-  BMap2[100] = 1;
 
   setBrightness(BRIGHTNESS_DEFAULT);
 
@@ -35,15 +33,7 @@ void setup()
   Wire.begin();          // RTC uses I2C
   Serial.begin(115200);    // debug port
   delay(100);
-/*
-  for(int i=0; i<100; i++) {
-    Serial.printf("%f, ", BMap[i]);
-  }
-  Serial.printf("\n");
-  for(int i=0; i<100; i++) {
-    Serial.printf("%f, ", BMap2[i]);
-  }
-*/
+
   EncDir = 0;    // no buttons being pushed or knobs being turned, we hope
   pushed = false;
   theFace = NClks;    // draw a splash screen until knob turned

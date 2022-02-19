@@ -48,6 +48,15 @@ char MinStr[]  = "00";
 char SecStr[]  = "00";
 char MSecStr[] = "000";
 
+char LastCenStr[]  = "00";
+char LastYrsStr[]  = "00";
+char LastMonStr[]  = "00";
+char LastDayStr[]  = "00\n";
+char LastHrsStr[]  = "00";
+char LastMinStr[]  = "00";
+char LastSecStr[]  = "00";
+char LastMSecStr[] = "000";
+
 // Some fixed strings
 char BlankLn[] = "\n";
 char ColStr[]  = ":";
@@ -905,6 +914,49 @@ void doDigital9() {
   FastDraw = 0;
 }
 
+/****************************** Digital 10
+ * 
+ */
+// 4 digit digital clock draw list
+struct item digital10List[] = {
+// type, scale, func, font, brightness, shadow, shadow spacing, string, x, y
+  {text,27,0,0,100,0,0,HrsStr, 0,0}, // 0 - hours
+  {text,27,0,0,70,0,0,ColStr,  0,0}, // 1 - colon
+  {text,27,0,0,100,0,0,MinStr, 0,0}, // 2 - mins
+  {text,27,0,0,70,0,0,ColStr,  0,0}, // 3 - colon
+  {text,27,0,0,100,0,0,SecStr, 0,0}, // 4 - sec
+  {text,27,0,0,0,0,0,BlankLn,  0,0}, // next line
+  {listend,0,0,0,0,0,0,BlankLn,0,0}
+};
+
+face * registerDigital10() {
+  face* f = (face*) malloc(sizeof(face));
+
+  f->text = digital10List;
+  f->title =  (item*) malloc(sizeof(item) * 2);
+  f->title[0] = {text, 10, 0, 0, 0,0, 0,(char*)"Digital 10\n", -400, -1200};
+  f->title[1] = {listend, 0, 0, 0, 0,0, 0,BlankLn, 0, 0};
+  f->init = 0;
+  f->uninit = 0;
+  f->draw = doDigital10;
+  f->uses_knobs = 0;
+
+  return f;
+}
+
+void doDigital10() {
+  digital10List[4].brightness = 100 - (MSecs / 10);
+  digital10List[4].string = LastSecStr;
+
+  copyList(digital10List);
+  Center(TheList);                // fill in the positions of each string in our copy
+  DoAList(TheList);               // draw it on the screen
+
+  digital10List[4].brightness = MSecs / 10;
+  digital10List[4].string = SecStr;
+
+}
+
 /****************************** Nixie
  * 
  * 15:27
@@ -1103,6 +1155,8 @@ void doSecFractionDots()
 void makeTimeStrings() {
   int hours, zon;  // temp storage for manipulation
 
+//  Serial.printf("%s %s %s %s\n", LastMSecStr, MSecStr, LastSecStr, SecStr);
+
   if (Hr12) 
   {
     HrSelStr[0] = '1';
@@ -1156,13 +1210,6 @@ void makeTimeStrings() {
 
   SecStr[0] = (Secs / 10) | '0';
   SecStr[1] = (Secs % 10) | '0';
-
-  if(lastSecs != Secs) {
-    lastMSecs = millis();
-    lastSecs = Secs;
-  }
-
-  MSecs = millis() - lastMSecs;
 
   snprintf(MSecStr, 4, "%3.3d", MSecs);
 

@@ -6,40 +6,11 @@ void setBrightness(int b) {
     Brightness = 4096;
     Strokes = b - 100;
   } else {
-    Brightness = 4096 * BMap2[b];
+    Brightness = 4096 * BMap[b];
     Strokes = 1;
   }
 //  Serial.printf("P: %d %d\n", b, Brightness);
 }
-
-// Set brightness with a sort of linear stretch - LINEAR
-// Values above 100 result in each stroke being drawn multiple times.  101 = 2 repeats, 102 = three, 103 = four, etc.
-// Repeating strokes rapidly increase rendering time.
-void setBrightnessL(int b) {
-  if(b > 100) {
-    Brightness = 4096;
-    Strokes = b - 100;
-  } else {
-    Brightness = 4096 * BMap[b];
-    Strokes = 1;
-  }
-//  Serial.printf("PL: %d %d\n", b, Brightness);
-}
-
-// Set brightness with no corrections. RAW
-// Values above 100 result in each stroke being drawn multiple times.  101 = 2 repeats, 102 = three, 103 = four, etc.
-// Repeating strokes rapidly increase rendering time.
-void setBrightnessR(int b) {
-  if(b > 100) {
-    Brightness = 4096;
-    Strokes = b - 100;
-  } else {
-    Brightness = 4096 * b / 100;
-    Strokes = 1;
-  }
-//  Serial.printf("PR: %d %d %d\n", b, 0, Brightness);
-}
-
 
 // Standalone shape drawing for non-drawlist features
 

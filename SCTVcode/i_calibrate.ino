@@ -109,9 +109,11 @@ struct item calibrateBrightnessList[] = {
   {text,3,0,0,0,0,0,(char *)"80%",  300  , 300},
   {text,3,0,0,0,0,0,(char *)"90%",  500  , 300},
   {text,3,0,0,0,0,0,(char *)"100%",  700 , 300},
-  {text,4,0,0,0,0,0,(char *)"Raw",    1000, 150},
-  {text,4,0,0,0,0,0,(char *)"Linear", 1000, -50},
-  {text,4,0,0,0,0,0,(char *)"Exp",    1000, -250},
+
+  {text,3,0,0,0,0,0,(char *)"101 %",  900 , -25},
+  {text,3,0,0,0,0,0,(char *)"102 %",  900 ,-225},
+  {text,3,0,0,0,0,0,(char *)"103 %",  900 ,-425},
+  {text,3,0,0,0,0,0,(char *)"104 %",  900 ,-625},
   {listend,0,0,0,0,0,0,BlankLn,0,0}
 };
 
@@ -135,36 +137,6 @@ void doCalibrateBrightness() {
   int b = 10;
 
   for(int i=0; i< 10; i++) {
-    setBrightnessR(b);
-    b+=10;
-    drawACircle(x, y, 100);
-    drawACircle(x, y, 80);
-    drawACircle(x, y, 60);
-    drawACircle(x, y, 40);
-    drawACircle(x, y, 20);
-    x+=200;
-  } 
-
-x = -1000;
-y = 0;
-b = 10;
-
-  for(int i=0; i< 10; i++) {
-    setBrightnessL(b);
-    b+=10;
-    drawACircle(x, y, 100);
-    drawACircle(x, y, 80);
-    drawACircle(x, y, 60);
-    drawACircle(x, y, 40);
-    drawACircle(x, y, 20);
-    x+=200;
-  } 
-
-x = -1000;
-y = -200;
-b = 10;
-
-  for(int i=0; i< 10; i++) {
     setBrightness(b);
     b+=10;
     drawACircle(x, y, 100);
@@ -173,19 +145,22 @@ b = 10;
     drawACircle(x, y, 40);
     drawACircle(x, y, 20);
     x+=200;
-  } 
-/*
-  for(int i=0; i < 100; i+=5) {
-    drawALine(i*10-500, -1300+BMap2[i]*500, i*10-500, -1300);
   }
-*/
-/*
-  for(int i=0, j=-1000; i<100; i++) {
-    SetBrightnessP(i);
-//    for(int k=0; k<2; k++) {
-      drawALine(j, 400, j, 450);
-      j+=19;
-//    }
+
+  x-=200;
+  y-=200;
+
+  for(int i=101; i<= 104; i++) {
+    setBrightness(i);
+
+    drawACircle(x, y, 100);
+    drawACircle(x, y, 80);
+    drawACircle(x, y, 60);
+    drawACircle(x, y, 40);
+    drawACircle(x, y, 20);
+    y-=200;
   }
-*/
+
+  setBrightness(BRIGHTNESS_DEFAULT);
+  
 }
