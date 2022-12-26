@@ -1211,6 +1211,13 @@ void makeTimeStrings() {
   SecStr[0] = (Secs / 10) | '0';
   SecStr[1] = (Secs % 10) | '0';
 
+  if(lastSecs != Secs) {
+    lastMSecs = millis();
+    lastSecs = Secs;
+  }
+
+  MSecs = millis() - lastMSecs;
+
   snprintf(MSecStr, 4, "%3.3d", MSecs);
 
   HzStr[0] = (Hertz / 10) | '0';
