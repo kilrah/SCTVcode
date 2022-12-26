@@ -37,8 +37,9 @@
 // V 1.0.0 11/30/21 DF  Made screensaver bigger, issued as a release
 // V 1.0.1 12/20/21 DF  Made the locale data stored in the RTC chip
 // V 1.0.2 01/21/22 DF  Fixed brightness on 0 via stride, moved tails on 6,9
+// V 2.0.0 12/25/22 AM  Lots of changes...  https://github.com/amalmin/SCTVcode/
 
-char versionNo[]  = "Version 1.0.2\n";
+char versionNo[]  = "Version 2.0.0\n";
 
 // THINGS TO DO
 
