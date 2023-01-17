@@ -17,6 +17,7 @@ The original code from Cathode Corner has been hacked up to add some new things:
   - A basic clock with second tick marks and a smoothly moving second hand.
   - The above base clock with a 3d rotating cube in the background
   - The above base clock with a starfield flying by in the background
+- Several new digital clock faces
 - a 3d spinning cube screen effect
 - a starfield screen effect
 - two 'memory display' screen effects that plot the content of memory onto the screen
