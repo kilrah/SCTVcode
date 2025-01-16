@@ -370,6 +370,7 @@ void writeRTClocale()
   Wire.write(ZMins);
   Wire.write(Hr12);
   Wire.write(Hertz);
+  Wire.write(theFace);
   Wire.endTransmission();
 }
 
@@ -409,16 +410,18 @@ void readRTClocale()
   Wire.write(0x18);  // read locale data starting at byte 0x18
   Wire.endTransmission();
 
-  Wire.requestFrom(DS3232_ADDRESS, 6, 1);  // request seven bytes, then stop
+  Wire.requestFrom(DS3232_ADDRESS, 7, 1);  // request eight bytes, then stop
   if (Wire.read() == rtcMagic) {
     Century = Wire.read();
     Zone    = Wire.read() - 30;
     ZMins   = Wire.read();
     Hr12    = Wire.read();
     Hertz   = Wire.read();
+    theFace = Wire.read();
     rtcValid = 1;
   }
   else {
+    Wire.read();
     Wire.read();
     Wire.read();
     Wire.read();

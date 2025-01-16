@@ -36,7 +36,7 @@ void setup()
 
   EncDir = 0;    // no buttons being pushed or knobs being turned, we hope
   pushed = false;
-  theFace = NClks;    // draw a splash screen until knob turned
+  //theFace = NClks;    // draw a splash screen until knob turned (removed because face is now saved and reapplied)
   InMenu = false;
 //  FlwStr[4] = '\n';
 //  MakeFLW();
@@ -184,7 +184,8 @@ void loop()
 
       theFace += EncDir;
       if (theFace >= NClks) theFace = 0;   // select the next clock face
-      if (theFace < 0) theFace = NClks - 1;
+      if (theFace < 0) theFace = NClks;
+      writeRTClocale();
 
       if(faces[theFace]->title) 
         theClockTitleFade = 80;  // Clock Title set to high brightness.
